@@ -61,5 +61,53 @@ class Ocorrencia_model extends CI_Model{
         return $this->db->query($query);
     }
 
+    public function get_menu_planta(){
+        $query = '
+                SELECT DISTINCT
+                o.id_planta as id_planta,
+                p.dsc_planta as dsc_planta
+                FROM ocorrencia o
+                INNER JOIN assunto a ON o.id_assunto = a.id_assunto
+                INNER JOIN planta p ON o.id_planta = p.id_planta
+                INNER JOIN periodo pe ON o.id_periodo = pe.id_periodo
+            '; 
+
+        return $this->db->query($query);
+
+    }
+
+    public function get_submenu_periodo(){
+        $query = '
+                SELECT DISTINCT
+                o.id_planta as id_planta,
+                o.id_periodo as id_periodo,
+                pe.dsc_periodo as dsc_periodo
+                FROM ocorrencia o
+                INNER JOIN assunto a ON o.id_assunto = a.id_assunto
+                INNER JOIN planta p ON o.id_planta = p.id_planta
+                INNER JOIN periodo pe ON o.id_periodo = pe.id_periodo
+            ';
+
+        return $this->db->query($query);
+
+    }
+
+    public function get_submenu_ocorrencia(){
+        $query = '
+                SELECT DISTINCT
+                o.id_planta as id_planta,
+                o.id_periodo as id_periodo,
+                o.id_assunto as id_assunto,
+                a.dsc_assunto as dsc_assunto
+                FROM ocorrencia o
+                INNER JOIN assunto a ON o.id_assunto = a.id_assunto
+                INNER JOIN planta p ON o.id_planta = p.id_planta
+                INNER JOIN periodo pe ON o.id_periodo = pe.id_periodo
+            ';
+
+        return $this->db->query($query);
+
+    }
+
 }
 

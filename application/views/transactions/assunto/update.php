@@ -15,11 +15,21 @@
 	  <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
 	  <span class="sr-only">Error:</span>','</div>');
 
-		echo form_label('ID');
+		echo '<div class="set_assunto">';
+		echo form_label('Código do Acordo')."<br>";
 		echo form_input(array('name'=>'id_assunto', 'class'=>'id-assunto'),  set_value('id', $query->id_assunto),'bloqued')."<br>";
 
-		echo form_label('Descrição do Acordo');
+		
+		echo form_label('Título do Acordo');
 		echo form_input(array('name'=>'dsc_assunto'),  set_value('dsc_assunto',$query->dsc_assunto))."<br>";
+		echo '</div>';
+
+		echo form_label('Conceito do Acordo')."<br>";
+		echo form_textarea(array('name'=>'dsc_conceito', 'class'=>'form-control', 'id'=>"txtEditor"),  set_value('dsc_conceito',$query->dsc_conceito))."<br>";
+
+		echo "<span><a href='#' class='atach-file'>Anexar arquivo </a> </span><span class='glyphicon glyphicon-trash' aria-hidden='true'></span>";
+
+		echo form_input(array('name'=>'dsc_file', 'class'=>'dsc_file'),  set_value('dsc_file',$query->dsc_file))."<br>";
 
 		echo form_button(array('name'=>'cadastrar', 'class'=>'submit', 'id'=>'submit','content'=>'Salvar', 'type'=>'submit'));
 
@@ -32,13 +42,28 @@
 
 <!-- o script jquery abaixo é carregado no formulário no momento que o formulário é criado -->
 <script>
+
+	// $('.Editor-editor').keyup( function(){
+	// 	alert($(this).text());
+	// });
+
+	// $('.Editor-editor').keypress(function() {
+	//   console.log( "Handler for .keypress() called." );
+	// });
+	
 	$(".submit").click(function(){
 		// var numtab = $(this).closest("div").attr("numtab");
 		// var numtab = $(this).closest("div").attr("numtab");
 		var id_assunto = $(this).closest('fieldset').find('input.id-assunto').val();
 
+		var txt = $('.Editor-editor').text();
+		$('.form-control').append(txt);
+
+		// alert(txt);
+
 		$('.ajax_form').submit(function(){
 				
+			// var dados = $( this ).serialize();
 			var dados = $( this ).serialize();
 
 			$.ajax({
@@ -55,4 +80,30 @@
 			return false;
 		});
 	});
+
+	$('.atach-file').on('click', function(){
+	    
+	    var controller = 'ocorrencia/carregar';
+
+	     $.ajax({
+	            type      : 'post',
+	            url       : controller, //é o controller que receberá
+	            
+	            success: function( response ){
+	                $('.apontamento').show();
+
+	                $('.dados_componente').css( "display", "table" );
+	                $('.dados_componente').css( "position", "absolute" );
+	                $('.dados_componente').append(response);
+	            }
+	        });
+	    });
+
+	$(document).ready( function() {
+		$("#txtEditor").Editor();   
+
+		var txt = $('.form-control').val(); 
+		$('.Editor-editor').append(txt);
+	});
+        
 </script>

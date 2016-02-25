@@ -1,5 +1,10 @@
 <ul class="nav-acordos">
 
+	<div class="menu-side-bar">
+		<span class="glyphicon glyphicon-menu-hamburger btn-lg" aria-hidden="true"></span>
+	</div>
+	
+
 <?php foreach ($menu_planta->result() as $menu): ?>
 	<li class="list-plantas">
 	    <a href="#" class="link-plantas"><?php echo ucwords($menu->dsc_planta) ?><span class="caret"></span></a>

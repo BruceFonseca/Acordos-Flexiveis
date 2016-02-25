@@ -1,6 +1,8 @@
 
 <div class='form'>
-	
+
+
+
 
 <?php
 // var_dump($users_roles);
@@ -12,7 +14,7 @@
 
 echo '<form method="post" action="" class="ajax_form">';
 
-echo form_fieldset('Criar novo Assunto');
+echo form_fieldset('Criar novo Conceito de Acordo');
 
 ?>
 <?php 
@@ -26,10 +28,23 @@ if($this->session->flashdata('cadastrook')):
     echo '<div class="alert alert-success">'.$this->session->flashdata('cadastrook').'</div>';
 endif;
 
-echo form_label('Descrição Acordo');
+echo '<div class="set_assunto">';
+echo form_label('Título do Acordo')."<br>";
 echo form_input(array('name'=>'dsc_assunto'),  '')."<br>";
+echo '</div>';
+
+echo '<div id="sample">';
+echo form_label('Conceito do Acordo')."<br>";
+echo form_textarea(array('name'=>'dsc_conceito', 'class'=>'form-control', 'id'=>"txtEditor"),  '')."<br>";
+echo '</div>';
+
+echo "<span><a href='#' class='atach-file'>Anexar arquivo </a> </span><span class='glyphicon glyphicon-trash' aria-hidden='true'></span>";
+
+echo form_input(array('name'=>'dsc_file', 'class'=>'dsc_file'),  '')."<br>";
 
 echo form_button(array('name'=>'cadastrar', 'class'=>'submit', 'id'=>'submit','content'=>'Cadastrar', 'type'=>'submit'))."<br>";
+
+
 
 echo form_fieldset_close();
 echo form_close();
@@ -60,5 +75,27 @@ echo form_close();
 			return false;
 		});
 	});
-</script>
 
+	$('.atach-file').on('click', function(){
+	    
+	    var controller = 'ocorrencia/carregar';
+
+	     $.ajax({
+	            type      : 'post',
+	            url       : controller, //é o controller que receberá
+	            
+	            success: function( response ){
+	                $('.apontamento').show();
+
+	                $('.dados_componente').css( "display", "table" );
+	                $('.dados_componente').css( "position", "absolute" );
+	                $('.dados_componente').append(response);
+	            }
+	        });
+	    });
+
+	$(document).ready( function() {
+		$("#txtEditor").Editor();                   
+	});
+        
+</script>

@@ -20,7 +20,7 @@ class Assunto extends CI_Controller{
     public function  create(){   
         
         // validação dos dados recebidos do formulário
-        $this->form_validation->set_rules('dsc_assunto','trim|required|is_unique[assunto.dsc_acordo]');
+        $this->form_validation->set_rules('dsc_assunto','trim|required|is_unique[assunto.dsc_assunto]');
         $this->form_validation->set_message('is_unique', 'Este %s já está cadastrado.');//é uma menssagem definida pelo programador onde %s é o nome do campo
         // $this->form_validation->set_rules('dsc_name','Nome','trim|required|max_lenght[100]|strtoupper');
         // $this->form_validation->set_rules('dsc_matricula','Matrícula','trim|required|max_lenght[45]|strtoupper');
@@ -30,7 +30,9 @@ class Assunto extends CI_Controller{
 
             $validacao = TRUE;
             $dados = elements(array(
-                                    'dsc_assunto'
+                                    'dsc_assunto',
+                                    'dsc_conceito',
+                                    'dsc_file'
                                     ), $this->input->post());
             $this->assunto_model->do_insert($dados);
         }
@@ -79,8 +81,9 @@ class Assunto extends CI_Controller{
 
 
                 $dados = elements(array(
-                                        'id_assunto',
-                                        'dsc_assunto'
+                                        'dsc_assunto',
+                                        'dsc_conceito',
+                                        'dsc_file'
                                         ), $this->input->post());
 
                 $this->assunto_model->do_update($dados, array('id'=> $id));

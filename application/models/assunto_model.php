@@ -17,12 +17,15 @@ class Assunto_model extends CI_Model{
 
         if ($dados != NULL && $condicao != NULL):
             // não está utilizando a variavel condição
-        // pd($dados['id_assunto']);
+        // pd($condicao);
 
         $sql =  'UPDATE assunto 
-                    SET dsc_assunto = ' . "'" . $dados['dsc_assunto'] . "'" .
-                ' WHERE id_assunto = ' . $dados['id_assunto'];
-
+                    SET 
+                    dsc_assunto = ' . "'" . $dados['dsc_assunto'] . "' ," .
+                   ' dsc_conceito = ' . "'" . $dados['dsc_conceito'] . "' ," .
+                   ' dsc_file = ' . "'" . $dados['dsc_file'] . "'" .
+                ' WHERE id_assunto = ' . $condicao['id'];
+// pd($sql);
                 $this->db-> query($sql);
 
             $this->session->set_flashdata('edicaook','Acordo atualizado com sucesso');
@@ -38,7 +41,7 @@ class Assunto_model extends CI_Model{
     
     
     public function get_byid($id) {
-        $query = 'SELECT id_assunto, dsc_assunto FROM assunto
+        $query = 'SELECT id_assunto, dsc_assunto, dsc_conceito, dsc_file FROM assunto
                   WHERE id_assunto = ' . $id ; 
 
         return $this->db->query($query);

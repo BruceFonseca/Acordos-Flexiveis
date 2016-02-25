@@ -38,9 +38,64 @@ a{
     float: left;
     height: 100%;
     width: 15%;
-    background: #ccc;
+    background: #222;
     margin-bottom: 0px
 }
+
+.nav-acordos{
+list-style: none !important;
+    margin: 0px;
+    padding: 0px;
+    display: inline;
+    /*padding-left: 20px;*/
+    /*padding-top: 10px;*/
+}
+.nav-acordos ul{
+    list-style: none !important;
+    margin: 0px;
+    padding: 0px;
+    display: inline;
+}
+
+.menu-side-bar{
+    width: 100%;
+    height: 20px;
+    display: table;
+}
+.menu-side-bar span{
+    cursor: pointer;
+    float: right;
+    display: block;
+    color: #fff;
+}
+
+.menu-side-bar span:hover{
+    color: #b83039;
+}
+
+.nav-acordos ul li{
+    list-style: none;
+}
+.nav-acordos a{
+    line-height: 26px;
+    padding-left: 20px;
+}
+
+.nav-acordos a:hover, .nav-acordos a:focus{
+    color: #b83039;
+}
+
+.nav-acordos li:hover{
+    background-color: transparent;
+}
+.list-periodos a, .list-periodos li{
+    /*padding-left: 20px;*/
+}
+
+.list-plantas:focus{
+    background: #333;
+}
+
 
 .nav.nav-tabs{
     width: 85%;
@@ -470,6 +525,7 @@ preto               102 102 102   #666666*/
     width: 100%;
 }
 
+form fieldset .set_assunto input,
 form fieldset .set_assunto select{
     width: 100%;
     margin: 0;
@@ -488,4 +544,5 @@ form fieldset .set_assunto label{
 .glyphicon-edit{
     cursor: pointer;
 }
+
 

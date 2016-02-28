@@ -15,7 +15,7 @@
 <body>
 <div class="topo-login">
 <img id="logo-login" src="<?php echo base_url('img/sistema/logotipo/logo.png')?>" alt=""/>
-    <span>Recuros Humanos - Sistema de Acordos Flexíveis</span>
+    <span>COE - Flexibilidade</span>
 </div>
 
 

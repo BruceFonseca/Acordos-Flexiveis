@@ -95,7 +95,24 @@ echo form_close();
 	    });
 
 	$(document).ready( function() {
-		$("#txtEditor").Editor();                   
+		//se o plugin wysiwyg já existe, ele não dupliará o plugin
+		if (!$('#InsertLink').length){
+			$("#txtEditor").Editor();
+		};
+		
+
+		$('.Editor-editor').keyup( function(){
+			moveToTextArea();
+		});
+		$('.Editor-editor').click( function(){
+			moveToTextArea();
+		});
 	});
+        
+    function moveToTextArea(){
+		var txt = encodeURIComponent($('.Editor-editor').html());
+		$('textarea.form-control').text('');
+		$('.form-control').append(txt);
+	}
         
 </script>

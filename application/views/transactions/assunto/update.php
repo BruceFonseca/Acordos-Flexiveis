@@ -43,23 +43,10 @@
 <!-- o script jquery abaixo é carregado no formulário no momento que o formulário é criado -->
 <script>
 
-	// $('.Editor-editor').keyup( function(){
-	// 	alert($(this).text());
-	// });
-
-	// $('.Editor-editor').keypress(function() {
-	//   console.log( "Handler for .keypress() called." );
-	// });
-	
 	$(".submit").click(function(){
-		// var numtab = $(this).closest("div").attr("numtab");
-		// var numtab = $(this).closest("div").attr("numtab");
+
 		var id_assunto = $(this).closest('fieldset').find('input.id-assunto').val();
 
-		var txt = $('.Editor-editor').text();
-		$('.form-control').append(txt);
-
-		// alert(txt);
 
 		$('.ajax_form').submit(function(){
 				
@@ -102,8 +89,17 @@
 	$(document).ready( function() {
 		$("#txtEditor").Editor();   
 
-		var txt = $('.form-control').val(); 
+		var txt = decodeURIComponent($('.form-control').val()); 
 		$('.Editor-editor').append(txt);
+
+		$('.Editor-editor').keyup( function(){
+
+			var txt = $('.Editor-editor').html();
+			$('textarea.form-control').text('');
+			$('.form-control').append(txt);
+
+		// alert($(this).text());
+	});
 	});
         
 </script>

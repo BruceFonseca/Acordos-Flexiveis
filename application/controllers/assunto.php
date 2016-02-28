@@ -20,13 +20,18 @@ class Assunto extends CI_Controller{
     public function  create(){   
         
         // validação dos dados recebidos do formulário
-        $this->form_validation->set_rules('dsc_assunto','trim|required|is_unique[assunto.dsc_assunto]');
-        $this->form_validation->set_message('is_unique', 'Este %s já está cadastrado.');//é uma menssagem definida pelo programador onde %s é o nome do campo
-        // $this->form_validation->set_rules('dsc_name','Nome','trim|required|max_lenght[100]|strtoupper');
         // $this->form_validation->set_rules('dsc_matricula','Matrícula','trim|required|max_lenght[45]|strtoupper');
+        // $this->form_validation->set_rules('dsc_assunto','');
+        // $this->form_validation->set_rules('dsc_assunto', 'dsc_assunto', 'required|is_unique[assunto.dsc_assunto]');
+        // $this->form_validation->set_message('dsc_assunto', 'Este %s já está cadastrado.');//é uma menssagem definida pelo programador onde %s é o nome do campo
+
+        $this->form_validation->set_rules('dsc_assunto', 'Título', 'required|is_unique[assunto.dsc_assunto]');
+        $this->form_validation->set_message('is_unique', 'Este %s já está cadastrado.');//é uma menssagem definida pelo programador onde %s é o nome do campo
 
         // se existe uma validação, envia os dados para o model inserir
         if ($this->form_validation->run()==TRUE){
+
+            // pd($this->input->post());
 
             $validacao = TRUE;
             $dados = elements(array(
@@ -71,11 +76,12 @@ class Assunto extends CI_Controller{
             
 
         if($this->input->post('dsc_assunto')){
-            
+
             //o $id é setado novamente quando vem por POST 
             $id = $this->input->post('id_assunto');
 
-            $this->form_validation->set_rules('dsc_assunto','dsc_assunto','trim');
+            $this->form_validation->set_rules('dsc_assunto', 'Título', 'required');
+            // $this->form_validation->set_message('is_unique', 'Este %s já está cadastrado.');//é uma menssagem definida pelo programador onde %s é o nome do campo
 
             if ($this->form_validation->run()==TRUE):
 

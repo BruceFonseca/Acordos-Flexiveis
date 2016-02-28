@@ -20,10 +20,8 @@ class Periodo extends CI_Controller{
     public function  create(){   
         
         // validação dos dados recebidos do formulário
-        $this->form_validation->set_rules('dsc_periodo','trim|required|is_unique[periodo.dsc_periodo]');
+        $this->form_validation->set_rules('dsc_periodo', 'Período', 'required|is_unique[periodo.dsc_periodo]');
         $this->form_validation->set_message('is_unique', 'Este %s já está cadastrado.');//é uma menssagem definida pelo programador onde %s é o nome do campo
-        // $this->form_validation->set_rules('dsc_name','Nome','trim|required|max_lenght[100]|strtoupper');
-        // $this->form_validation->set_rules('dsc_matricula','Matrícula','trim|required|max_lenght[45]|strtoupper');
 
         // se existe uma validação, envia os dados para o model inserir
         if ($this->form_validation->run()==TRUE){
@@ -73,9 +71,8 @@ class Periodo extends CI_Controller{
             //o $id é setado novamente quando vem por POST 
             $id = $this->input->post('id_periodo');
 
-            // pd($id);
-
-            $this->form_validation->set_rules('dsc_periodo','dsc_periodo','trim');
+            $this->form_validation->set_rules('dsc_periodo', 'Período', 'required|is_unique[periodo.dsc_periodo]');
+            $this->form_validation->set_message('is_unique', 'Este %s já está cadastrado.');//é uma menssagem definida pelo programador onde %s é o nome do campo
 
             if ($this->form_validation->run()==TRUE):
 

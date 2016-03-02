@@ -61,6 +61,56 @@ class Assunto extends CI_Controller{
         
         $this->load->view('conteudo', $dados);
     }
+
+    public function conceito() {
+        // é praticamente a mesma visão de RETRIEVE
+        // porem será utilizado para exibir os conceitos 
+        // dos acordos na primeira tab, assim que o sistema abrir
+
+        $dados = array(
+            'tela'=> 'conceito',
+            'pasta'=> 'assunto',// é a pasta que está dentro de "telas". existe uma pasta para cada tabela a ser cadastrada
+            'status'=> $this->assunto_model->get_conceitos()->result(),
+             );
+        
+        $this->load->view('conteudo', $dados);
+    }
+
+    public function imprimir() {
+        // é praticamente a mesma visão de RETRIEVE
+        // porem será utilizado para exibir os conceitos 
+        // dos acordos na primeira tab, assim que o sistema abrir
+
+        // recebe o id do usuário através da URL
+        $id = $this->uri->segment(3);
+
+        $dados = array(
+            'tela'=> 'imprimir',
+            'pasta'=> 'assunto',// é a pasta que está dentro de "telas". existe uma pasta para cada tabela a ser cadastrada
+            'status'=> $this->assunto_model->get_conceito_by_id($id)->row(),
+             );
+        
+        $this->load->view('conteudo', $dados);
+    }
+
+    public function print_page() {
+        // é praticamente a mesma visão de RETRIEVE, porem com
+        // porem será utilizado para exibir os conceitos 
+        // dos acordos na primeira tab, assim que o sistema abrir
+
+        // recebe o id do usuário através da URL
+        $id = $this->uri->segment(3);
+
+        $dados = array(
+            'tela'=> 'imprimir',
+            'pasta'=> 'print_page',// é a pasta que está dentro de "telas". existe uma pasta para cada tabela a ser cadastrada
+            'status'=> $this->assunto_model->get_conceito_by_id($id)->row(),
+             );
+        
+        $this->load->view('print_page', $dados);
+    }
+    
+    
     
 
     public function  update(){   

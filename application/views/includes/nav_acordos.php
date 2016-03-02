@@ -86,6 +86,7 @@ foreach ($menu_planta->result() as $menu): ?>
 
 		//redimenciona a div conteudo
 		resize_div_conteudo();
+		// alert($('.conteudo-principal').height());
 	});
 
 	function resize_div_conteudo(){
@@ -96,24 +97,29 @@ foreach ($menu_planta->result() as $menu): ?>
 		$('.conteudo-principal').css('width' , w_con);
 	}
 
-
-	// $('.list-plantas').on('click', function(){
-	// 	// alert('agaga');
-	// 	// $(this).toggle();
-	// 	$('ul li' , this).toggle();
-	// });
-
-	// $('.list-periodos').on('click', function(){
-	// 	// alert('agaga');
-	// 	// $(this).toggle();
-	// 	$('.list-periodos ul li a' , this).toggle();
-	// });
+	$('.conteudo-principal').resize(function(){
+	// $('.conteudo-principal').on('resize',function(){
+		alert('fsdgfagas');
+	});
 
 
-	// $('.list-acordos').on('click', function(){
-	// 	// alert('agaga');
-	// 	// $(this).toggle();
-	// 	$('.list-plantas li' , this).toggle();
-	// });
+	$('.list-plantas').on('click', function(){
+		// alert('agaga');
+		// $(this).toggle();
+		$('ul li' , this).toggle();
+	});
+
+	$('.list-periodos').on('click', function(){
+		// alert('agaga');
+		// $(this).toggle();
+		$('.list-periodos ul li a' , this).toggle();
+	});
+
+
+	$('.list-acordos').on('click', function(){
+		// alert('agaga');
+		// $(this).toggle();
+		$('.list-plantas li' , this).toggle();
+	});
 
 </script>

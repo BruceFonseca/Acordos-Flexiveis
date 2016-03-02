@@ -38,6 +38,28 @@ class Assunto_model extends CI_Model{
          
         return $this->db->query($query);
     }
+
+    public function get_conceitos(){
+          $query = 'SELECT 
+                    id_assunto, 
+                    dsc_assunto,
+                    dsc_conceito,
+                    dsc_file
+                    FROM assunto';     
+         
+        return $this->db->query($query);
+    }
+    
+    public function get_conceito_by_id($id){
+          $query = 'SELECT 
+                    id_assunto, 
+                    dsc_assunto,
+                    dsc_conceito,
+                    dsc_file
+                    FROM assunto WHERE id_assunto = ' . $id ;     
+         
+        return $this->db->query($query);
+    }
     
     
     public function get_byid($id) {

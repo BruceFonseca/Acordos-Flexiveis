@@ -107,6 +107,9 @@ echo form_close();
 		$('.Editor-editor').click( function(){
 			moveToTextArea();
 		});
+		$('.row-fluid').click( function(){
+				moveToTextArea();
+		});
 	});
         
     function moveToTextArea(){

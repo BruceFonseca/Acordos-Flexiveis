@@ -1,3 +1,5 @@
+
+
 $(function(){
 
 	// cria uma nova aba referente a transação selecionada pelo usuário
@@ -27,9 +29,10 @@ $(function(){
 		ativaAbaAposFechar();
 	});
 	
+	//inicia o sistema abrindo a guia abaixo:
+	criarNovaAba('assunto/conceito', 'Ferramentas');
 
 }); //fim do código
-
 
 
 	// cria uma div com o conteudo da transação selecionada pelo usuário

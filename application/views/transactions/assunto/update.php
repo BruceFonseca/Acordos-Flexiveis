@@ -92,14 +92,34 @@
 		var txt = decodeURIComponent($('.form-control').val()); 
 		$('.Editor-editor').append(txt);
 
+	// 	$('.Editor-editor').keyup( function(){
+
+	// 		var txt = $('.Editor-editor').html();
+	// 		$('textarea.form-control').text('');
+	// 		$('.form-control').append(txt);
+
+	// 	// alert($(this).text());
+	// });
+
 		$('.Editor-editor').keyup( function(){
+			moveToTextArea();
+		});
 
-			var txt = $('.Editor-editor').html();
-			$('textarea.form-control').text('');
-			$('.form-control').append(txt);
+		$('.Editor-editor').click( function(){
+				moveToTextArea();
+		});
+		
+		$('.row-fluid').click( function(){
+				moveToTextArea();
+		});
+	});
+	
 
-		// alert($(this).text());
-	});
-	});
+
+	function moveToTextArea(){
+		var txt = encodeURIComponent($('.Editor-editor').html());
+		$('textarea.form-control').text('');
+		$('.form-control').append(txt);
+	}
         
 </script>

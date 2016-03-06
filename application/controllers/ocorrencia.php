@@ -20,8 +20,12 @@ class Ocorrencia extends CI_Controller{
     }
     
    
-    public function  create(){   
-        
+    public function  create(){
+
+        // if(isset($_POST['data'])) {
+        //     $data = json_decode($_POST['data']);
+        //     pd($data);
+        // }        
         // validação dos dados recebidos do formulário
         $this->form_validation->set_rules('dsc_resumo', 'Descrição do Acordo','trim|required');
         // $this->form_validation->set_rules('dsc_name','Nome','trim|required|max_lenght[100]|strtoupper');

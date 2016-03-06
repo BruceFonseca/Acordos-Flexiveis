@@ -21,7 +21,7 @@ for($i=0; $i < count($dados_periodo); $i++){
 
 echo '<form method="post" action="" class="ajax_form">';
 
-echo form_fieldset('Criar novo Acordo');
+echo form_fieldset('Adicionar interpretação');
 
 ?>
 <?php 
@@ -49,11 +49,53 @@ echo '<div class="set_form">';
 echo '</div>';
 
 echo '<div class="set_assunto">';
-	echo form_label('Assunto')."<br>";
+	echo form_label('Acordo')."<br>";
 	echo form_dropdown('id_assunto',  $assuntos);
 echo '</div>';
 
-	echo form_label('Descrição do Acordo');
+echo '
+ 	<div class="set_assunto">
+	<label>Assuntos Disponíveis</label>
+	<br>
+	<ul id="sortable1" class="connectedSortable list-group">
+  		<li class="ui-state-default list-group-item">FGTS</li>
+  		<li class="ui-state-default list-group-item">INSS</li>
+	</ul>
+ 
+ 
+ 	<label>Assuntos Utilizados</label>
+	<ul id="sortable2" class="connectedSortable list-group">
+	  <li class="ui-state-highlight list-group-item" id="1">
+	  	<span class="id">ID</span>
+	  	<span class="name">13º Décimo terceiro</span>
+	  	<span class="file">file.pdf</span>
+	  	<span class="glyphicon glyphicon-paperclip" aria-hidden="true"></span>
+	  </li>
+
+	  <li class="ui-state-highlight list-group-item" id="2">
+	  	<span class="id">ID</span>
+	  	<span class="name">PPR</span>
+	  	<span class="file">file.pdf</span>
+	  	<span class="glyphicon glyphicon-paperclip" aria-hidden="true"></span>
+	  </li>
+	  <li class="ui-state-highlight list-group-item" id="3">
+	  	<span class="id">ID</span>
+	  	<span class="name">PLM</span>
+	  	<span class="file">file.pdf</span>
+	  	<span class="glyphicon glyphicon-paperclip" aria-hidden="true"></span>
+	  </li>
+	  <li class="ui-state-highlight list-group-item" id="4>
+	  	<span class="id">ID</span>
+	  	<span class="name">Bolsa Idiomas</span>
+	  	<span class="file">file.pdf</span>
+	  	<span class="glyphicon glyphicon-paperclip" aria-hidden="true"></span>
+	  </li>
+	</ul>
+
+	</div>
+	 ';
+
+	echo form_label('Descrição da interpretação');
 	echo form_textarea(array('name'=>'dsc_resumo', 'class'=>'form-control'),  '')."<br>";
 
 // echo form_label('Anexar arquivo');
@@ -71,23 +113,36 @@ echo form_close();
 
 <!-- o script jquery abaixo é carregado no formulário no momento que o formulário é criado -->
 <script>
-
-	$('.glyphicon-trash').on('click', function(){
-		$("input[name='dsc_file']").val( '' );
-	});
+	
+	$(".submit").click(function(event){
+		// event.preventDefault();
+	
+		var dadosAssuntos = {};
 		
+		$("#sortable2 li").each(function(){
+            var self = $(this);
+            	dadosAssuntos[self.attr('id')] = {            
+                id : self.find('.id').text(),
+                name  : self.find('.name').text(),
+                file  : self.find('.file').text()
+            };            
+        });
 
-	$(".submit").click(function(){
+		var dados = JSON.stringify(dadosAssuntos);
+
+		// console.log(json);
+
 		var numtab = $(this).closest("div").attr("numtab");
 		
 		$('.ajax_form').submit(function(){
 				
-			var dados = $( this ).serialize();
+			// var dados = $( this ).serialize();
 
 			$.ajax({
 				type: "POST",
 				url: "ocorrencia/create",
-				data: dados,
+				// data: dados,
+				data: 'data=' + dados,
 				success: function( data )
 				{
 					$('div[numtab="'+ numTran +'"] div').remove();
@@ -98,6 +153,11 @@ echo form_close();
 			return false;
 		});
 	});
+
+	$('.glyphicon-trash').on('click', function(){
+		$("input[name='dsc_file']").val( '' );
+	});
+
 
 	$('.atach-file').on('click', function(){
 	    
@@ -115,7 +175,22 @@ echo form_close();
 	                $('.dados_componente').append(response);
 	            }
 	        });
-	    });
+	});
+
+	$(function() {
+	    $( "#sortable1, #sortable2" ).sortable(
+	    {
+	      	connectWith: ".connectedSortable",
+	      	start: function(event, ui) {
+		        // alert('start');
+		    },
+			update: function (event, ui) {
+					// alert('update');
+			    }
+	    }).disableSelection();
+  	});
+
+
 </script>
 
 

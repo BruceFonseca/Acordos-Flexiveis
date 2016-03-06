@@ -568,3 +568,62 @@ fieldset legend{
     vertical-align: bottom;
     text-align: center;
 }
+
+
+#sortable1, #sortable2 {
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    width: 100%;
+    min-height: 30px;
+    list-style-type: none;
+    margin: 0px 10px 10px 0px;
+    padding: 10px;
+    /*margin-right: 10px;*/
+    display: table;
+    float: left;
+  }
+
+  #sortable2{
+    display: block;
+  }
+
+
+  #sortable1 li{
+    /*
+    padding: 5px;
+    font-size: 1.2em;
+    width: 120px;
+    display: inline;*/
+    margin: 5px;
+    margin-left: 0;
+    display: inline;
+    padding: .2em .6em .3em;
+    font-size: 90%;
+    font-weight: 700;
+    line-height: 1;
+    color: #fff;
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: baseline;
+    border-radius: 4px;
+    border: none;
+    background-color: #d9534f;
+    
+  }
+
+  #sortable2 li{
+    display: block;
+  }
+  #sortable1 li:hover, #sortable2 li:hover{
+    cursor: pointer;
+  }
+
+#sortable1 li .id, 
+#sortable1 li .glyphicon-paperclip, 
+#sortable1 li .file{
+    display: none;
+}
+
+#sortable1 li .id, #sortable2 li .id{
+    display: none;
+}

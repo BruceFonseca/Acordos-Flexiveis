@@ -6,7 +6,7 @@ endif;
 
 echo '<form method="post" action="" class="ajax_form">';
 
-echo form_fieldset('Conceito dos acordos');
+echo form_fieldset('...');
 
 echo  validation_errors('<div class="alert alert-danger" role="alert">
   <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>

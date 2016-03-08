@@ -627,3 +627,16 @@ fieldset legend{
 #sortable1 li .id, #sortable2 li .id{
     display: none;
 }
+
+.list-group-item .name{
+    width: 120px;
+    display: inline;
+    font-weight: bold;
+}
+
+.list-group-item a .file{
+    color: #d9534f;
+}
+.list-group-item .glyphicon-paperclip{
+    float: right;
+}

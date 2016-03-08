@@ -2,46 +2,26 @@
 
 class Oc_ac_as_model extends CI_Model{
     
-    public function do_insert($dados=NULL){            
-        
-        if ($dados != NULL):
-            $this->db->insert('oc_ac_as',$dados);
-        endif;
-            
+    public function do_insert($data=NULL, $id_ocorrencia){        
+
+    //transforma o objeto em array
+    if (is_object($data)) {
+            $dados = get_object_vars($data);
+            unset($dados['dados_acordo']);
     }
-    
-    public function do_update($dados=NULL, $condicao=NULL){
 
+    foreach ($dados as $linha):
 
-        if ($dados != NULL && $condicao != NULL):
-            // não está utilizando a variavel condição
-        // pd($dados['id_assunto']);
+        $sql = ' INSERT INTO oc_ac_as (id_ocorrencia, id_tratado, dsc_file)
+                VALUES('. $id_ocorrencia .', '. $linha->id . ', "'. $linha->file .'")';
 
-        $sql =  'UPDATE planta 
-                    SET dsc_planta = ' . "'" . $dados['dsc_planta'] . "'" .
-                ' WHERE id_planta = ' . $dados['id_planta'];
+        $this->db-> query($sql);
+    endforeach;
 
-                $this->db-> query($sql);
-
-            $this->session->set_flashdata('edicaook','Acordo atualizado com sucesso');
-            redirect(current_url());
-        endif;
     }
-    
-    public function get_all(){
 
-          $query = 'SELECT id_planta, dsc_planta FROM planta';     
-         
-        return $this->db->query($query);
-    }
     
-    
-    public function get_byid($id) {
-        $query = 'SELECT id_planta, dsc_planta FROM planta 
-                  WHERE id_planta = ' . $id ; 
 
-        return $this->db->query($query);
-    }
 
 }
 

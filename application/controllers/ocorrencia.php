@@ -16,33 +16,38 @@ class Ocorrencia extends CI_Controller{
        $this->load->model('assunto_model');//carrega o model
        $this->load->model('planta_model');//carrega o model
        $this->load->model('periodo_model');//carrega o model
+       $this->load->model('oc_ac_as_model');//carrega o model
+       $this->load->model('tratado_model');//carrega o model
         date_default_timezone_set('America/Sao_Paulo');//define o timezone
     }
     
    
     public function  create(){
 
-        // if(isset($_POST['data'])) {
-        //     $data = json_decode($_POST['data']);
-        //     pd($data);
-        // }        
-        // validação dos dados recebidos do formulário
-        $this->form_validation->set_rules('dsc_resumo', 'Descrição do Acordo','trim|required');
-        // $this->form_validation->set_rules('dsc_name','Nome','trim|required|max_lenght[100]|strtoupper');
-        // $this->form_validation->set_rules('dsc_matricula','Matrícula','trim|required|max_lenght[45]|strtoupper');
+        $flash_data = NULL;
 
-        // se existe uma validação, envia os dados para o model inserir
-        if ($this->form_validation->run()==TRUE){
+        if(isset($_POST['data'])) {
+            $data = json_decode($_POST['data']);
+            // pd($data->dados_acordo->id_assunto);
 
-            $validacao = TRUE;
-            $dados = elements(array(
-                                    'id_assunto',
-                                    'id_planta',
-                                    'id_periodo',
-                                    'dsc_resumo',
-                                    'dsc_file',
-                                    ), $this->input->post());
-            $this->ocorrencia_model->do_insert($dados);
+            $id_assunto = $data->dados_acordo->id_assunto;
+            $id_planta  = $data->dados_acordo->id_planta;
+            $id_periodo = $data->dados_acordo->id_periodo;
+
+            $dados = array(
+                'id_assunto' => $id_assunto,
+                'id_planta'  => $id_planta,
+                'id_periodo' => $id_periodo,
+             );
+
+            if ($this->ocorrencia_model->valida_ocorrencia($id_assunto, $id_planta, $id_periodo) == FALSE){
+                $flash_data = $this->ocorrencia_model->msg_validacao('cadastro_duplicado');
+            }else{
+                $this->ocorrencia_model->do_insert($dados);
+                $id_ocorrencia = $this->ocorrencia_model->get_last()->row()->last;
+                $this->oc_ac_as_model->do_insert($data, $id_ocorrencia);
+                $flash_data = $this->ocorrencia_model->msg_validacao('cadastrado_sucesso');
+            }
         }
 
         $dados = array(
@@ -52,6 +57,8 @@ class Ocorrencia extends CI_Controller{
             'dados_assunto'=> $this->assunto_model->get_all()->result_array(),
             'dados_planta'=> $this->planta_model->get_all()->result_array(),
             'dados_periodo'=> $this->periodo_model->get_all()->result_array(),
+            'assuntos_disp'=> $this->tratado_model->get_all()->result_array(),
+            'flash_data' => $flash_data,
              );
         
         $this->load->view('conteudo', $dados );
@@ -96,7 +103,6 @@ class Ocorrencia extends CI_Controller{
 
             if ($this->form_validation->run()==TRUE):
 
-
                 $dados = elements(array(
                                         'id_periodo',
                                         'dsc_periodo'
@@ -116,9 +122,6 @@ class Ocorrencia extends CI_Controller{
         
         $this->load->view('conteudo', $dados );
 
-        // $id = $this->input->post('id');
-
-        // pd($id);
     }//fim update
 
 

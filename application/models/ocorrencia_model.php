@@ -8,7 +8,7 @@ class Ocorrencia_model extends CI_Model{
             $this->db->insert('ocorrencia',$dados);
             $this->session->set_flashdata('cadastrook','<span class="glyphicon glyphicon-check" aria-hidden="true"></span>
                                                  <span class="sr-only">Error:</span>     Acordo atualizado com sucesso!!!');
-            redirect('ocorrencia/create');
+            // redirect('ocorrencia/create');
         endif;
             
     }
@@ -75,6 +75,16 @@ class Ocorrencia_model extends CI_Model{
         return $this->db->query($query);
 
     }
+    public function get_last(){
+        $query = '
+                SELECT 
+                MAX(id_ocorrencia) as last
+                FROM ocorrencia
+            ';     
+         
+        return $this->db->query($query);
+
+    }
 
     public function get_submenu_periodo(){
         $query = '
@@ -108,6 +118,47 @@ class Ocorrencia_model extends CI_Model{
         return $this->db->query($query);
 
     }
+
+    public function valida_ocorrencia($id_assunto, $id_planta, $id_periodo){
+    // verifica o número de vezes que o registro está cadastrado no banco
+
+        $query = '
+            SELECT COUNT(*) as cont FROM ocorrencia
+            WHERE 
+                id_assunto= ' . $id_assunto . ' AND
+                id_planta= '  . $id_planta  . ' AND
+                id_periodo= ' . $id_periodo  ;
+
+        //transforma o resultado da query em um objeto para utiliza-lo
+        $cont = $this->db->query($query)->row()->cont;
+
+        if ($cont >= 1) {
+            // se já está cadastrado, retorna FALSE
+            return FALSE;
+        }else{
+            return TRUE;
+        }
+    }
+
+    public function msg_validacao($msg){
+
+        if($msg == 'cadastro_duplicado'){
+             
+            $return = ' <div class="alert alert-danger" role="alert">
+                        <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+                        <span class="sr-only">Error:</span>Esta Interpretação já está cadastrada com 
+                        o mesmo <strong>Acordo</strong>, <strong>Planta</strong> e <strong>Período</strong></div>';
+
+        }elseif ($msg == 'cadastrado_sucesso') {
+            $return = '<div class="alert alert-success" role="alert">
+                        <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+                        <span class="sr-only">Error:</span>
+                        Interpretação cadastrada com sucesso!!!</div>';
+        }
+
+        return $return;
+    }
+    
 
 }
 

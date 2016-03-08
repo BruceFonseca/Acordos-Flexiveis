@@ -69,6 +69,7 @@ $(function(){
 
 	// cria uma nova aba referente a transação selecionada pelo usuário
 	function criarNovaAba(controller, desc){
+		fecha_aba_mesmo_ctr(controller);
 		// alert('entriou' + controller + desc + numTran);
 		var numTran = numTab();
 		$('.nav.nav-tabs li').removeClass('active');
@@ -141,6 +142,18 @@ $(function(){
  					$('div[numtab="'+ numTran +'"]').append(response);
 				}
 			});
+	}
+
+	function fecha_aba_mesmo_ctr(controller){
+		var numtab = $('a[crt="'+ controller +'"]').attr('numtab');
+		$('a[numtab="'+ numtab +'"]').parent().remove();//remove a aba do numtab selecionado
+		$('div[numtab="'+ numtab +'"]').remove(); //remove a div que contem o numtab selecionado
+
+		if(controller == "assunto/create"){
+			if ($('.modal.fade').length) {
+				$(this).remove();
+			};
+		}
 	}
 
 

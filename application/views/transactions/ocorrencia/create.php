@@ -61,7 +61,7 @@ echo '
 		    '<li class="ui-state-default list-group-item" id="'. $id .'">
 		    <span class="id">'. $id .'</span>
 		  	<span class="name">'. $tratado .'</span>
-		  	<a href="#"><span class="file">file.pdf</span></a>
+		  	<a href="#"><span class="file"></span></a>
 		  	<span class="glyphicon glyphicon-paperclip" aria-hidden="true"></span>
 
 		    </li>';
@@ -169,14 +169,11 @@ echo form_close();
 		});
 	});
 
-	$('.glyphicon-trash').on('click', function(){
-		$("input[name='dsc_file']").val( '' );
-	});
+	$('.glyphicon.glyphicon-paperclip').on('click',function(){
 
+		var id = $(this).closest("li").attr("id");
 
-	$('.atach-file').on('click', function(){
-	    
-	    var controller = 'ocorrencia/carregar';
+		var controller = 'ocorrencia/carregar/'+ id;
 
 	     $.ajax({
 	            type      : 'post',
@@ -189,7 +186,7 @@ echo form_close();
 	                $('.dados_componente').css( "position", "absolute" );
 	                $('.dados_componente').append(response);
 	            }
-	        });
+	    });
 	});
 
 	$(function() {

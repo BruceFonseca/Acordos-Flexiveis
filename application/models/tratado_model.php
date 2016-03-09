@@ -16,8 +16,6 @@ class Tratado_model extends CI_Model{
 
 
         if ($dados != NULL && $condicao != NULL):
-            // não está utilizando a variavel condição
-        // pd($dados['id_assunto']);
 
         $sql =  'UPDATE tratado 
                     SET dsc_tratado = ' . "'" . $dados['dsc_tratado'] . "'" .
@@ -34,6 +32,40 @@ class Tratado_model extends CI_Model{
 
           $query = 'SELECT id_tratado, dsc_tratado FROM tratado';     
          
+        return $this->db->query($query);
+    }
+
+    public function get_disp_byid($id){
+
+          $query = 
+          'SELECT id_tratado, dsc_tratado FROM tratado 
+          WHERE id_tratado NOT IN (
+                SELECT id_tratado FROM oc_ac_as WHERE id_ocorrencia = '. $id .'
+            )';
+         
+        return $this->db->query($query);
+    }
+    
+    public function get_ulti_byid($id){
+
+          // $query = 
+          // 'SELECT t.id_tratado as id_tratado, dsc_tratado, oc.dsc_file as dsc_file FROM tratado t
+          // INNER JOIN oc_ac_as oc ON t.id_tratado = oc.id_tratado AND
+          // WHERE t.id_tratado IN (
+          //       SELECT oo.id_tratado FROM oc_ac_as oo WHERE id_ocorrencia = '. $id .'
+          //   )
+          //   ';
+
+        $query = 
+          'SELECT 
+          oc.id_tratado as id_tratado, 
+          t.dsc_tratado as dsc_tratado, 
+          oc.dsc_file as dsc_file FROM oc_ac_as oc
+          
+          INNER JOIN tratado t ON oc.id_tratado = t.id_tratado
+          WHERE oc.id_ocorrencia = '. $id;
+
+
         return $this->db->query($query);
     }
     

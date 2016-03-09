@@ -76,6 +76,8 @@ echo form_close();
 		});
 	});
 
+	
+
 	$('.atach-file').on('click', function(){
 	    
 	    var controller = 'ocorrencia/carregar';
@@ -91,8 +93,8 @@ echo form_close();
 	                $('.dados_componente').css( "position", "absolute" );
 	                $('.dados_componente').append(response);
 	            }
-	        });
 	    });
+	});
 
 	$(document).ready( function() {
 		//se o plugin wysiwyg já existe, ele não dupliará o plugin

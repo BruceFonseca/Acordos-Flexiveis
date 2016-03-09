@@ -8,26 +8,23 @@ class Ocorrencia_model extends CI_Model{
             $this->db->insert('ocorrencia',$dados);
             $this->session->set_flashdata('cadastrook','<span class="glyphicon glyphicon-check" aria-hidden="true"></span>
                                                  <span class="sr-only">Error:</span>     Acordo atualizado com sucesso!!!');
-            // redirect('ocorrencia/create');
         endif;
             
     }
     
     public function do_update($dados=NULL, $condicao=NULL){
 
-
         if ($dados != NULL && $condicao != NULL):
-            // não está utilizando a variavel condição
-        // pd($dados['id_assunto']);
-
-        $sql =  'UPDATE periodo 
-                    SET dsc_periodo = ' . "'" . $dados['dsc_periodo'] . "'" .
-                ' WHERE id_periodo = ' . $dados['id_periodo'];
-
-                $this->db-> query($sql);
-
-            $this->session->set_flashdata('edicaook','Período atualizado com sucesso!!!');
-            redirect(current_url());
+            $sql =  'UPDATE ocorrencia 
+                        SET 
+                        id_planta = ' .  $dados['id_planta'] . ", " .
+                        'id_assunto = ' .  $dados['id_assunto'] . ", " .
+                        'id_periodo = ' . $dados['id_periodo'] . 
+                    ' WHERE id_ocorrencia = ' . $condicao;
+                    // pd($sql);
+            $this->db-> query($sql);
+            // $this->session->set_flashdata('edicaook','Interpretação atualizada com sucesso!!!');
+            // redirect(current_url());
         endif;
     }
     
@@ -55,8 +52,8 @@ class Ocorrencia_model extends CI_Model{
     
     
     public function get_byid($id) {
-        $query = 'SELECT id_periodo, dsc_periodo FROM periodo 
-                  WHERE id_periodo = ' . $id ; 
+        $query = 'SELECT id_ocorrencia, id_assunto, id_planta, id_periodo FROM ocorrencia 
+                  WHERE id_ocorrencia = ' . $id ; 
 
         return $this->db->query($query);
     }
@@ -83,7 +80,6 @@ class Ocorrencia_model extends CI_Model{
             ';     
          
         return $this->db->query($query);
-
     }
 
     public function get_submenu_periodo(){
@@ -99,7 +95,6 @@ class Ocorrencia_model extends CI_Model{
             ';
 
         return $this->db->query($query);
-
     }
 
     public function get_submenu_ocorrencia(){
@@ -121,7 +116,6 @@ class Ocorrencia_model extends CI_Model{
 
     public function valida_ocorrencia($id_assunto, $id_planta, $id_periodo){
     // verifica o número de vezes que o registro está cadastrado no banco
-
         $query = '
             SELECT COUNT(*) as cont FROM ocorrencia
             WHERE 

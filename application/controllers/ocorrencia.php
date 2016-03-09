@@ -78,47 +78,47 @@ class Ocorrencia extends CI_Controller{
 
     public function  update(){   
 
-    $flash_data = NULL;
-
-    if($this->session->flashdata('edicaook')):
-        $flash_data = '<div class="alert alert-success" role="alert">
-    <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
-    <span class="sr-only">Error:</span>
-    Acordo atualizado com sucesso!!!
-    </div>';
-    endif;
       
         // recebe o id do usuário através da URL
         $id = $this->uri->segment(3);
-            
-
-        if($this->input->post('dsc_periodo')){
-            
-            //o $id é setado novamente quando vem por POST 
-            $id = $this->input->post('id_periodo');
-
+        $flash_data = NULL;
+        
+        if(isset($_POST['data'])) {
+            $data = json_decode($_POST['data']);
             // pd($id);
 
-            $this->form_validation->set_rules('dsc_periodo','dsc_periodo','trim');
+            $id_assunto = $data->dados_acordo->id_assunto;
+            $id_planta  = $data->dados_acordo->id_planta;
+            $id_periodo = $data->dados_acordo->id_periodo;
 
-            if ($this->form_validation->run()==TRUE):
+            $dados = array(
+                'id_assunto' => $id_assunto,
+                'id_planta'  => $id_planta,
+                'id_periodo' => $id_periodo,
+             );
 
-                $dados = elements(array(
-                                        'id_periodo',
-                                        'dsc_periodo'
-                                        ), $this->input->post());
 
-                $this->periodo_model->do_update($dados, array('id_periodo'=> $id));
-            endif;
-
-        }//fim do if
+            // if ($this->ocorrencia_model->valida_ocorrencia($id_assunto, $id_planta, $id_periodo) == FALSE){
+                // $flash_data = $this->ocorrencia_model->msg_validacao('cadastro_duplicado');
+            // }else{
+                $this->ocorrencia_model->do_update($dados, $id);
+                $this->oc_ac_as_model->do_delete($id);
+                $this->oc_ac_as_model->do_insert($data, $id);
+                $flash_data = $this->ocorrencia_model->msg_validacao('cadastrado_sucesso');
+            // }
+        }
 
         $dados = array(
             'tela'=> 'update',
-            'pasta'=> 'periodo',// é a pasta que está dentro de "telas". existe uma pasta para cada tabela a ser cadastrada
-            'query'=> $this->periodo_model->get_byid($id)->row(),
-            'flash_data'=> $flash_data,
-         );
+            'pasta'=> 'ocorrencia',// é a pasta que está dentro de "telas". existe uma pasta para cada tabela a ser cadastrada
+            'dados_assunto'=> $this->assunto_model->get_all()->result_array(),
+            'dados_planta'=> $this->planta_model->get_all()->result_array(),
+            'dados_periodo'=> $this->periodo_model->get_all()->result_array(),
+            'dados_ocorrencia'=> $this->ocorrencia_model->get_byid($id)->row(),
+            'assuntos_disp'=> $this->tratado_model->get_disp_byid($id)->result_array(),
+            'assuntos_util'=> $this->tratado_model->get_ulti_byid($id)->result_array(),
+            'flash_data' => $flash_data,
+             );
         
         $this->load->view('conteudo', $dados );
 
@@ -176,6 +176,10 @@ class Ocorrencia extends CI_Controller{
 
     public function carregar(){
         // carrega os arquivos de acordos
+        $id = NULL;
+        if($this->uri->segment(3)){
+            $id =$this->uri->segment(3);
+        }
 
         $this->output->enable_profiler(FALSE);//MODO NATIVO DE DEBUG CODEIGNITER. MUDE PARA "TRUE" PARA HABILITAR
 
@@ -183,6 +187,7 @@ class Ocorrencia extends CI_Controller{
         $dados = array(
             'tela'=> 'carregar',
             'pasta'=> 'ocorrencia',// é a pasta que está dentro de "telas". existe uma pasta para cada tabela a ser cadastrada
+            'id'=> $id,
              );
 
         $this->load->view('conteudo', $dados);

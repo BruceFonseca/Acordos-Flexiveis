@@ -6,9 +6,9 @@
 	</button>
 
 <?php
-
-    	echo form_open_multipart('ocorrencia/importar', array('class' => 'upload-esturtura-produto'));
-    	echo form_fieldset('Carregar arquivo');
+        echo form_open_multipart('ocorrencia/importar', array('class' => 'upload-esturtura-produto'));
+        echo form_fieldset('Carregar arquivo');
+        if($id){ echo form_hidden('fihd', $id);}
     ?>
 		<!-- AJAX Response will be outputted on this DIV container -->
 	    <div class = "upload-messages-esturtura-produto"></div>
@@ -21,6 +21,7 @@
 <!-- o script jquery abaixo é carregado no formulário no momento que o formulário é criado -->
 <script>                    
     jQuery(document).ready(function($) {
+
 
         var options = {
             beforeSend: function(){
@@ -42,13 +43,23 @@
 
     $('#fechar-apontamento-componente').on('click', function(){
         var name_file= $('input[name="atach-file"]').val();
-		$('.apontamento').hide();
-		$('.dados_componente').hide();
-		$('.dados_componente .form').remove();
-		// $('.dados_componente .body-table-abastecimento').remove();
-		$('.dados_componente script').remove();
+        if ($('.upload-esturtura-produto input[name="fihd"]').length) {
+            var id = $('.upload-esturtura-produto input[name="fihd"]').val();
+            insere_nome_ocorrencia(name_file, id);
+        };
+        $('.apontamento').hide();
+        $('.dados_componente').hide();
+        $('.dados_componente .form').remove();
+        // $('.dados_componente .body-table-abastecimento').remove();
+        $('.dados_componente script').remove();
         $('.dsc_file').val(name_file);
-	});
-	
+
+    });
+
+    function insere_nome_ocorrencia(name_file, id){
+
+        $('#sortable2 #'+id+' a span').text(name_file);
+    }
+    
 </script>
 

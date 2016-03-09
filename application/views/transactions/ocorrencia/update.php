@@ -1,58 +1,187 @@
+
 <div class='form'>
 	
 
-	<?php
+<?php
 
-		echo '<form method="post" action="" class="ajax_form">';
+// pd($dados_ocorrencia->id_assunto);
+// pd($assuntos_disp);
 
-		echo form_fieldset('Atualizar Período');
-			
-		if($flash_data):
-	        echo $flash_data;
-	    endif;
+for($i=0; $i < count($dados_assunto); $i++){ 
+    $id = $dados_assunto[$i]['id_assunto'];
+    $assuntos[$id] = $dados_assunto[$i]['dsc_assunto'];
+}
 
-		echo  validation_errors('<div class="alert alert-danger" role="alert">
-	  <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
-	  <span class="sr-only">Error:</span>','</div>');
+for($i=0; $i < count($dados_planta); $i++){ 
+    $id = $dados_planta[$i]['id_planta'];
+    $plantas[$id] = $dados_planta[$i]['dsc_planta'];
+}
 
-		echo form_label('ID Período');
-		echo form_input(array('name'=>'id_periodo', 'class'=>'id-periodo'),  set_value('id_periodo', $query->id_periodo),'bloqued')."<br>";
+for($i=0; $i < count($dados_periodo); $i++){ 
+    $id = $dados_periodo[$i]['id_periodo'];
+    $periodos[$id] = $dados_periodo[$i]['dsc_periodo'];
+}
 
-		echo form_label('Descrição do Período');
-		echo form_input(array('name'=>'dsc_periodo'),  set_value('dsc_periodo',$query->dsc_periodo))."<br>";
+echo '<form method="post" action="" class="ajax_form_ocorrencia">';
 
-		echo form_button(array('name'=>'cadastrar', 'class'=>'submit', 'id'=>'submit','content'=>'Salvar', 'type'=>'submit'));
+echo form_fieldset('Adicionar interpretação');
 
-		echo form_fieldset_close();
-		echo form_close();
+if($flash_data):
+	echo $flash_data;
+endif;
 
-	?>
+echo '<div class="set_form">';
+echo form_hidden('id_ocorrencia', $dados_ocorrencia->id_ocorrencia);
 
+	echo '<div class="set_com">';
+		echo form_label('Planta')."<br>";
+		echo form_dropdown('id_planta',  $plantas, $dados_ocorrencia->id_planta);
+	echo '</div>';
+
+	echo '<div class="set_com">';
+		echo form_label('Período')."<br>";
+		echo form_dropdown('id_periodo',  $periodos, $dados_ocorrencia->id_periodo);
+	echo '</div>';
+echo '</div>';
+
+echo '<div class="set_assunto">';
+	echo form_label('Acordo')."<br>";
+	echo form_dropdown('id_assunto',  $assuntos, $dados_ocorrencia->id_assunto);
+echo '</div>';
+
+echo '
+ 	<div class="set_assunto">
+	<label>Assuntos Disponíveis</label>
+	<br>
+	<ul id="sortable1" class="connectedSortable list-group">';
+
+  		for($i=0; $i < count($assuntos_disp); $i++){ 
+		    $id = $assuntos_disp[$i]['id_tratado'];
+		    $tratado = $assuntos_disp[$i]['dsc_tratado'];
+
+		    echo 
+		    '<li class="ui-state-default list-group-item" id="'. $id .'">
+		    <span class="id">'. $id .'</span>
+		  	<span class="name">'. $tratado .'</span>
+		  	<a href="#"><span class="file"></span></a>
+		  	<span class="glyphicon glyphicon-paperclip" aria-hidden="true"></span>
+
+		    </li>';
+		}
+echo '</ul>';
+ 
+ 
+ 	echo '<label>Assuntos Utilizados</label>
+	<ul id="sortable2" class="connectedSortable list-group">';
+	  
+	  for($i=0; $i < count($assuntos_util); $i++){ 
+		    $id = $assuntos_util[$i]['id_tratado'];
+		    $tratado = $assuntos_util[$i]['dsc_tratado'];
+		    $file = $assuntos_util[$i]['dsc_file'];
+		    // $file = isset($assuntos_util[$i]['dsc_file'])     ? $assuntos_util[$i]['dsc_file']    : 'Não disponível';
+
+		    echo 
+		    '<li class="ui-state-default list-group-item" id="'. $id .'">
+		    <span class="id">'. $id .'</span>
+		  	<span class="name">'. $tratado .'</span>
+		  	<a href="#"><span class="file">'. $file .'</span></a>
+		  	<span class="glyphicon glyphicon-paperclip" aria-hidden="true"></span>
+
+		    </li>';
+		}
+	
+	echo '</ul>
+
+	</div>';
+
+echo form_button(array('name'=>'cadastrar', 'class'=>'submit', 'id'=>'submit','content'=>'Cadastrar', 'type'=>'submit'))."<br>";
+
+echo form_fieldset_close();
+echo form_close();
+
+?>
 </div>
 
 <!-- o script jquery abaixo é carregado no formulário no momento que o formulário é criado -->
 <script>
-	$(".submit").click(function(){
-		// var numtab = $(this).closest("div").attr("numtab");
-		// var numtab = $(this).closest("div").attr("numtab");
-		var id_assunto = $(this).closest('fieldset').find('input.id-periodo').val();
+	
+	$(".submit").click(function(event){
+		// event.preventDefault();
+		var id = $('.set_form input[name="id_ocorrencia"]').val();
+		var dadosAssuntos = {};
+		
+		$("#sortable2 li").each(function(){
+            var self = $(this);
+            	dadosAssuntos[self.attr('id')] = {            
+                id : self.find('.id').text(),
+                name  : self.find('.name').text(),
+                file  : self.find('.file').text()
+            };            
+        });
 
-		$('.ajax_form').submit(function(){
-				
-			var dados = $( this ).serialize();
+		var id_assunto = $("select[name='id_assunto']").val();
+		var id_planta = $("select[name='id_planta']").val();
+		var id_periodo = $("select[name='id_periodo']").val();
+
+		dadosAssuntos['dados_acordo'] = {            
+                id_assunto  : id_assunto,
+                id_planta   : id_planta,
+                id_periodo  : id_periodo
+            };
+
+		var dados = JSON.stringify(dadosAssuntos);
+
+		var numtab = $(this).closest("div.conteudo").attr("numtab");
+		
+		$('.ajax_form_ocorrencia').submit(function(){
 
 			$.ajax({
 				type: "POST",
-				url: "periodo/update/"+ id_assunto,
-				data: dados,
+				url: "ocorrencia/update/"+ id,
+				data: 'data=' + dados,
 				success: function( data )
 				{
-					$('div[numtab="'+ numTran +'"] div').remove();
-					$('div[numtab="'+ numTran +'"]').append(data);
+					$('div[numtab="'+ numtab +'"] div').remove();
+					$('div[numtab="'+ numtab +'"]').append(data);
 				}
 			});
 
 			return false;
 		});
 	});
+
+	$('.glyphicon.glyphicon-paperclip').on('click',function(){
+
+		var id = $(this).closest("li").attr("id");
+
+		var controller = 'ocorrencia/carregar/'+ id;
+
+	     $.ajax({
+	            type      : 'post',
+	            url       : controller, //é o controller que receberá
+	            
+	            success: function( response ){
+	                $('.apontamento').show();
+
+	                $('.dados_componente').css( "display", "table" );
+	                $('.dados_componente').css( "position", "absolute" );
+	                $('.dados_componente').append(response);
+	            }
+	    });
+	});
+
+	$(function() {
+	    $( "#sortable1, #sortable2" ).sortable(
+	    {
+	      	connectWith: ".connectedSortable",
+	      	start: function(event, ui) {
+		        // alert('start');
+		    },
+			update: function (event, ui) {
+					// alert('update');
+			    }
+	    }).disableSelection();
+  	});
+
+
 </script>

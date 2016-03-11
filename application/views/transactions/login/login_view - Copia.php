@@ -19,7 +19,59 @@
 </div>
 
 
+<div class="cycle-slideshow">
 
+        <div class="slide_item">
+            <img src=<?php echo base_url('img/slideshow/02_case_IH_990x300.jpg' )?> title="Foto 02" />
+        </div>
+
+        <div class="slide_item">
+            <img src=<?php echo base_url('img/slideshow/Top_Case_construction.jpg' )?> title="Foto 02" />
+        </div>
+
+        <div class="slide_item">
+            <img src=<?php echo base_url('img/slideshow/01_iveco_990x300.jpg' )?> title="Foto 02" />
+        </div>
+
+        <div class="slide_item">
+            <img src=<?php echo base_url('img/slideshow/01_iveco_bus_990x300.jpg' )?> title="Foto 02" />
+        </div>
+
+        <div class="slide_item">
+            <img src=<?php echo base_url('img/slideshow/02_new_holland_con_990x300.jpg' )?> title="Foto 02" />
+        </div>
+
+        <div class="slide_item">
+            <img src=<?php echo base_url('img/slideshow/Our-Businesses---New-Holland-Ag---nuova-foto-top.jpg' )?> title="Foto 02" />
+        </div>
+
+        <div class="slide_item">
+            <img src=<?php echo base_url('img/slideshow/02_steyr_990x300.jpg' )?>  title="Foto 02" />
+        </div>
+
+
+        <div class="slide_item">
+            <img src=<?php echo base_url('img/slideshow/02_iveco_astra_990x300.jpg' )?> title="Foto 02" />
+        </div>
+
+        <div class="slide_item">
+            <img src=<?php echo base_url('img/slideshow/top_magirus_990x300.jpg' )?> title="Foto 02" />
+        </div>
+
+        <div class="slide_item">
+            <img src=<?php echo base_url('img/slideshow/GX_327_BHNS_top_2.jpg' )?> title="Foto 02" />
+        </div>
+
+        <div class="slide_item">
+            <img src=<?php echo base_url('img/slideshow/iveco_defence_top.jpg' )?> title="Foto 02" />
+        </div>
+
+        <div class="slide_item">
+            <img src=<?php echo base_url('img/slideshow/_DSC0408.jpg' )?>  title="Foto 01" />
+        </div>
+
+
+</div><!-- /slideshow -->
 
 <div class="marcas">
     <ul> 

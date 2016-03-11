@@ -49,6 +49,28 @@ class Ocorrencia_model extends CI_Model{
         return $this->db->query($query);
     }
     
+        
+    public function get_all_by_planta($id){
+
+          $query = '
+                SELECT 
+                o.id_ocorrencia as id_ocorrencia,
+                o.id_assunto as id_assunto,
+                a.dsc_assunto as dsc_assunto,
+                o.id_planta as id_planta,
+                p.dsc_planta as dsc_planta,
+                o.id_periodo as id_periodo,
+                pe.dsc_periodo as dsc_periodo,
+                o.dsc_resumo as dsc_resumo,
+                o.dsc_file as dsc_file
+                FROM ocorrencia o
+                INNER JOIN assunto a ON o.id_assunto = a.id_assunto
+                INNER JOIN planta p ON o.id_planta = p.id_planta
+                INNER JOIN periodo pe ON o.id_periodo = pe.id_periodo
+                WHERE o.id_planta = ' . $id ;     
+        return $this->db->query($query);
+    }
+    
     
     public function get_byid($id) {
         $query = 'SELECT id_ocorrencia, id_assunto, id_planta, id_periodo, dsc_file FROM ocorrencia 

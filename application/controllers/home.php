@@ -30,8 +30,8 @@ class Home extends CI_Controller {
                 'submenu_list'=> $this->user_menu_model->get_submenu_by_role($role),
 
                 'menu_planta'=> $this->ocorrencia_model->get_menu_planta(),
-                'submenu_periodo'=> $this->ocorrencia_model->get_submenu_periodo(),
-                'submenu_ocorrencia'=> $this->ocorrencia_model->get_submenu_ocorrencia(),
+                // 'submenu_periodo'=> $this->ocorrencia_model->get_submenu_periodo(),
+                // 'submenu_ocorrencia'=> $this->ocorrencia_model->get_submenu_ocorrencia(),
             );
 
             // $data['username'] = $session_data['username'];

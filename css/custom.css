@@ -42,11 +42,18 @@ a{
     margin-bottom: 0px
 }
 
+.conteudo-principal{
+    float: right;
+}
 .nav-acordos{
 list-style: none !important;
     margin: 0px;
     padding: 0px;
     display: inline;
+    overflow: hidden;
+    position: fixed;
+    float: left;
+
     /*padding-left: 20px;*/
     /*padding-top: 10px;*/
 }
@@ -99,7 +106,7 @@ list-style: none !important;
 
 .nav.nav-tabs{
     width: 85%;
-    float: left;
+    float: right;
 }
 
 .conteudo-principal .conteudo{
@@ -654,4 +661,14 @@ fieldset legend{
 .list-group-item .glyphicon-paperclip{
     float: right;
     min-width: 20px;
+}
+
+#header-principal{
+    position: fixed;
+    width: 100%;
+    z-index: 1000;
+
+}
+.nav.nav-tabs, .nav-acordos{
+    margin-top: 51px;
 }

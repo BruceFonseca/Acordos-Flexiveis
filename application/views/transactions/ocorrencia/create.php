@@ -4,8 +4,6 @@
 
 <?php
 
-// pd($assuntos_disp);
-
 for($i=0; $i < count($dados_assunto); $i++){ 
     $id = $dados_assunto[$i]['id_assunto'];
     $assuntos[$id] = $dados_assunto[$i]['dsc_assunto'];
@@ -44,13 +42,19 @@ echo '</div>';
 
 echo '<div class="set_assunto">';
 	echo form_label('Acordo')."<br>";
+
 	echo form_dropdown('id_assunto',  $assuntos);
 echo '</div>';
+
+echo "<span><a href='#' class='atach-file'>Anexar arquivo </a>";
+
+echo form_input(array('name'=>'dsc_file file', 'class'=>'dsc_file'),  '')."<br>";
 
 echo '
  	<div class="set_assunto">
 	<label>Assuntos Disponíveis</label>
 	<br>
+
 	<ul id="sortable1" class="connectedSortable list-group">';
 
   		for($i=0; $i < count($assuntos_disp); $i++){ 
@@ -63,7 +67,7 @@ echo '
 		  	<span class="name">'. $tratado .'</span>
 		  	<a href="#"><span class="file"></span></a>
 		  	<span class="glyphicon glyphicon-paperclip" aria-hidden="true"></span>
-
+		  	<textarea name="" class="dsc_interpretacao form-control"></textarea>
 		    </li>';
 		}
 echo '</ul>';
@@ -74,41 +78,7 @@ echo '</ul>';
 	  
 	</ul>
 
-	</div>
-	 ';
-	 // <li class="ui-state-highlight list-group-item" id="1">
-	 //  	<span class="id">ID</span>
-	 //  	<span class="name">13º Décimo terceiro</span>
-	 //  	<span class="file">file.pdf</span>
-	 //  	<span class="glyphicon glyphicon-paperclip" aria-hidden="true"></span>
-	 //  </li>
-
-	 //  <li class="ui-state-highlight list-group-item" id="2">
-	 //  	<span class="id">ID</span>
-	 //  	<span class="name">PPR</span>
-	 //  	<span class="file">file.pdf</span>
-	 //  	<span class="glyphicon glyphicon-paperclip" aria-hidden="true"></span>
-	 //  </li>
-	 //  <li class="ui-state-highlight list-group-item" id="3">
-	 //  	<span class="id">ID</span>
-	 //  	<span class="name">PLM</span>
-	 //  	<span class="file">file.pdf</span>
-	 //  	<span class="glyphicon glyphicon-paperclip" aria-hidden="true"></span>
-	 //  </li>
-	 //  <li class="ui-state-highlight list-group-item" id="4>
-	 //  	<span class="id">ID</span>
-	 //  	<span class="name">Bolsa Idiomas</span>
-	 //  	<span class="file">file.pdf</span>
-	 //  	<span class="glyphicon glyphicon-paperclip" aria-hidden="true"></span>
-	 //  </li>
-
-	// echo form_label('Descrição da interpretação');
-	// echo form_textarea(array('name'=>'dsc_resumo', 'class'=>'form-control'),  '')."<br>";
-
-// echo form_label('Anexar arquivo');
-// echo "<span><a href='#' class='atach-file'>Anexar arquivo </a> </span><span class='glyphicon glyphicon-trash' aria-hidden='true'></span>";
-
-// echo form_input(array('name'=>'dsc_file', 'class'=>'dsc_file'),  '')."<br>";
+	</div>';
 
 echo form_button(array('name'=>'cadastrar', 'class'=>'submit', 'id'=>'submit','content'=>'Cadastrar', 'type'=>'submit'))."<br>";
 
@@ -120,33 +90,32 @@ echo form_close();
 
 <!-- o script jquery abaixo é carregado no formulário no momento que o formulário é criado -->
 <script>
-	
+
 	$(".submit").click(function(event){
 		// event.preventDefault();
-	
 		var dadosAssuntos = {};
-		
+
 		$("#sortable2 li").each(function(){
             var self = $(this);
             	dadosAssuntos[self.attr('id')] = {            
                 id : self.find('.id').text(),
                 name  : self.find('.name').text(),
-                file  : self.find('.file').text()
+                file  : self.find('.file').text(),
+                interpretacao  : self.find('textarea.dsc_interpretacao').val()
             };            
         });
 
 		var id_assunto = $("select[name='id_assunto']").val();
-		var id_planta = $("select[name='id_planta']").val();
+		var id_planta  = $("select[name='id_planta']").val();
 		var id_periodo = $("select[name='id_periodo']").val();
-		// var dsc_file = $("input[name='dsc_file']").val();
-		// var dsc_resumo = $("textarea[name='dsc_resumo']").text();
-		// alert(id_periodo);
+		var dsc_file   = $("input[name='dsc_file']").val();
 
 		dadosAssuntos['dados_acordo'] = {            
-                id_assunto  : id_assunto,
-                id_planta   : id_planta,
-                id_periodo  : id_periodo
-            };
+            id_assunto  : id_assunto,
+            id_planta   : id_planta,
+            id_periodo  : id_periodo,
+            dsc_file    : dsc_file
+        };
 
 		var dados = JSON.stringify(dadosAssuntos);
 
@@ -189,6 +158,24 @@ echo form_close();
 	    });
 	});
 
+	$('.atach-file').on('click', function(){
+	    
+	    var controller = 'ocorrencia/carregar';
+
+	     $.ajax({
+	            type      : 'post',
+	            url       : controller, //é o controller que receberá
+	            
+	            success: function( response ){
+	                $('.apontamento').show();
+
+	                $('.dados_componente').css( "display", "table" );
+	                $('.dados_componente').css( "position", "absolute" );
+	                $('.dados_componente').append(response);
+	            }
+	    });
+	});
+
 	$(function() {
 	    $( "#sortable1, #sortable2" ).sortable(
 	    {
@@ -202,6 +189,8 @@ echo form_close();
 	    }).disableSelection();
   	});
 
+	//resolve o problema do sortable, que não permite selecionar textarea dentro de sortable
+	$('textarea').mousedown(function(e){ e.stopPropagation(); });
 
 </script>
 

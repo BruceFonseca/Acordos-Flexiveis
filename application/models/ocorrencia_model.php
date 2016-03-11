@@ -19,12 +19,11 @@ class Ocorrencia_model extends CI_Model{
                         SET 
                         id_planta = ' .  $dados['id_planta'] . ", " .
                         'id_assunto = ' .  $dados['id_assunto'] . ", " .
-                        'id_periodo = ' . $dados['id_periodo'] . 
+                        'id_assunto = ' .  $dados['id_assunto'] . ", " .
+                        'dsc_file = "' . $dados['dsc_file'] .' "'  .
                     ' WHERE id_ocorrencia = ' . $condicao;
                     // pd($sql);
             $this->db-> query($sql);
-            // $this->session->set_flashdata('edicaook','Interpretação atualizada com sucesso!!!');
-            // redirect(current_url());
         endif;
     }
     
@@ -52,7 +51,7 @@ class Ocorrencia_model extends CI_Model{
     
     
     public function get_byid($id) {
-        $query = 'SELECT id_ocorrencia, id_assunto, id_planta, id_periodo FROM ocorrencia 
+        $query = 'SELECT id_ocorrencia, id_assunto, id_planta, id_periodo, dsc_file FROM ocorrencia 
                   WHERE id_ocorrencia = ' . $id ; 
 
         return $this->db->query($query);

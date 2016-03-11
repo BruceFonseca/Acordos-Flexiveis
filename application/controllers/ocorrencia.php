@@ -33,11 +33,14 @@ class Ocorrencia extends CI_Controller{
             $id_assunto = $data->dados_acordo->id_assunto;
             $id_planta  = $data->dados_acordo->id_planta;
             $id_periodo = $data->dados_acordo->id_periodo;
+            $dsc_file     = isset($data->dados_acordo->dsc_file)     ? $data->dados_acordo->dsc_file     : '';
+            // $dsc_file = $data->dados_acordo->dsc_file;
 
             $dados = array(
                 'id_assunto' => $id_assunto,
                 'id_planta'  => $id_planta,
                 'id_periodo' => $id_periodo,
+                'dsc_file'   => $dsc_file,
              );
 
             if ($this->ocorrencia_model->valida_ocorrencia($id_assunto, $id_planta, $id_periodo) == FALSE){
@@ -85,18 +88,20 @@ class Ocorrencia extends CI_Controller{
         
         if(isset($_POST['data'])) {
             $data = json_decode($_POST['data']);
-            // pd($id);
+            // pd($data);
 
             $id_assunto = $data->dados_acordo->id_assunto;
             $id_planta  = $data->dados_acordo->id_planta;
             $id_periodo = $data->dados_acordo->id_periodo;
+            // $dsc_file   = isset($data->dados_acordo->dsc_file) ? $data->dados_acordo->dsc_file : '';
+            $dsc_file = $data->dados_acordo->dsc_file;
 
             $dados = array(
                 'id_assunto' => $id_assunto,
                 'id_planta'  => $id_planta,
                 'id_periodo' => $id_periodo,
+                'dsc_file'   => $dsc_file,
              );
-
 
             // if ($this->ocorrencia_model->valida_ocorrencia($id_assunto, $id_planta, $id_periodo) == FALSE){
                 // $flash_data = $this->ocorrencia_model->msg_validacao('cadastro_duplicado');

@@ -24,7 +24,7 @@ for($i=0; $i < count($dados_periodo); $i++){
 
 echo '<form method="post" action="" class="ajax_form_ocorrencia">';
 
-echo form_fieldset('Adicionar interpretação');
+echo form_fieldset('Atualizar interpretação');
 
 if($flash_data):
 	echo $flash_data;
@@ -46,8 +46,12 @@ echo '</div>';
 
 echo '<div class="set_assunto">';
 	echo form_label('Acordo')."<br>";
-	echo form_dropdown('id_assunto',  $assuntos, $dados_ocorrencia->id_assunto);
+	echo form_dropdown('id_assunto',  $assuntos, $dados_ocorrencia->id_assunto );
 echo '</div>';
+
+echo "<span><a href='#' class='atach-file'>Anexar arquivo </a>";
+
+echo form_input(array('name'=>'dsc_file', 'class'=>'dsc_file file'), set_value('dsc_file', $dados_ocorrencia->dsc_file))."<br>";
 
 echo '
  	<div class="set_assunto">
@@ -65,7 +69,7 @@ echo '
 		  	<span class="name">'. $tratado .'</span>
 		  	<a href="#"><span class="file"></span></a>
 		  	<span class="glyphicon glyphicon-paperclip" aria-hidden="true"></span>
-
+		  	<textarea name="" class="dsc_interpretacao form-control"></textarea>
 		    </li>';
 		}
 echo '</ul>';
@@ -78,6 +82,7 @@ echo '</ul>';
 		    $id = $assuntos_util[$i]['id_tratado'];
 		    $tratado = $assuntos_util[$i]['dsc_tratado'];
 		    $file = $assuntos_util[$i]['dsc_file'];
+		    $dsc_interpretacao = $assuntos_util[$i]['dsc_interpretacao'];
 		    // $file = isset($assuntos_util[$i]['dsc_file'])     ? $assuntos_util[$i]['dsc_file']    : 'Não disponível';
 
 		    echo 
@@ -86,7 +91,7 @@ echo '</ul>';
 		  	<span class="name">'. $tratado .'</span>
 		  	<a href="#"><span class="file">'. $file .'</span></a>
 		  	<span class="glyphicon glyphicon-paperclip" aria-hidden="true"></span>
-
+		  	<textarea name="" class="dsc_interpretacao form-control">'. $dsc_interpretacao .'</textarea>
 		    </li>';
 		}
 	
@@ -94,7 +99,7 @@ echo '</ul>';
 
 	</div>';
 
-echo form_button(array('name'=>'cadastrar', 'class'=>'submit', 'id'=>'submit','content'=>'Cadastrar', 'type'=>'submit'))."<br>";
+echo form_button(array('name'=>'cadastrar', 'class'=>'submit', 'id'=>'submit','content'=>'Salvar', 'type'=>'submit'))."<br>";
 
 echo form_fieldset_close();
 echo form_close();
@@ -115,19 +120,22 @@ echo form_close();
             	dadosAssuntos[self.attr('id')] = {            
                 id : self.find('.id').text(),
                 name  : self.find('.name').text(),
-                file  : self.find('.file').text()
+                file  : self.find('.file').text(),
+                interpretacao  : self.find('textarea.dsc_interpretacao').val()
             };            
         });
 
 		var id_assunto = $("select[name='id_assunto']").val();
-		var id_planta = $("select[name='id_planta']").val();
+		var id_planta  = $("select[name='id_planta']").val();
 		var id_periodo = $("select[name='id_periodo']").val();
+		var dsc_file   = $("input[name='dsc_file']").val();
 
 		dadosAssuntos['dados_acordo'] = {            
-                id_assunto  : id_assunto,
-                id_planta   : id_planta,
-                id_periodo  : id_periodo
-            };
+            id_assunto  : id_assunto,
+            id_planta   : id_planta,
+            id_periodo  : id_periodo,
+            dsc_file    : dsc_file
+        };
 
 		var dados = JSON.stringify(dadosAssuntos);
 
@@ -170,6 +178,24 @@ echo form_close();
 	    });
 	});
 
+	$('.atach-file').on('click', function(){
+	    
+	    var controller = 'ocorrencia/carregar';
+
+	     $.ajax({
+	            type      : 'post',
+	            url       : controller, //é o controller que receberá
+	            
+	            success: function( response ){
+	                $('.apontamento').show();
+
+	                $('.dados_componente').css( "display", "table" );
+	                $('.dados_componente').css( "position", "absolute" );
+	                $('.dados_componente').append(response);
+	            }
+	    });
+	});
+
 	$(function() {
 	    $( "#sortable1, #sortable2" ).sortable(
 	    {
@@ -182,6 +208,9 @@ echo form_close();
 			    }
 	    }).disableSelection();
   	});
+
+	//resolve o problema do sortable, que não permite selecionar textarea dentro de sortable
+	$('textarea').mousedown(function(e){ e.stopPropagation(); });
 
 
 </script>

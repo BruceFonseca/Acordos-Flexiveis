@@ -46,13 +46,15 @@
         if ($('.upload-esturtura-produto input[name="fihd"]').length) {
             var id = $('.upload-esturtura-produto input[name="fihd"]').val();
             insere_nome_ocorrencia(name_file, id);
+        }else{
+            $('.dsc_file').val(name_file);
         };
+
         $('.apontamento').hide();
         $('.dados_componente').hide();
         $('.dados_componente .form').remove();
         // $('.dados_componente .body-table-abastecimento').remove();
         $('.dados_componente script').remove();
-        $('.dsc_file').val(name_file);
 
     });
 

@@ -59,6 +59,7 @@ class Tratado_model extends CI_Model{
         $query = 
           'SELECT 
           oc.id_tratado as id_tratado, 
+          oc.dsc_interpretacao as dsc_interpretacao, 
           t.dsc_tratado as dsc_tratado, 
           oc.dsc_file as dsc_file FROM oc_ac_as oc
           

@@ -588,7 +588,7 @@ fieldset legend{
   }
 
 
-  #sortable1 li{
+  #sortable1 li, #sortable2 li .name{
     /*
     padding: 5px;
     font-size: 1.2em;
@@ -619,12 +619,17 @@ fieldset legend{
   }
 
 #sortable1 li .id, 
+#sortable1 li .dsc_interpretacao, 
+#sortable1 li input, 
 #sortable1 li .glyphicon-paperclip, 
 #sortable1 li .file{
     display: none;
 }
 
-#sortable1 li .id, #sortable2 li .id{
+#sortable1 li span.dsc_interpretacao, 
+#sortable2 li span.dsc_interpretacao, 
+#sortable1 li .id, 
+#sortable2 li .id{
     display: none;
 }
 
@@ -639,4 +644,14 @@ fieldset legend{
 }
 .list-group-item .glyphicon-paperclip{
     float: right;
+}
+
+.list-group-item a{
+    float: right;
+    min-width: 120px;
+}
+
+.list-group-item .glyphicon-paperclip{
+    float: right;
+    min-width: 20px;
 }

@@ -14,9 +14,11 @@ class Oc_ac_as_model extends CI_Model{
             // $file = $linha->file ;
             $file = isset($linha->file)     ? $linha->file    : 'Não disponível';
 
-            $sql = ' INSERT INTO oc_ac_as (id_ocorrencia, id_tratado, dsc_file)
-                    VALUES('. $id_ocorrencia .', '. $linha->id . ', "'. $file .'")';
+            $sql = ' INSERT INTO oc_ac_as (id_ocorrencia, id_tratado, dsc_file, dsc_interpretacao)
+                    VALUES('. $id_ocorrencia .', '. $linha->id . ', "'. $file .'", "'. $linha->interpretacao .'")';
+
                     // pd($sql);
+                    
             $this->db-> query($sql);
         endforeach;
 

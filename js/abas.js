@@ -40,7 +40,7 @@ $(function(){
 	});
 	
 	//inicia o sistema abrindo a guia abaixo:
-	criarNovaAba('assunto/conceito', 'Ferramentas');
+	criarNovaAba('assunto/conceito', 'Conceitos');
 
 }); //fim do código
 
@@ -83,7 +83,7 @@ $(function(){
 		// alert('entriou' + controller + desc + numTran);
 		var numTran = numTab();
 		$('.nav.nav-tabs li').removeClass('active');
-		var $addAba = '<li class="active"><a href="#" numtab="'+ numTran +'" id=" '+ desc  +'" crt="'+ controller +'">'+ desc  +'&nbsp <span>x</span>&nbsp</a></li>';
+		var $addAba = '<li class="active"><a href="#" numtab="'+ numTran +'" id="'+ desc  +'" crt="'+ controller +'">'+ desc  +'&nbsp <span>x</span>&nbsp</a></li>';
 	    $(".nav.nav-tabs").append($addAba);
 	    addConteudo(numTran);//cria uma div com classe conteudo
 	    ocultaConteudo(); //oculta todos os conteudos

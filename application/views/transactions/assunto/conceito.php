@@ -40,20 +40,21 @@ echo form_close();
 
 $('.panel.panel-default.conceitos').on('click', function(){
 	    
-	    var controller = $(this).attr('ctr');
-	     $.ajax({
-	            type      : 'post',
-	            url       : controller, //é o controller que receberá
-	            
-	            success: function( response ){
-	                $('.apontamento').show();
+    var controller = $(this).attr('ctr');
+     $.ajax({
+            type      : 'post',
+            url       : controller, //é o controller que receberá
+            
+            success: function( response ){
+                $('.apontamento').show();
 
-	                $('.dados_componente').css( "display", "table" );
-	                $('.dados_componente').css( "position", "absolute" );
-	                $('.dados_componente').append(response);
-	            }
-	        });
-	    });
+                $('.dados_componente').css( "display", "table" );
+                $('.dados_componente').css( "position", "absolute" );
+                $('.dados_componente').append(response);
+            }
+        });
+    });
+$('#Conceitos span').remove();
 
 </script>
 

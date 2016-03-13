@@ -1,33 +1,44 @@
 <?php
+// pd($interpretacao);
+echo '<div class="retrieve-table">';
+echo '<h2> Interpretações da Planta de '. $interpretacao[0]->dsc_planta .'</h2>';   
 
+   echo '<div class="panel panel-default">
+  <!-- Table -->
+  <table class="table">
+  <thead>
+      <tr>
+      <td>Acordo</td>
+      <td>Período</td>
+      <td>Anexo</td>
+      <td>Interpretação</td>
+      </tr>
+  </thead>
+  <tbody>';
 
-$this->table->set_heading('Id Ocorrência', 'Planta','Assunto', 'Período', 'Integra' ,'Editar');
+$ult_assunt = NULL;
+foreach ($interpretacao as $linha):
+  echo '<tr>';
+        if($ult_assunt != $linha->dsc_assunto){
+            echo  '<td colspan="" rowspan="'. $linha->cont .'" headers="">'. $linha->dsc_assunto  .'</td>';
+        }
+        if( strlen($linha->dsc_file)>0){
+            $file = '<a target="_blank" href="'.base_url().'uploads/'. $linha->dsc_file .'" >Arquivo na Íntegra</a>';
+        }else{
+            $file ="Não disponível";
+        }
+  echo '      
+        <td>'. $linha->dsc_periodo .'</td>
+        <td>'. $file .'</td>
+        </tr>';
 
-
-foreach ($status as $linha):
-    $id = array('data'=> $linha->id_ocorrencia, 'class'=>'id-ocorrencia');
-    $file = '<a target="_blank" href= "'. base_url().'uploads/'. $linha->dsc_file. '">'. $linha->dsc_file . '</a>';
-    $this->table->add_row(
-    $id, 
-    $linha->dsc_planta, 
-    $linha->dsc_assunto, 
-    $linha->dsc_periodo, 
-    $file, 
-	'<span class="glyphicon glyphicon-edit" aria-hidden="true"></span>');
+        $ult_assunt = $linha->dsc_assunto;
 endforeach;
 
-
-
-
-echo '<div class="retrieve-table">';
-echo '<h2> Interpretações Planta de '. $linha->dsc_planta .'</h2>';	
-
-$tmpl = array ( 'table_open'  => '<table border="1" cellpadding="2" cellspacing="1" class="table table-striped table-hover">' );
-$this->table->set_template($tmpl);
-echo $this->table->generate();
+  echo '</tbody></table>
+</div>';
 
 echo '</div>';
-
 ?>
 
 

@@ -44,6 +44,7 @@ class Ocorrencia_model extends CI_Model{
                 INNER JOIN assunto a ON o.id_assunto = a.id_assunto
                 INNER JOIN planta p ON o.id_planta = p.id_planta
                 INNER JOIN periodo pe ON o.id_periodo = pe.id_periodo
+                ORDER BY p.dsc_planta, a.dsc_assunto, pe.dsc_periodo
             ';     
          
         return $this->db->query($query);
@@ -69,8 +70,60 @@ class Ocorrencia_model extends CI_Model{
                 INNER JOIN periodo pe ON o.id_periodo = pe.id_periodo
                 WHERE o.id_planta = ' . $id ;     
         return $this->db->query($query);
+
     }
     
+    public function get_all_acordo_by_planta($id){
+
+          $query = '
+                SELECT DISTINCT
+                COUNT(o.id_periodo) as cont,
+                o.id_assunto as id_assunto,
+                a.dsc_assunto as dsc_assunto,
+                o.id_periodo as id_periodo,
+                pe.dsc_periodo as dsc_periodo
+                FROM ocorrencia o
+                INNER JOIN assunto a ON o.id_assunto = a.id_assunto
+                INNER JOIN planta p ON o.id_planta = p.id_planta
+                INNER JOIN periodo pe ON o.id_periodo = pe.id_periodo
+                WHERE o.id_planta = ' . $id . ' GROUP BY o.id_assunto, a.dsc_assunto, pe.dsc_periodo'; 
+        return $this->db->query($query);
+    }  
+
+    public function get_all_periodo_by_planta($id){
+
+          $query = '
+                SELECT DISTINCT
+                o.id_assunto as id_assunto,
+                o.id_periodo as id_periodo,
+                pe.dsc_periodo as dsc_periodo
+                FROM ocorrencia o
+                INNER JOIN assunto a ON o.id_assunto = a.id_assunto
+                INNER JOIN planta p ON o.id_planta = p.id_planta
+                INNER JOIN periodo pe ON o.id_periodo = pe.id_periodo
+                WHERE o.id_planta = ' . $id ;     
+        return $this->db->query($query);
+    }
+    
+    public function get_all_ocorrencias_by_planta($id){
+
+          $query = '
+                SELECT DISTINCT 
+                (SELECT COUNT(oo.id_assunto) FROM ocorrencia oo WHERE oo.id_assunto = o.id_assunto AND oo.id_planta = o.id_planta) as cont,
+                o.id_ocorrencia as id_ocorrencia,
+                o.id_assunto as id_assunto,
+                p.dsc_planta as dsc_planta,
+                a.dsc_assunto as dsc_assunto,
+                o.id_periodo as id_periodo,
+                pe.dsc_periodo as dsc_periodo,
+                o.dsc_file as dsc_file
+                FROM ocorrencia o
+                INNER JOIN assunto a ON o.id_assunto = a.id_assunto
+                INNER JOIN planta p ON o.id_planta = p.id_planta
+                INNER JOIN periodo pe ON o.id_periodo = pe.id_periodo
+                WHERE o.id_planta = ' . $id ;     
+        return $this->db->query($query);
+    }
     
     public function get_byid($id) {
         $query = 'SELECT id_ocorrencia, id_assunto, id_planta, id_periodo, dsc_file FROM ocorrencia 

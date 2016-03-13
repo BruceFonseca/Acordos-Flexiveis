@@ -711,3 +711,20 @@ fieldset legend{
 #hide_last_assunto{
     display: none;
 }
+
+.retrieve-table ul.list-group{
+    width: 600px;
+
+}
+
+.retrieve-table ul.list-group .list-group-item{
+    width: 100%;
+    min-height: 60px;
+}
+
+.retrieve-table ul.list-group .list-group-item .list-group-item-col{
+    min-width: 150px;
+    height: 100%;
+    display: inline;
+    float: left;
+}

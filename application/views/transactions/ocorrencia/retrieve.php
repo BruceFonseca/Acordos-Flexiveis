@@ -1,7 +1,7 @@
 <?php
 
 
-$this->table->set_heading('Id Ocorrência','Assunto', 'Planta', 'Período', 'Editar');
+$this->table->set_heading('Id Ocorrência', 'Planta', 'Assunto',  'Período', 'Editar');
 
 
 foreach ($status as $linha):
@@ -9,14 +9,11 @@ foreach ($status as $linha):
     
     $this->table->add_row(
     $id, 
-    $linha->dsc_assunto, 
     $linha->dsc_planta, 
+    $linha->dsc_assunto, 
     $linha->dsc_periodo, 
 	'<span class="glyphicon glyphicon-edit" aria-hidden="true"></span>');
 endforeach;
-
-
-
 
 echo '<div class="retrieve-table">';
 echo '<h2>Administrar Interpretações</h2>';	

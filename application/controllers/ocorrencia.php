@@ -154,7 +154,7 @@ class Ocorrencia extends CI_Controller{
             // Define file rules
             $this->upload->initialize(array(
                 "upload_path"       =>  $path,
-                "allowed_types"     =>  'text/plain|text|doc|docx|pdf|csv',
+                "allowed_types"     =>  'text/plain|text|doc|docx|pdf|csv|png|jpeg',
                 // "max_size"          =>  '1000',
                 // "max_width"         =>  '1024',
                 // "max_height"        =>  '768'

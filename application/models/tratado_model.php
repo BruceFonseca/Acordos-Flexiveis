@@ -2,12 +2,23 @@
 
 class Tratado_model extends CI_Model{
     
-    public function do_insert($dados=NULL){            
+    public function do_insert($dados=NULL, $tela = NULL){            
         
         if ($dados != NULL):
             $this->db->insert('tratado',$dados);
             $this->session->set_flashdata('cadastrook','Cadastro efetuado com sucesso');
-            redirect('tratado/create');
+
+            if ($tela != NULL) {
+            //se não é nulo então retorna msg informando que foi cadastrado com sucesso
+            //só utilizado quando esta cadastrando um novo assundo direto da tela de "Interpretaçoes"
+              $return = '<div class="alert alert-success" role="alert">
+                        <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+                        <span class="sr-only">Error:</span>
+                        Assunto cadastrado com sucesso!!!</div>';
+              return $return;
+            }else{
+              redirect('tratado/create');
+            }
         endif;
             
     }
@@ -31,6 +42,13 @@ class Tratado_model extends CI_Model{
     public function get_all(){
 
           $query = 'SELECT id_tratado, dsc_tratado FROM tratado';     
+         
+        return $this->db->query($query);
+    }
+
+    public function get_last(){
+
+          $query = 'SELECT id_tratado, dsc_tratado FROM tratado ORDER BY id_tratado DESC LIMIT 1';     
          
         return $this->db->query($query);
     }

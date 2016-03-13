@@ -163,6 +163,7 @@ list-style: none !important;
 	border-radius: 4px;
 	border: 1px solid #ccc;
 	margin-top: 20px;
+    display: table;
 }
 
 .form form label, .retrieve-ordem-producao form label, .retrieve-componentes-produto form label{
@@ -453,7 +454,7 @@ preto               102 102 102   #666666*/
 .form form input.dsc_file{
     border: 1px solid #fff;
     border-radius: 4px;
-    width: 80%;
+    width: 70%;
 }
 
 .glyphicon-trash{
@@ -492,7 +493,12 @@ preto               102 102 102   #666666*/
 }
 
 .atach-file{
-    color: #337ab7;
+    color: #b83039;
+}
+
+.atach-file:hover{
+    color: #b83039;
+    text-decoration: underline;
 }
 
 .navbar-header img{
@@ -530,6 +536,11 @@ preto               102 102 102   #666666*/
 
 .set_assunto{
     width: 100%;
+}
+
+.set_assunto a{
+    float: right;
+    color: #b83039;
 }
 
 form fieldset .set_assunto input,
@@ -590,7 +601,7 @@ fieldset legend{
     float: left;
   }
 
-  #sortable2{
+   #sortable2{
     display: block;
   }
 
@@ -618,6 +629,13 @@ fieldset legend{
     
   }
 
+  #sortable1 li{
+    float: left;
+    margin: 5px 5px 5px 0;
+    padding: 0.2em 0.6em 0.3em;
+    /*display: inline;*/
+  }
+
   #sortable2 li{
     display: block;
   }
@@ -641,8 +659,9 @@ fieldset legend{
 }
 
 .list-group-item .name{
-    width: 120px;
-    display: inline;
+    /*width: 120px;*/
+    /*display: inline;*/
+    display: block;
     font-weight: bold;
 }
 
@@ -683,4 +702,12 @@ fieldset legend{
     text-decoration: none;
     width: 100%;
     display: table;
+}
+
+.alert-danger{
+    width: 100%;
+}
+
+#hide_last_assunto{
+    display: none;
 }

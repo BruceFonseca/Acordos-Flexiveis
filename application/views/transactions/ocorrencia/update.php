@@ -49,13 +49,13 @@ echo '<div class="set_assunto">';
 	echo form_dropdown('id_assunto',  $assuntos, $dados_ocorrencia->id_assunto );
 echo '</div>';
 
-echo "<span><a href='#' class='atach-file'>Anexar arquivo </a>";
+echo "<a href='#' class='atach-file'> Anexar arquivo " .'<span class="glyphicon glyphicon-paperclip" aria-hidden="true">'."</span></a>";
 
 echo form_input(array('name'=>'dsc_file', 'class'=>'dsc_file file'), set_value('dsc_file', $dados_ocorrencia->dsc_file))."<br>";
 
 echo '
  	<div class="set_assunto">
-	<label>Assuntos Disponíveis</label>
+	<label>Assuntos Disponíveis </label> <a href="#"> Adicionar assuntos <span class="glyphicon glyphicon-plus" aria-hidden="true"></span></a>
 	<br>
 	<ul id="sortable1" class="connectedSortable list-group">';
 
@@ -151,6 +151,7 @@ echo form_close();
 				{
 					$('div[numtab="'+ numtab +'"] div').remove();
 					$('div[numtab="'+ numtab +'"]').append(data);
+					$('body,html').animate({scrollTop:0},600);
 				}
 			});
 

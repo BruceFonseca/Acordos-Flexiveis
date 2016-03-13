@@ -18,7 +18,7 @@ class Tratado extends CI_Controller{
     
    
     public function  create(){   
-        
+        $msg =NULL;
         // validação dos dados recebidos do formulário
         $this->form_validation->set_rules('dsc_tratado','Assunto', 'trim|required|is_unique[tratado.dsc_tratado]');
         $this->form_validation->set_message('is_unique', 'Este %s já está cadastrado.');//é uma menssagem definida pelo programador onde %s é o nome do campo
@@ -26,18 +26,39 @@ class Tratado extends CI_Controller{
         // se existe uma validação, envia os dados para o model inserir
         if ($this->form_validation->run()==TRUE){
 
+            if($this->uri->segment(3)){ //se recebe o 3º segmento, então deve apontar para tratado/create/fast  no módel
+                $tela = $this->uri->segment(3);
+            }
+
             $validacao = TRUE;
             $dados = elements(array(
                                     'dsc_tratado'
                                     ), $this->input->post());
-            $this->tratado_model->do_insert($dados);
-        }
+            
+            //faz o insert no banco e retorna a mensagem
+            $msg =$this->tratado_model->do_insert($dados, $tela);
 
-        $dados = array(
-            'validacao'=> TRUE,
-            'tela'=> 'create',
-            'pasta'=> 'tratado',// é a pasta que está dentro de "telas". existe uma pasta para cada tabela a ser cadastrada
-             );
+        }
+        
+        if($this->uri->segment(3)){
+            if(!$msg){
+                $msg = NULL;
+            }
+
+            $dados = array(
+                'msg'=> $msg,
+                'last_id' => $this->tratado_model->get_last()->row(),
+                'validacao'=> TRUE,
+                'tela'=> 'create_fast',
+                'pasta'=> 'tratado',// é a pasta que está dentro de "telas". existe uma pasta para cada tabela a ser cadastrada
+                 );
+        }else{
+            $dados = array(
+                'validacao'=> TRUE,
+                'tela'=> 'create',
+                'pasta'=> 'tratado',// é a pasta que está dentro de "telas". existe uma pasta para cada tabela a ser cadastrada
+                 );
+        }
         
         $this->load->view('conteudo', $dados );
     }
@@ -52,7 +73,6 @@ class Tratado extends CI_Controller{
         
         $this->load->view('conteudo', $dados);
     }
-    
 
     public function  update(){   
 

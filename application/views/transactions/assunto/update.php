@@ -61,6 +61,7 @@
 				{
 					$('div[numtab="'+ numTran +'"] div').remove();
 					$('div[numtab="'+ numTran +'"]').append(data);
+					$('body,html').animate({scrollTop:0},600);
 				}
 			});
 

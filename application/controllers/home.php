@@ -51,4 +51,12 @@ class Home extends CI_Controller {
         redirect('home', 'refresh');
     }
 
+    function update_menu_sidebar()
+    {
+        $dados = array(
+            'menu_planta'=> $this->ocorrencia_model->get_menu_planta(),
+        );
+         $this->load->view('includes/menu_sidebar', $dados);
+    }
+
 }

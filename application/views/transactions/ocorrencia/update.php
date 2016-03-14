@@ -152,6 +152,7 @@ echo form_close();
 					$('div[numtab="'+ numtab +'"] div').remove();
 					$('div[numtab="'+ numtab +'"]').append(data);
 					$('body,html').animate({scrollTop:0},600);
+					update_menu_sidebar();
 				}
 			});
 
@@ -197,6 +198,8 @@ echo form_close();
 	    });
 	});
 
+
+
 	$(function() {
 	    $( "#sortable1, #sortable2" ).sortable(
 	    {
@@ -208,6 +211,7 @@ echo form_close();
 					// alert('update');
 			    }
 	    }).disableSelection();
+	    update_menu_sidebar();
   	});
 
 	//resolve o problema do sortable, que não permite selecionar textarea dentro de sortable

@@ -13,14 +13,14 @@ $(function(){
 	});
 
 	// cria uma nova aba referente a transação selecionada pelo usuário  (SIDE BAR)
-	$(".list-plantas a").click(function(){
-		var controller = $(this).attr('ctr'); //este atributo será utilizado para trazer o controller da transaçãoque será utilizado para manupulkar abas (abrir fechar etc) as abas
-		var desc = $(this).text() + '&nbsp'; // pega descrição do menu e utiliza nas abas que serão abertas
+	// $(".list-plantas a").click(function(){
+	// 	var controller = $(this).attr('ctr'); //este atributo será utilizado para trazer o controller da transaçãoque será utilizado para manupulkar abas (abrir fechar etc) as abas
+	// 	var desc = $(this).text() + '&nbsp'; // pega descrição do menu e utiliza nas abas que serão abertas
 
-		//função que efetivamente criara a aba e respectivos conteudos
-		criarNovaAba(controller, desc);
+	// 	//função que efetivamente criara a aba e respectivos conteudos
+	// 	criarNovaAba(controller, desc);
 
-	});
+	// });
 
 	// deixa a aba ativa e o respectivo conteudo tb
 	$(".nav.nav-tabs").on("click", "li a", function(){
@@ -165,5 +165,24 @@ $(function(){
 			};
 		}
 	}
+
+	function update_menu_sidebar(){
+
+		var controller = 'home/update_menu_sidebar';
+
+		$.ajax({
+			            type      : 'post',
+			            url       : controller, //é o controller que receberá
+			            
+			            success: function( response ){
+			            	// $(document).ready(function() {
+			            	$('.nav-acordos').remove();
+			            	$('#nav-sidebar script').remove();
+			                $('#nav-sidebar').append(response);
+			            // }
+			            }
+			    });
+			}
+
 
 

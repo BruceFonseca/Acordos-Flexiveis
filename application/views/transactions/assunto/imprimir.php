@@ -52,7 +52,7 @@ echo  validation_errors('<div class="alert alert-danger" role="alert">
           <div class=""> '. $status->dsc_assunto . '</div>
           <div class="">
             <p>'.
-                strip_tags(urldecode($status->dsc_conceito))
+                (urldecode($status->dsc_conceito))
             .'</p>
           </div>
         </div>

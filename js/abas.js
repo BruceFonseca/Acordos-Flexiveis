@@ -5,7 +5,7 @@ $(function(){
 	// cria uma nova aba referente a transação selecionada pelo usuário  (menu superior)
 	$(".dropdown-menu li a").click(function(){
 		var controller = $(this).attr('ctr'); //este atributo será utilizado para trazer o controller da transaçãoque será utilizado para manupulkar abas (abrir fechar etc) as abas
-		var desc = $(this).text(); // pega descrição do menu e utiliza nas abas que serão abertas
+		var desc = $(this).text() + '&nbsp'; // pega descrição do menu e utiliza nas abas que serão abertas
 
 		//função que efetivamente criara a aba e respectivos conteudos
 		criarNovaAba(controller, desc);
@@ -15,7 +15,7 @@ $(function(){
 	// cria uma nova aba referente a transação selecionada pelo usuário  (SIDE BAR)
 	$(".list-plantas a").click(function(){
 		var controller = $(this).attr('ctr'); //este atributo será utilizado para trazer o controller da transaçãoque será utilizado para manupulkar abas (abrir fechar etc) as abas
-		var desc = $(this).text(); // pega descrição do menu e utiliza nas abas que serão abertas
+		var desc = $(this).text() + '&nbsp'; // pega descrição do menu e utiliza nas abas que serão abertas
 
 		//função que efetivamente criara a aba e respectivos conteudos
 		criarNovaAba(controller, desc);
@@ -96,7 +96,7 @@ $(function(){
 		// alert('entriou' + controller + desc + numTran);
 		var numTran = numTab();
 		$('.nav.nav-tabs li').removeClass('active');
-		var $addAba = '<li class="active"><a href="#" numtab="'+ numTran +'" id=" '+ desc  +'" crt="'+ controller +'">'+ desc  +'<span>x</span></a></li>';
+		var $addAba = '<li class="active"><a href="#" numtab="'+ numTran +'" id=" '+ desc  +'" crt="'+ controller +'">'+ desc  +'&nbsp <span>x</span></a></li>';
 	    $(".nav.nav-tabs").append($addAba);
 	    addConteudo(numTran);//cria uma div com classe conteudo
 	    ocultaConteudo(); //oculta todos os conteudos

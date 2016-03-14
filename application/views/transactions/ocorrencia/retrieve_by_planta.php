@@ -3,15 +3,15 @@
 echo '<div class="retrieve-table">';
 echo '<h2> Interpretações da Planta de '. $interpretacao[0]->dsc_planta .'</h2>';   
 
-   echo '<div class="panel panel-default">
+   echo '
   <!-- Table -->
-  <table class="table">
+  <table border="1" cellpadding="2" cellspacing="1" class="table table-striped table-hover">
   <thead>
       <tr>
-      <td>Acordo</td>
-      <td>Período</td>
-      <td>Anexo</td>
-      <td>Interpretação</td>
+      <th>Acordo</th>
+      <th>Período</th>
+      <th>Anexo</th>
+      <th>Interpretação</th>
       </tr>
   </thead>
   <tbody>';
@@ -29,14 +29,15 @@ foreach ($interpretacao as $linha):
         }
   echo '      
         <td>'. $linha->dsc_periodo .'</td>
-        <td>'. $file .'</td>
+        <td >'. $file .'</td>
+        <td><a href="#" title="" ><span id="'.$linha->id_ocorrencia .'" class="glyphicon glyphicon-file" aria-hidden="true"></span></a></td>
         </tr>';
 
         $ult_assunt = $linha->dsc_assunto;
 endforeach;
 
   echo '</tbody></table>
-</div>';
+';
 
 echo '</div>';
 ?>
@@ -44,12 +45,13 @@ echo '</div>';
 
 <!-- o script jquery abaixo é carregado no formulário no momento que o formulário é criado -->
 <script>
-$('.retrieve-table tr td span').click(function(){
+$('.retrieve-table tr td a span').click(function(){
 
 	//encontra o id do usuário que será atualizado
-	var id_ocorrencia = $(this).closest('tr').find('td[class="id-ocorrencia"]').text();
-	var desc = 'Atualizar Interpretação';
-	var controller = 'ocorrencia/update/'+ id_ocorrencia;
+	var id_ocorrencia = $(this).attr('id');
+
+	var desc = 'Interpretação ';
+	var controller = 'ocorrencia/interpretacao_planta/'+ id_ocorrencia;
 	var numTran = numTab();
 
 	criarNovaAbaSemConteudo(controller, desc, numTran);

@@ -19,6 +19,8 @@ class Tratado extends CI_Controller{
    
     public function  create(){   
         $msg =NULL;
+        $tela = NULL;
+        
         // validação dos dados recebidos do formulário
         $this->form_validation->set_rules('dsc_tratado','Assunto', 'trim|required|is_unique[tratado.dsc_tratado]');
         $this->form_validation->set_message('is_unique', 'Este %s já está cadastrado.');//é uma menssagem definida pelo programador onde %s é o nome do campo
@@ -36,7 +38,7 @@ class Tratado extends CI_Controller{
                                     ), $this->input->post());
             
             //faz o insert no banco e retorna a mensagem
-            $msg =$this->tratado_model->do_insert($dados, $tela);
+            $msg = $this->tratado_model->do_insert($dados, $tela);
 
         }
         

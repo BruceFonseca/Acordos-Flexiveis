@@ -21,7 +21,7 @@ foreach ($status as $linha):
 		  <div class="panel-heading"> '. $linha->dsc_assunto . '</div>
 		  <div class="panel-body">
 		    <p>'.
-		    	(urldecode($linha->dsc_conceito));
+		    	(urldecode($linha->dsc_conceito))
 		    .'</p>
 		  </div>
 		</div>

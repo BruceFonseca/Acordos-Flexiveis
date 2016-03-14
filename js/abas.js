@@ -73,7 +73,7 @@ $(function(){
 		// alert('entriou' + controller + desc + numTran);
 		var numTran = numTab();
 		$('.nav.nav-tabs li').removeClass('active');
-		var $addAba = '<li class="active"><a href="#" numtab="'+ numTran +'" id="'+ desc  +'" crt="'+ controller +'">'+ desc  +'&nbsp <span>x</span>&nbsp</a></li>';
+		var $addAba = '<li class="active"><a href="#" numtab="'+ numTran +'" id="'+ desc  +'" crt="'+ controller +'">'+ desc  +'&nbsp<span>x</span>&nbsp</a></li>';
 	    $(".nav.nav-tabs").append($addAba);
 	    addConteudo(numTran);//cria uma div com classe conteudo
 	    ocultaConteudo(); //oculta todos os conteudos
@@ -86,7 +86,7 @@ $(function(){
 		// alert('entriou' + controller + desc + numTran);
 		var numTran = numTab();
 		$('.nav.nav-tabs li').removeClass('active');
-		var $addAba = '<li class="active"><a href="#" numtab="'+ numTran +'" id=" '+ desc  +'" crt="'+ controller +'">'+ desc  +'&nbsp <span>x</span></a></li>';
+		var $addAba = '<li class="active"><a href="#" numtab="'+ numTran +'" id=" '+ desc  +'" crt="'+ controller +'">'+ desc  +'&nbsp<span>x</span>&nbsp</a></li>';
 	    $(".nav.nav-tabs").append($addAba);
 	    addConteudo(numTran);//cria uma div com classe conteudo
 	    ocultaConteudo(); //oculta todos os conteudos

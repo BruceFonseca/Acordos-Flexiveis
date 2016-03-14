@@ -37,7 +37,7 @@ $('.retrieve-assuntos tr td span').click(function(){
 
 	//encontra o id do usuário que será atualizado
 	var id_assunto = $(this).closest('tr').find('td[class="id-assunto"]').text();
-	var desc = 'Atualizar Acordo &nbsp';
+	var desc = 'Atualizar Acordo ';
 	var controller = 'assunto/update/'+ id_assunto;
 	var numTran = numTab();
 

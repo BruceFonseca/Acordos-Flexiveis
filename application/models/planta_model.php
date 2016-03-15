@@ -32,7 +32,7 @@ class Planta_model extends CI_Model{
     
     public function get_all(){
 
-          $query = 'SELECT id_planta, dsc_planta FROM planta';     
+          $query = 'SELECT id_planta, dsc_planta FROM planta ORDER BY dsc_planta';     
          
         return $this->db->query($query);
     }

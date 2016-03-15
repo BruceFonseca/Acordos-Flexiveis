@@ -22,7 +22,7 @@ class Usuario_model extends CI_Model{
     
     public function get_all(){
           $query = 'SELECT id, username, u.dsc_name as nome, dsc_matricula, r.dsc_name as role, ativo as status FROM users u
-                    INNER JOIN user_roles r ON u.id_user_roles = r.id_user_roles';     
+                    INNER JOIN user_roles r ON u.id_user_roles = r.id_user_roles ORDER BY u.dsc_name';     
          
         return $this->db->query($query);
     }

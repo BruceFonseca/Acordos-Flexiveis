@@ -34,7 +34,7 @@ class Assunto_model extends CI_Model{
     }
     
     public function get_all(){
-          $query = 'SELECT id_assunto, dsc_assunto FROM assunto';     
+          $query = 'SELECT id_assunto, dsc_assunto FROM assunto ORDER BY dsc_assunto';     
          
         return $this->db->query($query);
     }
@@ -45,7 +45,8 @@ class Assunto_model extends CI_Model{
                     dsc_assunto,
                     dsc_conceito,
                     dsc_file
-                    FROM assunto';     
+                    FROM assunto
+                    ORDER BY dsc_assunto';     
          
         return $this->db->query($query);
     }

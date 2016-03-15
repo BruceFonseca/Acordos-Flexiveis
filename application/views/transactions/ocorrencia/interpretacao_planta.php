@@ -1,7 +1,7 @@
 <?php
 
 
-$this->table->set_heading('Item', 'descrição', 'Anexo');
+$this->table->set_heading('Item', 'Descrição', 'Anexo');
 
 
 foreach ($interpretacao as $linha):
@@ -9,7 +9,7 @@ foreach ($interpretacao as $linha):
     if( strlen($linha->dsc_file)>0){
             $file = '<a target="_blank" href="'.base_url().'uploads/'. $linha->dsc_file .'" >Arquivo na Íntegra</a>';
     }else{
-        $file ="Não disponível";
+        $file ="-";
     }
 
     $this->table->add_row(
@@ -22,7 +22,7 @@ endforeach;
 echo '<div class="retrieve-table">';
 
 if ($interpretacao) {
-    echo '<h2>'. $interpretacao[0]->dsc_assunto . ', '.$interpretacao[0]->dsc_planta . ', '. $interpretacao[0]->dsc_periodo .'</h2>';	
+    echo '<h2> Interpretação - '. $interpretacao[0]->dsc_assunto . ' - '.$interpretacao[0]->dsc_planta . ' - '. $interpretacao[0]->dsc_periodo .'</h2>';	
 }else{
     echo '<h2>Não Disponivel</h2>';   
 }

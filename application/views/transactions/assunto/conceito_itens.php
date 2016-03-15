@@ -1,4 +1,3 @@
-<div class="container-conceito">
 <?php
 
 if($this->session->flashdata('excluirok')):
@@ -58,5 +57,3 @@ $('.panel.panel-default.conceitos').on('click', function(){
 $('#Conceitos span').remove();
 
 </script>
-
-</div>

@@ -20,7 +20,7 @@ endforeach;
 
 
 echo '<div class="retrieve-planta-table">';
-echo '<h2>Administrar Plantas</h2>';	
+echo '<h2>Administrar Assuntos</h2>';	
 
 $tmpl = array ( 'table_open'  => '<table border="1" cellpadding="2" cellspacing="1" class="table table-striped table-hover">' );
 $this->table->set_template($tmpl);

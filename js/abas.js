@@ -174,5 +174,20 @@ $(function(){
 			    });
 			}
 
+	function update_container_conceito(){
+
+		var controller = 'assunto/conceito_itens';
+
+		$.ajax({
+			            type      : 'post',
+			            url       : controller, //é o controller que receberá
+			            
+			            success: function( response ){
+			            	$('.container-conceito').empty();
+			                $('.container-conceito').append(response);
+
+			            }
+			    });
+			}
 
 

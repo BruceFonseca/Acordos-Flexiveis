@@ -1,7 +1,7 @@
 <?php
 // pd($interpretacao);
 echo '<div class="retrieve-table">';
-echo '<h2> Interpretações da Planta de '. $interpretacao[0]->dsc_planta .'</h2>';   
+echo '<h2> Interpretações - '. $interpretacao[0]->dsc_planta .'</h2>';   
 
    echo '
   <!-- Table -->
@@ -25,7 +25,7 @@ foreach ($interpretacao as $linha):
         if( strlen($linha->dsc_file)>0){
             $file = '<a target="_blank" href="'.base_url().'uploads/'. $linha->dsc_file .'" >Arquivo na Íntegra</a>';
         }else{
-            $file ="Não disponível";
+            $file ="-";
         }
   echo '      
         <td>'. $linha->dsc_periodo .'</td>

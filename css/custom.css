@@ -311,6 +311,7 @@ th {
     padding: 10px 15px;
     position: relative;
     text-shadow: 0 1px 0 #000;  
+    text-align: center;
 }
 
 th:after {
@@ -342,7 +343,12 @@ td {
     padding: 5px;
     position: relative;
     transition: all 300ms;
-    text-align: center;
+    text-align: left;
+}
+
+.table.table-striped.table-hover tbody tr td{
+    vertical-align: center;
+
 }
 
 td span{

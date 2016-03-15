@@ -76,6 +76,15 @@ class Assunto extends CI_Controller{
         $this->load->view('conteudo', $dados);
     }
 
+    public function conceito_itens() {
+
+        $dados = array(
+            'status'=> $this->assunto_model->get_conceitos()->result(),
+             );
+        
+        $this->load->view('transactions/assunto/conceito_itens', $dados);
+    }
+
     public function imprimir() {
         // é praticamente a mesma visão de RETRIEVE
         // porem será utilizado para exibir os conceitos 

@@ -4,20 +4,34 @@
 
 <?php
 
-for($i=0; $i < count($dados_assunto); $i++){ 
-    $id = $dados_assunto[$i]['id_assunto'];
-    $assuntos[$id] = $dados_assunto[$i]['dsc_assunto'];
+if($dados_assunto){
+	for($i=0; $i < count($dados_assunto); $i++){ 
+	    $id = $dados_assunto[$i]['id_assunto'];
+	    $assuntos[$id] = $dados_assunto[$i]['dsc_assunto'];
+	}
+}else{
+	$assuntos = NULL;
 }
 
-for($i=0; $i < count($dados_planta); $i++){ 
-    $id = $dados_planta[$i]['id_planta'];
-    $plantas[$id] = $dados_planta[$i]['dsc_planta'];
+if ($dados_planta) {
+	for($i=0; $i < count($dados_planta); $i++){ 
+	    $id = $dados_planta[$i]['id_planta'];
+	    $plantas[$id] = $dados_planta[$i]['dsc_planta'];
+	}
+}else{
+	$plantas = NULL;
 }
 
-for($i=0; $i < count($dados_periodo); $i++){ 
-    $id = $dados_periodo[$i]['id_periodo'];
-    $periodos[$id] = $dados_periodo[$i]['dsc_periodo'];
+if($dados_periodo){
+	for($i=0; $i < count($dados_periodo); $i++){ 
+	    $id = $dados_periodo[$i]['id_periodo'];
+	    $periodos[$id] = $dados_periodo[$i]['dsc_periodo'];
+	}
+}else{
+	$periodos = NULL;
 }
+
+
 
 echo '<form method="post" action="" class="ajax_form_ocorrencia">';
 

@@ -22,10 +22,10 @@ class Assunto_model extends CI_Model{
         $sql =  'UPDATE assunto 
                     SET 
                     dsc_assunto = ' . "'" . $dados['dsc_assunto'] . "' ," .
-                   ' dsc_conceito = ' . "'" . $dados['dsc_conceito'] . "' ," .
+                   ' dsc_conceito = ' . "'" . addslashes($dados['dsc_conceito']). "' ," .
                    ' dsc_file = ' . "'" . $dados['dsc_file'] . "'" .
                 ' WHERE id_assunto = ' . $condicao['id'];
-// pd($sql);
+// pd($sql);'''A'''    '''
                 $this->db-> query($sql);
 
             $this->session->set_flashdata('edicaook','Acordo atualizado com sucesso');

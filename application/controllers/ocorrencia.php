@@ -30,10 +30,10 @@ class Ocorrencia extends CI_Controller{
             $data = json_decode($_POST['data']);
             // pd($data->dados_acordo->id_assunto);
 
-            $id_assunto = $data->dados_acordo->id_assunto;
-            $id_planta  = $data->dados_acordo->id_planta;
-            $id_periodo = $data->dados_acordo->id_periodo;
-            $dsc_file     = isset($data->dados_acordo->dsc_file)     ? $data->dados_acordo->dsc_file     : '';
+            $id_assunto = isset($data->dados_acordo->id_assunto)     ? $data->dados_acordo->id_assunto    : ''; 
+            $id_planta  = isset($data->dados_acordo->id_planta)      ? $data->dados_acordo->id_planta     : ''; 
+            $id_periodo = isset($data->dados_acordo->id_periodo)     ? $data->dados_acordo->id_periodo    : '';
+            $dsc_file   = isset($data->dados_acordo->dsc_file)       ? $data->dados_acordo->dsc_file      : '';
             // $dsc_file = $data->dados_acordo->dsc_file;
 
             $dados = array(

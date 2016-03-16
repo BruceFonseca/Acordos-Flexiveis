@@ -81,6 +81,7 @@ echo form_close();
 		$('.dados_componente .form').remove();
 		$('.dados_componente script').remove();
         $('#sortable1').append(last_assunto);
+        $('textarea').mousedown(function(e){ e.stopPropagation(); });
 	});
 </script>
 

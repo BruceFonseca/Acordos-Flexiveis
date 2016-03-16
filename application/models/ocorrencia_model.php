@@ -147,7 +147,7 @@ class Ocorrencia_model extends CI_Model{
                 INNER JOIN assunto a ON o.id_assunto = a.id_assunto
                 INNER JOIN planta p ON o.id_planta = p.id_planta
                 INNER JOIN periodo pe ON o.id_periodo = pe.id_periodo
-                WHERE o.id_planta = ' . $id ;     
+                WHERE o.id_planta = ' . $id . ' ORDER BY o.id_assunto, o.id_periodo '; 
         return $this->db->query($query);
     }
     

@@ -199,6 +199,22 @@ echo form_close();
 	});
 
 
+	$('.set_assunto a').on('click', function(){
+	    
+	    var controller = 'tratado/create/fast';
+
+	     $.ajax({
+	            type      : 'post',
+	            url       : controller, //é o controller que receberá
+	            
+	            success: function( response ){
+	                $('.apontamento').show();
+	                $('.dados_componente').css( "display", "table" );
+	                $('.dados_componente').css( "position", "absolute" );
+	                $('.dados_componente').append(response);
+	            }
+	    });
+	});
 
 	$(function() {
 	    $( "#sortable1, #sortable2" ).sortable(

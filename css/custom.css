@@ -736,3 +736,18 @@ fieldset legend{
     display: inline;
     float: left;
 }
+
+.buttons-controle{
+    width: 100%;
+    margin-top: 20px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    display: table;
+    margin-top: 20px;
+    padding: 10px;
+    height: 30px;
+}
+
+.buttons-controle #fechar-apontamento-componente{
+    margin-bottom: 0px;
+}

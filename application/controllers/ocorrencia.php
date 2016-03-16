@@ -91,6 +91,19 @@ class Ocorrencia extends CI_Controller{
         $this->load->view('conteudo', $dados);
     }
 
+    public function retrieve_by_acordo() {
+
+        $id = $this->uri->segment(3);
+
+        $dados = array(
+            'tela'=> 'retrieve_by_acordo',
+            'pasta'=> 'ocorrencia',// é a pasta que está dentro de "telas". existe uma pasta para cada tabela a ser cadastrada
+            'interpretacao'=> $this->ocorrencia_model->get_all_ocorrencias_by_acordo($id)->result(),
+             );
+        
+        $this->load->view('conteudo', $dados);
+    }
+
     public function interpretacao_planta() {
 
         $id = $this->uri->segment(3);

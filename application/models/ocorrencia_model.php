@@ -150,6 +150,26 @@ class Ocorrencia_model extends CI_Model{
                 WHERE o.id_planta = ' . $id . ' ORDER BY o.id_assunto, o.id_periodo '; 
         return $this->db->query($query);
     }
+
+    public function get_all_ocorrencias_by_acordo($id){
+
+          $query = '
+                SELECT DISTINCT 
+                (SELECT COUNT(oo.id_assunto) FROM ocorrencia oo WHERE oo.id_assunto = o.id_assunto AND oo.id_planta = o.id_planta) as cont,
+                o.id_ocorrencia as id_ocorrencia,
+                o.id_assunto as id_assunto,
+                p.dsc_planta as dsc_planta,
+                a.dsc_assunto as dsc_assunto,
+                o.id_periodo as id_periodo,
+                pe.dsc_periodo as dsc_periodo,
+                o.dsc_file as dsc_file
+                FROM ocorrencia o
+                INNER JOIN assunto a ON o.id_assunto = a.id_assunto
+                INNER JOIN planta p ON o.id_planta = p.id_planta
+                INNER JOIN periodo pe ON o.id_periodo = pe.id_periodo
+                WHERE o.id_assunto = ' . $id . ' ORDER BY o.id_assunto, o.id_periodo, p.dsc_planta '; 
+        return $this->db->query($query);
+    }
     
     public function get_byid($id) {
         $query = 'SELECT id_ocorrencia, id_assunto, id_planta, id_periodo, dsc_file FROM ocorrencia 

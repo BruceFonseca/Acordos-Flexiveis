@@ -1,6 +1,7 @@
 
 <div class='form'>
-    
+    <div class="buttons-controle">
+
     <?php 
     if ($status->dsc_file) {
         echo 
@@ -8,7 +9,7 @@
         <a target="_blank" href= "'. base_url().'uploads/'. $status->dsc_file . '">
         
             <button type="button" class="btn btn-default" id="">
-                <span class="glyphicon glyphicon-paperclip" aria-hidden="true"></span> Anexo
+                <span class="glyphicon glyphicon-paperclip" aria-hidden="true"></span>
             </button>   
             
         </a>
@@ -21,25 +22,40 @@
         '
         <a target="_blank" href= "'. base_url().'assunto/print_page/'. $status->id_assunto . '">
             <button type="button" class="btn btn-default" id="">
-                <span class="glyphicon glyphicon-print" aria-hidden="true"></span> Imprimir
+                <span class="glyphicon glyphicon-print" aria-hidden="true"></span>
+            </button>
+        </a>
+        ';
+    
+    echo 
+        '
+        <a target="_blank" href= "'. base_url().'uploads/'. $status->dsc_file . '">
+            <button type="button" class="btn btn-default" id="">
+                <span class="glyphicon glyphicon-floppy-save" aria-hidden="true"></span>
+            </button>
+        </a>
+        ';  
+    echo 
+        '
+        <a href= "#" class="retrieve_by_acordo" ctr="ocorrencia/retrieve_by_acordo/'. $status->id_assunto .'">
+            <button type="button" class="btn btn-default" id="">
+                <span class="glyphicon glyphicon-file" aria-hidden="true"></span>
             </button>
         </a>
         ';
 
  ?>
-    <button type="button" class="btn btn-default" id="fechar-apontamento-componente">
-        <span class="glyphicon glyphicon-remove" aria-hidden="true"></span> Fechar
-    </button>	
-
+	
+</div>
 <?php
 
 if($this->session->flashdata('excluirok')):
     echo '<p>'.$this->session->flashdata('excluirok').'</p>';
 endif;
 
-echo '<form class="ajax_form">';
+echo '<form class="ajax_form imprimir">';
 
-echo form_fieldset('COE - Flexibilidade  <img id="" src=" '. base_url('img/sistema/logotipo/logo.png' ).'"/>');
+echo form_fieldset( $status->dsc_assunto .'<img id="" src=" '. base_url('img/sistema/logotipo/logo.png' ).'"/>');
 
 echo  validation_errors('<div class="alert alert-danger" role="alert">
   <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
@@ -49,7 +65,6 @@ echo  validation_errors('<div class="alert alert-danger" role="alert">
     '
         <div class="" ctr="assunto/imprimir/'. $status->id_assunto .'">
           <!-- Default panel contents -->
-          <div class=""> '. $status->dsc_assunto . '</div>
           <div class="">
             <p>'.
                 (urldecode($status->dsc_conceito))
@@ -68,14 +83,24 @@ echo form_close();
 <!-- o script jquery abaixo é carregado no formulário no momento que o formulário é criado -->
 <script>                    
 
-    $('#fechar-apontamento-componente').on('click', function(){
-        var name_file= $('input[name="atach-file"]').val();
-		$('.apontamento').hide();
-		$('.dados_componente').hide();
-		$('.dados_componente .form').remove();
-		// $('.dados_componente .body-table-abastecimento').remove();
-		$('.dados_componente script').remove();
-        $('.dsc_file').val(name_file);
-	});
+    $('.retrieve_by_acordo').on('click',function(){
+        var conceito = $('.ajax_form.imprimir fieldset legend').text();
+        var desc = 'Plantas com ' + conceito;
+        var controller = $(this).attr('ctr');
+        var numTran = numTab();
+
+        criarNovaAbaSemConteudo(controller, desc, numTran);
+
+         $.ajax({
+                type      : 'post',
+                url       : controller, //é o controller que receberá
+                // data      : 'id='+ id_ocorrencia,
+                
+                success: function( response ){
+                        $('div[numtab="'+ numTran +'"]').append(response);
+                }
+            });
+
+    })
 	
 </script>

@@ -10,7 +10,7 @@
     <link rel="stylesheet" type="text/css" href= <?php echo base_url("css/login.css" )?> />
 
     <meta charset="UTF-8">
-    <title>InfoLog  - bflabs</title>
+    <title>COE - Flexibilidade</title>
 </head>
 <body>
 <div class="topo-login">

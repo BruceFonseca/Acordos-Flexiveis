@@ -39,23 +39,29 @@ echo form_close();
 <!-- o script jquery abaixo é carregado no formulário no momento que o formulário é criado -->
 <script>
 
-$('.panel.panel-default.conceitos').on('click', function(){
-	    
+$('.panel.panel-default.conceitos').click(function(){
+
+
+    //encontra o id do usuário que será atualizado
+    // var id_ocorrencia = $(this).attr('id');
+
+    var desc = 'Conceito ' + $(this).find('.panel-heading').text();
     var controller = $(this).attr('ctr');
+    var numTran = numTab();
+
+    criarNovaAbaSemConteudo(controller, desc, numTran);
+
      $.ajax({
             type      : 'post',
             url       : controller, //é o controller que receberá
+            // data      : 'id='+ id_ocorrencia,
             
             success: function( response ){
-                $('.apontamento').show();
-
-                $('.dados_componente').css( "display", "table" );
-                $('.dados_componente').css( "position", "absolute" );
-                $('.dados_componente').append(response);
+                    $('div[numtab="'+ numTran +'"]').append(response);
             }
         });
-    });
-$('#Conceitos span').remove();
+
+});
 
 </script>
 

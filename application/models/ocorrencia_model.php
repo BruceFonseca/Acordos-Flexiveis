@@ -139,6 +139,7 @@ class Ocorrencia_model extends CI_Model{
                 o.id_ocorrencia as id_ocorrencia,
                 o.id_assunto as id_assunto,
                 p.dsc_planta as dsc_planta,
+                p.id_planta as id_planta,
                 a.dsc_assunto as dsc_assunto,
                 o.id_periodo as id_periodo,
                 pe.dsc_periodo as dsc_periodo,

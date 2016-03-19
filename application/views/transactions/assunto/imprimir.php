@@ -20,7 +20,7 @@
     
     echo 
         '
-        <a target="_blank" href= "'. base_url().'assunto/print_page/'. $status->id_assunto . '">
+        <a class="btn-print" target="_blank" href= "'. base_url().'pdfgerar/pdf_conceito/'. $status->id_assunto . '">
             <button type="button" class="btn btn-default" id="">
                 <span class="glyphicon glyphicon-print" aria-hidden="true"></span>
             </button>
@@ -29,7 +29,7 @@
     
     echo 
         '
-        <a target="_blank" href= "'. base_url().'uploads/'. $status->dsc_file . '">
+        <a class="btn-download" target="_blank" href= "'. base_url().'pdfgerar/pdf_conceito/'. $status->id_assunto . '">
             <button type="button" class="btn btn-default" id="">
                 <span class="glyphicon glyphicon-floppy-save" aria-hidden="true"></span>
             </button>
@@ -83,7 +83,8 @@ echo form_close();
 <!-- o script jquery abaixo é carregado no formulário no momento que o formulário é criado -->
 <script>                    
 
-    $('.retrieve_by_acordo').on('click',function(){
+
+     $('.retrieve_by_acordo').on('click',function(){
         var conceito = $('.ajax_form.imprimir fieldset legend').text();
         var desc = 'Plantas com ' + conceito;
         var controller = $(this).attr('ctr');
@@ -101,6 +102,35 @@ echo form_close();
                 }
             });
 
-    })
-	
+    });
+    
+    $('.btn-print').on('click', function(){
+
+        var controller = $('.btn-print').attr('ctr');
+
+         printPdf(controller);
+    });
+
+     $('.btn-download').on('click', function(){
+
+        var controller = $('.btn-print').attr('ctr');
+        printPdf(controller);
+
+         
+    });
+
+    function printPdf(url) {
+        
+        $.ajax({
+            url: url,
+            success: function(data) {
+                var blob=new Blob([data]);
+                var link=data;
+                link.click();
+            }
+        });
+    }
+
+
+
 </script>

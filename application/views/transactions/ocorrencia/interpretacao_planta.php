@@ -3,7 +3,6 @@
 
 $this->table->set_heading('Item', 'Descrição', 'Anexo');
 
-
 foreach ($interpretacao as $linha):
 
     if( strlen($linha->dsc_file)>0){
@@ -18,7 +17,26 @@ foreach ($interpretacao as $linha):
     $file 
     );
 endforeach;
-// pd($interpretacao);
+
+echo '<div class="buttons-controle">';
+echo 
+        '
+        <a class="btn-print" target="_blank" href= "'. base_url().'pdfgerar/pdf_ocorrencia/'. $interpretacao[0]->id_ocorrencia . '">
+            <button type="button" class="btn btn-default" id="">
+                <span class="glyphicon glyphicon-print" aria-hidden="true"></span>
+            </button>
+        </a>
+        ';
+    
+    echo 
+        '
+        <a class="btn-download" target="_blank" href= "'. base_url().'pdfgerar/pdf_ocorrencia/'. $interpretacao[0]->id_ocorrencia . '">
+            <button type="button" class="btn btn-default" id="">
+                <span class="glyphicon glyphicon-floppy-save" aria-hidden="true"></span>
+            </button>
+        </a>
+        ';  
+echo '</div>';
 echo '<div class="retrieve-table">';
 
 if ($interpretacao) {
@@ -35,5 +53,31 @@ echo $this->table->generate();
 echo '</div>';
 
 ?>
+
+<script>
+
+    $('.btn-print').on('click', function(){
+        var controller = $('.btn-print').attr('ctr');
+         printPdf(controller);
+    });
+
+    $('.btn-download').on('click', function(){
+        var controller = $('.btn-print').attr('ctr');
+        printPdf(controller);
+    });
+
+      function printPdf(url) {
+          
+          $.ajax({
+              url: url,
+              success: function(data) {
+                  var blob=new Blob([data]);
+                  var link=data;
+                  link.click();
+              }
+          });
+      }
+
+</script>
 
 

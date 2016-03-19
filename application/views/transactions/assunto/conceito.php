@@ -63,6 +63,8 @@ $('.panel.panel-default.conceitos').click(function(){
 
 });
 
+$('#Conceitos span').hide();
+
 </script>
 
 </div>

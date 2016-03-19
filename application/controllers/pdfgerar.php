@@ -26,7 +26,7 @@ class Pdfgerar extends CI_Controller{
         $id = $this->uri->segment(3);
 
         $dados = array(
-            'tela'=> 'interpretacao_planta',
+            'tela'=> 'pdf_ocorrencia',
             'interpretacao'=> $this->ocorrencia_model->get_all_ocorrencias_assuntos($id)->result(),
              );
 
@@ -50,15 +50,30 @@ class Pdfgerar extends CI_Controller{
         // $this->load->view('template_pdf', $dados);
     }
 
-    public function retrieve_by_acordo() {
+    public function pdf_plantas_acordo() {
       //plantas que tem o mesmo acordo
       //recebe o id do acordo
 
         $id = $this->uri->segment(3);
 
         $dados = array(
-            'tela'=> 'retrieve_by_acordo',
+            'tela'=> 'pdf_plantas_acordo',
             'interpretacao'=> $this->ocorrencia_model->get_all_ocorrencias_by_acordo($id)->result(),
+             );
+        
+        $this->gerar_pdf($dados);
+        // $this->load->view('template_pdf', $dados);
+    }
+
+    public function pdf_conceito() {
+      //plantas que tem o mesmo acordo
+      //recebe o id do acordo
+
+        $id = $this->uri->segment(3);
+
+        $dados = array(
+            'tela'=> 'pdf_conceito',
+            'status'=> $this->assunto_model->get_conceito_by_id($id)->row(),
              );
         
         $this->gerar_pdf($dados);

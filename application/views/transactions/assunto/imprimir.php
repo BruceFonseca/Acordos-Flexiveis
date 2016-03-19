@@ -55,7 +55,7 @@ endif;
 
 echo '<form class="ajax_form imprimir">';
 
-echo form_fieldset( $status->dsc_assunto .'<img id="" src=" '. base_url('img/sistema/logotipo/logo.png' ).'"/>');
+echo form_fieldset( $status->dsc_assunto);
 
 echo  validation_errors('<div class="alert alert-danger" role="alert">
   <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>

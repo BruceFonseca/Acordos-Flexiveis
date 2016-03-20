@@ -1,7 +1,7 @@
 <ul class="nav-acordos">
 
 	<div class="menu-side-bar">
-		<span class="glyphicon glyphicon-menu-hamburger btn-lg" aria-hidden="true"></span>
+				<span class="glyphicon glyphicon-menu-hamburger btn-lg" aria-hidden="true"></span>
 	</div>
 
 <?php 
@@ -12,7 +12,26 @@ foreach ($menu_planta->result() as $menu): ?>
 	</li>
 <?php endforeach; ?>
 
+
+<!-- cria o menu dinamico do usuário de acordo com a role -->
+<?php foreach ($menu_list->result() as $menu): ?>
+<li class="menu-admin">
+    <a href="#"><?php echo ucwords($menu->menu) ?><span class="caret"></span></a>
+    <ul class="dropdown-menu-admin">
+        <?php foreach ($submenu_list->result() as $submenu): ?>
+            <?php if($menu->id_menu==$submenu->id_menu):?>
+                <li>
+                    <a href="#"  ctr= '<?php echo $submenu->controller ?>'><?php echo ucwords($submenu->submenu) ?></a>
+                </li>
+            <?php endif;?>
+        <?php endforeach; ?>
+    </ul>
+</li>
+<?php endforeach; ?>
+
 </ul>
+
+
 <script>
 
 	$('.menu-side-bar span').on('click', function(){
@@ -58,11 +77,6 @@ foreach ($menu_planta->result() as $menu): ?>
 		$('.conteudo-principal').css('width' , w_con);
 	}
 
-	$('.conteudo-principal').resize(function(){
-	// $('.conteudo-principal').on('resize',function(){
-		// alert('fsdgfagas');
-	});
-
 	$(".list-plantas a").click(function(){
 		var controller = $(this).attr('ctr'); //este atributo será utilizado para trazer o controller da transaçãoque será utilizado para manupulkar abas (abrir fechar etc) as abas
 		var desc = $(this).text() + '&nbsp'; // pega descrição do menu e utiliza nas abas que serão abertas
@@ -72,6 +86,16 @@ foreach ($menu_planta->result() as $menu): ?>
 
 	});
 
+	$('li.menu-admin a').click(function(){
+
+		$(this).parent().find('.dropdown-menu-admin').toggle(function(){
+			$(this).parent().css({
+				background: '#323232'
+			});
+
+		});
+	// alert('sdfgadfgas');
+	});
 
 </script>
 

@@ -91,6 +91,9 @@ list-style: none !important;
 .nav-acordos a:hover, .nav-acordos a:focus{
     color: #b83039;
 }
+.nav-acordos a:hover{
+    color: #fff;
+}
 
 .nav-acordos li:hover{
     background-color: transparent;
@@ -112,6 +115,10 @@ list-style: none !important;
 .conteudo-principal .conteudo{
 	margin: 0 auto;
 	display: table;
+}
+
+.conteudo{
+    max-width: 900px;
 }
 
 .form form input[type="file"]{
@@ -700,13 +707,15 @@ fieldset legend{
     margin-top: 51px;
 }
 
-.nav-acordos .list-plantas a:hover{
+.nav-acordos .list-plantas a:hover, 
+.nav-acordos .menu-admin:hover, 
+.dropdown-menu-admin li:hover{
     text-decoration: none;
     color: #fff;
     background: rgba(255,255,255,0.2);
 }
 
-.nav-acordos .list-plantas a{
+.nav-acordos .list-plantas a, .dropdown-menu-admin li a{
     text-decoration: none;
     width: 100%;
     display: table;
@@ -751,3 +760,9 @@ fieldset legend{
 .buttons-controle #fechar-apontamento-componente{
     margin-bottom: 0px;
 }
+
+.menu-admin .dropdown-menu-admin{
+    display: none;
+}
+
+

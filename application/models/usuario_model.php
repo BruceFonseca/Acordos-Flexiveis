@@ -29,8 +29,15 @@ class Usuario_model extends CI_Model{
     
     
     public function get_byid($id) {
-        $query = 'SELECT id, username, u.dsc_name as nome, dsc_matricula, u.id_user_roles , r.dsc_name as role, ativo as status FROM users u
+        $query = 'SELECT id, username, u.dsc_name as nome, dsc_matricula, u.id_user_roles , r.dsc_name as role, ativo as status, email FROM users u
                   INNER JOIN user_roles r ON u.id_user_roles = r.id_user_roles
+                  WHERE id = ' . $id ; 
+
+        return $this->db->query($query);
+    }
+
+    public function get_email_byid($id) {
+        $query = 'SELECT email FROM users
                   WHERE id = ' . $id ; 
 
         return $this->db->query($query);

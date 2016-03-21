@@ -38,7 +38,7 @@ class Usuario_model extends CI_Model{
 
     public function get_email_byid($id) {
         $query = 'SELECT email FROM users
-                  WHERE id = ' . $id ; 
+                  WHERE username = "' . $id . '"' ; 
 
         return $this->db->query($query);
     }
@@ -49,6 +49,16 @@ class Usuario_model extends CI_Model{
         $query = "UPDATE users
                   SET password = " . "'" . $pass ."'" .
                  ' WHERE id = ' . $id;
+
+        $this->db->query($query);
+    }
+
+    public function reset_senha_by_username($id, $senha){
+        $pass = md5($senha);
+
+        $query = "UPDATE users
+                  SET password = " . "'" . $pass ."'" .
+                 ' WHERE username = "' . $id . '"' ; 
 
         $this->db->query($query);
     }
@@ -63,6 +73,30 @@ class Usuario_model extends CI_Model{
                  ' WHERE username = '. "'" . $username ."'";
 
         $this->db->query($query);
+    }
+
+    public function send_email($email, $senha){
+
+        $this->load->library('email');
+
+            $config['protocol']='smtp';
+            $config['smtp_host']='smtp.bflabs.com.br';
+            $config['smtp_port']='587';
+            $config['smtp_timeout']='60';
+            $config['smtp_user']='contato@bflabs.com.br';
+            $config['smtp_pass']='bru198607';
+            $config['charset']='utf-8';
+            $config['mailtype'] = 'html';
+
+            $this->email->initialize($config);
+
+            $this->email->from('contato@bflabs.com.br', 'Lembrar Senha | COE - Flexibilidade');
+            // $this->email->to('antonio.aires.jr@gmail.com'); 
+            $this->email->to($email); 
+            // $this->email->cc('lennon.bruce@gmail.com');
+            $this->email->subject('Nova mensagem enviada do site');
+            $this->email->message("Sua nova senha é: $senha <br> Favor alterá-la por questões de segurança");
+            $this->email->send();
     }
 }
 

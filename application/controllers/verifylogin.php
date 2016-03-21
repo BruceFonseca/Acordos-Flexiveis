@@ -6,6 +6,7 @@ class Verifylogin extends CI_Controller {
     {
         parent::__construct();
         $this->load->model('user','',TRUE);
+        $this->load->model('usuario_model');//carrega o model
     }
 
     function index()
@@ -15,8 +16,8 @@ class Verifylogin extends CI_Controller {
         //This method will have the credentials validation
         $this->load->library('form_validation');
 
-        $this->form_validation->set_rules('username', 'Usuário', 'trim|required|xss_clean');
-        $this->form_validation->set_rules('password', 'Senha', 'trim|required|xss_clean|callback_check_database');
+        // $this->form_validation->set_rules('username', 'Usuário', 'trim|required|xss_clean');
+        $this->form_validation->set_rules('password', 'Senha', 'trim|xss_clean|callback_check_database');
 
         if($this->form_validation->run() == FALSE)
         {
@@ -61,5 +62,26 @@ class Verifylogin extends CI_Controller {
             $this->form_validation->set_message('check_database', 'Usuário ou senha incorretos');
             return FALSE;
         }
+    }
+
+    function lembrar_senha(){
+
+        $id = $this->uri->segment(3);
+
+        $email = $this->usuario_model->get_email_byid($id)->row()->email;
+
+        if($email != NULL){
+            $senha = time();
+            // pd($senha);
+            $this->usuario_model->send_email($email, $senha);
+            $this->usuario_model->reset_senha_by_username($id, $senha);
+            echo ' Nova senha enviada para o e-mail <strong>'. $email . '</strong>';
+            return FALSE;
+        }else{
+            echo ' Não foi possível recuperar sua senha. Contate o administrador do sistema.';
+            return FALSE;
+        }
+
+
     }
 }

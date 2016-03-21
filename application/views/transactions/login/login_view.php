@@ -55,9 +55,19 @@
             <div class="col-xs-12">
                 <div class="form-wrap retrieve-table">
                     <h2>Faça Login</h2>
-                    <?php echo validation_errors(); ?>
+                    <?php 
+                        echo  validation_errors('<div class="alert alert-danger" role="alert">
+                          <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+                          <span class="sr-only">Error:</span>','</div>');
+                    ?>
 
                     <?php echo form_open('verifylogin', $attributes); ?>
+                        
+                        <div class="reset-senha">
+                            <div class="alert alert-info" role="alert">
+                              <span></span>
+                            </div>
+                        </div>
 
                         <div class="form-group">
                             <label for="userid" class="sr-only">UserID</label>
@@ -72,6 +82,7 @@
                         <div class="checkbox">
                             <span class="character-checkbox" onclick="showPassword()"></span>
                             <span class="label">Exibir senha</span>
+                            <a class="lembrar-senha" href="#" title=""><span class="label">Lembrar senha</span></a>
                         </div>
                         <input type="submit" id="btn-login" class="btn btn-custom btn-lg btn-block" value="Login">
                     </form>
@@ -119,6 +130,14 @@
                         $('header nav').slideToggle();
                     });
                 });
+
+                $('.reset-senha').hide();
+
+                $('.lembrar-senha').on('click', function(){
+                    $('.reset-senha').show();
+                    reset_senha();
+                });
+
                 function addIconClasses() {
                     $(".slide_item").each(function(){
                         var scre = $("body").width();
@@ -128,4 +147,30 @@
                         $(".slide_item img").width(scre);
                     });
                 }
+
+                function reset_senha(){
+
+                    var id   = $("input[name='username']").val();
+
+                    if (id.length > 0) {
+
+                        var controller = 'verifylogin/lembrar_senha/'+ id;
+                        $.ajax({
+                                type      : 'post',
+                                url       : controller, //é o controller que receberá
+                                
+                                success: function( response ){
+                                    $('.reset-senha span').text('');
+                                    $('.reset-senha span').append(response);
+                                }
+                        });
+
+                    } else{
+                        $('.reset-senha span').text('');
+                        $('.reset-senha span').append(' Favor informar usuário');
+                    };
+
+
+                }
+
             </script>

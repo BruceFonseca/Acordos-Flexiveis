@@ -786,3 +786,8 @@ fieldset legend{
     width: 30%;
     margin-left: 40%;
 }
+
+
+.checkbox a{
+    float: right;
+}

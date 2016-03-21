@@ -1,7 +1,8 @@
 <ul class="nav-acordos">
 
 	<div class="menu-side-bar">
-				<span class="glyphicon glyphicon-menu-hamburger btn-lg" aria-hidden="true"></span>
+		<h3>CNH Industrial</h3>
+		<span class="glyphicon glyphicon-menu-hamburger btn-lg" aria-hidden="true"></span>
 	</div>
 
 <?php 
@@ -48,6 +49,8 @@ foreach ($menu_planta->result() as $menu): ?>
 				width : '15%'
 			});
 			$('.list-plantas').show();
+			$('.menu-admin').show();
+			$('.menu-side-bar h3').show();
 			
 		}else{//recolhe o menu
 			$(this).css({
@@ -62,6 +65,8 @@ foreach ($menu_planta->result() as $menu): ?>
 			});
 
 			$('.list-plantas').hide();
+			$('.menu-admin').hide();
+			$('.menu-side-bar h3').hide();
 		}
 
 		//redimenciona a div conteudo
@@ -95,6 +100,16 @@ foreach ($menu_planta->result() as $menu): ?>
 
 		});
 	// alert('sdfgadfgas');
+	});
+
+	// cria uma nova aba referente a transação selecionada pelo usuário  (menu superior)
+	$(".dropdown-menu-admin li a").click(function(){
+		var controller = $(this).attr('ctr'); //este atributo será utilizado para trazer o controller da transaçãoque será utilizado para manupulkar abas (abrir fechar etc) as abas
+		var desc = $(this).text() ; // pega descrição do menu e utiliza nas abas que serão abertas
+
+		//função que efetivamente criara a aba e respectivos conteudos
+		criarNovaAba(controller, desc);
+
 	});
 
 </script>

@@ -53,8 +53,12 @@ class Home extends CI_Controller {
 
     function update_menu_sidebar()
     {
+        $session_data = $this->session->userdata('logged_in');
+        $role = $session_data['role'];
         $dados = array(
-            'menu_planta'=> $this->ocorrencia_model->get_menu_planta(),
+                'menu_list'=> $this->user_menu_model->get_menu_by_role($role),
+                'submenu_list'=> $this->user_menu_model->get_submenu_by_role($role),
+                'menu_planta'=> $this->ocorrencia_model->get_menu_planta(),
         );
          $this->load->view('includes/menu_sidebar', $dados);
     }

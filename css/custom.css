@@ -75,6 +75,13 @@ list-style: none !important;
     display: block;
     color: #fff;
 }
+.menu-side-bar h3{
+    float: left;
+    margin-top: 13px;
+    padding-left: 20px;
+    font-size: 20px;
+    color: #fff;
+}
 
 .menu-side-bar span:hover{
     color: rgba(255,255,255,0.2);
@@ -765,4 +772,17 @@ fieldset legend{
     display: none;
 }
 
+.navbar-header h1, .navbar-header img{
+    float: left;
+}
+.navbar-header h1{
+    margin: 10px 0 0 0;
+    height: 100%;
+    font-size: 30px;
+}
 
+.navbar-header{
+    margin: 0 auto;
+    width: 30%;
+    margin-left: 40%;
+}

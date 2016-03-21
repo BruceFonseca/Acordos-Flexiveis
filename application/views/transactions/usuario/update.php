@@ -34,6 +34,9 @@ echo form_input(array('name'=>'username'),  set_value('username', $query->userna
 echo form_label('Nome');
 echo form_input(array('name'=>'dsc_name'),  set_value('dsc_name',$query->nome))."<br>";
 
+echo form_label('E-mail');
+echo form_input(array('name'=>'email'),  set_value('dsc_name',$query->email))."<br>";
+
 echo form_label('Matrícula');
 echo form_input(array('name'=>'dsc_matricula'),    set_value('dsc_matricula', $query->dsc_matricula))."<br>";
 

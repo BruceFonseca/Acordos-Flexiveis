@@ -37,7 +37,8 @@ class Usuario extends CI_Controller{
                                     'dt_added',
                                     'dt_updated',
                                     'id_user_roles',
-                                    'ativo' ), $this->input->post());
+                                    'ativo',
+                                    'email' ), $this->input->post());
             $this->usuario_model->do_insert($dados);
         }
         $dados = array(
@@ -92,7 +93,8 @@ class Usuario extends CI_Controller{
                                         'dsc_matricula', 
                                         'id_user_roles',
                                         'ativo',
-                                        'dt_updated'), $this->input->post());
+                                        'dt_updated',
+                                        'email'), $this->input->post());
                 $this->usuario_model->do_update($dados, array('id'=> $id));
             endif;
 

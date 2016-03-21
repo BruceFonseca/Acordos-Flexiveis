@@ -32,6 +32,9 @@ echo form_input(array('name'=>'username'),  '','autofocus')."<br>";
 echo form_label('Nome');
 echo form_input(array('name'=>'dsc_name'),  '')."<br>";
 
+echo form_label('E-mail');
+echo form_input(array('name'=>'email'),  '')."<br>";
+
 echo form_label('Matrícula');
 echo form_input(array('name'=>'dsc_matricula'),  '')."<br>";
 

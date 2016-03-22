@@ -83,6 +83,8 @@ foreach ($menu_planta->result() as $menu): ?>
 	}
 
 	$(".list-plantas a").click(function(){
+
+		$('li.menu-admin').removeClass('li-active');
 		var controller = $(this).attr('ctr'); //este atributo será utilizado para trazer o controller da transaçãoque será utilizado para manupulkar abas (abrir fechar etc) as abas
 		var desc = $(this).text() + '&nbsp'; // pega descrição do menu e utiliza nas abas que serão abertas
 
@@ -91,12 +93,15 @@ foreach ($menu_planta->result() as $menu): ?>
 
 	});
 
+
 	$('li.menu-admin a').click(function(){
+		
+	$('.menu-admin .dropdown-menu-admin').hide();
+
+		$('li.menu-admin').removeClass('li-active');
 
 		$(this).parent().find('.dropdown-menu-admin').toggle(function(){
-			$(this).parent().css({
-				background: '#323232'
-			});
+			$(this).parent().addClass('li-active');
 
 		});
 	// alert('sdfgadfgas');

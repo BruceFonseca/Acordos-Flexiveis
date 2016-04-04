@@ -80,6 +80,25 @@ class Pdfgerar extends CI_Controller{
         // $this->load->view('template_pdf', $dados);
     }
 
+    public function pdf_comparacao() {
+      //plantas que tem o mesmo acordo
+      //recebe o id do acordo
+
+        $plantas  = $this->uri->segment(3);
+        $periodos = $this->uri->segment(4);
+        $acordos  = $this->uri->segment(5);
+
+        $dados = array(
+            'tela'=> 'pdf_comparacao',
+            'acordos'=> $this->ocorrencia_model->retrieve_tabela_comparacao($periodos, $plantas, $acordos)->result(),
+             );
+
+        // pd($dados);
+        
+        $this->gerar_pdf($dados);
+        // $this->load->view('template_pdf', $dados);
+    }
+
     public function gerar_pdf($dados){
 
         // As PDF creation takes a bit of memory, we're saving the created file in /downloads/reports/

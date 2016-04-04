@@ -40,10 +40,11 @@ $ult_planta = NULL;
 foreach ($interpretacao as $linha):
   echo '<tr>
         <td>'. $linha->dsc_assunto .'</td> 
+        <td>'. $linha->dsc_planta .'</td> 
         ';
-        if($ult_planta != $linha->dsc_planta){
-            echo  '<td colspan="" rowspan="'. $linha->cont .'" headers="">'. $linha->dsc_planta  .'</td>';
-        }
+        // if($ult_planta != $linha->dsc_planta){
+        //     echo  '<td colspan="" rowspan="'. $linha->cont .'" headers="">'. $linha->dsc_planta  .'</td>';
+        // }
         if( strlen($linha->dsc_file)>0){
             $file = '<a target="_blank" href="'.base_url().'uploads/'. $linha->dsc_file .'" >Arquivo na Íntegra</a>';
         }else{

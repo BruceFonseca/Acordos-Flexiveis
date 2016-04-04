@@ -93,7 +93,7 @@ class Ocorrencia_model extends CI_Model{
                 INNER JOIN periodo pe ON o.id_periodo = pe.id_periodo
                 INNER JOIN oc_ac_as oc ON o.id_ocorrencia = oc.id_ocorrencia
                 INNER JOIN tratado t on oc.id_tratado = t.id_tratado
-                WHERE o.id_ocorrencia = ' . $id ;    
+                WHERE o.id_ocorrencia = ' . $id . ' ORDER BY t.dsc_tratado';    
 
         return $this->db->query($query);
 
@@ -115,6 +115,64 @@ class Ocorrencia_model extends CI_Model{
                 WHERE o.id_planta = ' . $id . ' GROUP BY o.id_assunto, a.dsc_assunto, pe.dsc_periodo'; 
         return $this->db->query($query);
     }  
+
+
+    public function get_all_periodos_by_planta($plantas){
+    //atenção, retorna todos os períodos por plantas
+
+          $query = '
+                SELECT DISTINCT
+                o.id_periodo as id_periodo,
+                pe.dsc_periodo as dsc_periodo
+                FROM ocorrencia o
+                INNER JOIN periodo pe ON o.id_periodo = pe.id_periodo
+                WHERE o.id_planta IN (' . $plantas . ')' ; 
+        return $this->db->query($query);
+    }
+
+    public function get_all_acordos_by_periodos($periodos, $plantas){
+    //atenção, retorna todos os ACORDOS por PERIODOS E PLANTAS
+
+          $query = '
+                SELECT DISTINCT
+                o.id_assunto as id_assunto,
+                a.dsc_assunto as dsc_assunto
+                FROM ocorrencia o
+                INNER JOIN periodo pe ON o.id_periodo = pe.id_periodo 
+                INNER JOIN assunto a ON o.id_assunto = a.id_assunto
+                WHERE o.id_planta IN (' . $plantas . ') AND 
+                o.id_periodo IN (' . $periodos . ')' ; 
+        return $this->db->query($query);
+    }
+
+    public function retrieve_tabela_comparacao($periodos, $plantas, $acordos){
+    //atenção, retorna todos os ACORDOS por PERIODOS E PLANTAS
+
+          $query = '
+                SELECT 
+                o.id_ocorrencia as id_ocorrencia,
+                o.id_assunto as id_assunto,
+                a.dsc_assunto as dsc_assunto,
+                oc.dsc_interpretacao as dsc_interpretacao,
+                oc.dsc_file as dsc_file,
+                t.id_tratado as id_tratado,
+                t.dsc_tratado as dsc_tratado,
+                o.id_planta as id_planta,
+                p.dsc_planta as dsc_planta,
+                o.id_periodo as id_periodo,
+                pe.dsc_periodo as dsc_periodo
+                FROM ocorrencia o
+                INNER JOIN assunto a ON o.id_assunto = a.id_assunto
+                INNER JOIN planta p ON o.id_planta = p.id_planta
+                INNER JOIN periodo pe ON o.id_periodo = pe.id_periodo
+                INNER JOIN oc_ac_as oc ON o.id_ocorrencia = oc.id_ocorrencia
+                INNER JOIN tratado t on oc.id_tratado = t.id_tratado
+                WHERE o.id_planta IN (' . $plantas . ') AND 
+                o.id_assunto IN (' . $acordos . ') AND 
+                o.id_periodo IN (' . $periodos . ')' ; 
+        return $this->db->query($query);
+    }
+
 
     public function get_all_periodo_by_planta($id){
 
@@ -149,6 +207,18 @@ class Ocorrencia_model extends CI_Model{
                 INNER JOIN planta p ON o.id_planta = p.id_planta
                 INNER JOIN periodo pe ON o.id_periodo = pe.id_periodo
                 WHERE o.id_planta = ' . $id . ' ORDER BY o.id_assunto, o.id_periodo '; 
+        return $this->db->query($query);
+    }
+
+    public function get_all_plantas_with_ocorrencias(){
+        // todas as plantas que tem ocorrencias cadastradas
+
+          $query = '
+                SELECT DISTINCT 
+                p.id_planta as id_planta,
+                p.dsc_planta as dsc_planta
+                FROM ocorrencia o
+                INNER JOIN planta p ON o.id_planta = p.id_planta'; 
         return $this->db->query($query);
     }
 

@@ -6,7 +6,7 @@ $this->table->set_heading('Item', 'Descrição', 'Anexo');
 foreach ($interpretacao as $linha):
 
     if( strlen($linha->dsc_file)>0){
-            $file = '<a target="_blank" href="'.base_url().'uploads/'. $linha->dsc_file .'" >Arquivo na Íntegra</a>';
+            $file = '<a target="_blank" text-align="center" href="'.base_url().'uploads/'. $linha->dsc_file .'" >Arquivo na Íntegra</a>';
     }else{
         $file ="-";
     }

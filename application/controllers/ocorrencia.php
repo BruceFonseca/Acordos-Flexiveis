@@ -91,6 +91,92 @@ class Ocorrencia extends CI_Controller{
         $this->load->view('conteudo', $dados);
     }
 
+    public function retrieve_periodos_by_plantas() {
+        //recebe um JSON com as plantas e retorna os periodos
+
+        $plantas = ($_POST['data']);
+
+        $dados = array(
+            'tela'=> 'retrieve_periodos_by_plantas',
+            'pasta'=> 'ocorrencia',// é a pasta que está dentro de "telas". existe uma pasta para cada tabela a ser cadastrada
+            'periodos'=> $this->ocorrencia_model->get_all_periodos_by_planta($plantas)->result(),
+             );
+        
+        $this->load->view('conteudo', $dados);
+
+    }
+
+   
+    public function retrieve_acordos_by_periodos() {
+        //recebe um JSON com os PERIODOS e PLANTAS e retorna os AORDOS
+
+
+        $data = json_decode($_POST['data']);
+
+        $plantas = NULL;
+        for($i=0; $i < count($data->dados->id_planta); $i++){ 
+            $plantas = $plantas . $data->dados->id_planta[$i] . ',';
+        }
+        $periodos = NULL;
+        for($i=0; $i < count($data->dados->id_periodo); $i++){ 
+            $periodos = $periodos . $data->dados->id_periodo[$i] . ',';
+        }
+
+        $plantas = substr($plantas, 0, -1);
+        $periodos = substr($periodos, 0, -1);
+
+        // pd($plantas);
+
+        $dados = array(
+            'tela'=> 'retrieve_acordos_by_periodos',
+            'pasta'=> 'ocorrencia',// é a pasta que está dentro de "telas". existe uma pasta para cada tabela a ser cadastrada
+            'acordos'=> $this->ocorrencia_model->get_all_acordos_by_periodos($periodos, $plantas)->result(),
+             );
+
+        $this->load->view('conteudo', $dados);
+
+    }
+   
+    public function retrieve_tabela_comparacao() {
+        // recebe um JSON com os PERIODOS e PLANTAS e retorna os AORDOS
+
+        $data = json_decode($_POST['data']);
+
+        $plantas = NULL;
+        for($i=0; $i < count($data->dados->id_planta); $i++){ 
+            $plantas = $plantas . $data->dados->id_planta[$i] . ',';
+        }
+        $periodos = NULL;
+        for($i=0; $i < count($data->dados->id_periodo); $i++){ 
+            $periodos = $periodos . $data->dados->id_periodo[$i] . ',';
+        }
+        $acordos = NULL;
+        for($i=0; $i < count($data->dados->id_acordo); $i++){ 
+            $acordos = $acordos . $data->dados->id_acordo[$i] . ',';
+        }
+
+        // remove a ultima "," virgula
+        $plantas  = substr($plantas,  0, -1);
+        $periodos = substr($periodos, 0, -1);
+        $acordos  = substr($acordos,  0, -1);
+
+        // $plantas  = ('1,2');
+        // $periodos = ('1,2');
+        // $acordos  = ('88');
+
+        $dados = array(
+            'tela'=> 'retrieve_tabela_comparacao',
+            'plantas' => $plantas,
+            'periodos' => $periodos,
+            'tratados' => $acordos,
+            'pasta'=> 'ocorrencia',// é a pasta que está dentro de "telas". existe uma pasta para cada tabela a ser cadastrada
+            'acordos'=> $this->ocorrencia_model->retrieve_tabela_comparacao($periodos, $plantas, $acordos)->result(),
+             );
+
+        $this->load->view('conteudo', $dados);
+
+    }
+
     public function retrieve_by_acordo() {
 
         $id = $this->uri->segment(3);
@@ -117,7 +203,15 @@ class Ocorrencia extends CI_Controller{
         $this->load->view('conteudo', $dados);
     }
 
-
+    public function comparacao(){
+        $dados = array(
+            'tela'=> 'comparacao',
+            'pasta'=> 'ocorrencia',// é a pasta que está dentro de "telas". existe uma pasta para cada tabela a ser cadastrada
+            'plantas'=> $this->ocorrencia_model->get_all_plantas_with_ocorrencias()->result(),
+             );
+        
+        $this->load->view('conteudo', $dados);
+    }
     
 
     public function  update(){   

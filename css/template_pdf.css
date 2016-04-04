@@ -42,7 +42,7 @@ body {
 table {
     line-height: 24px;
     margin: 30px auto;
-    text-align: center;
+    text-align: justify;
     border: none;
     width: 100%;
 }   
@@ -59,8 +59,14 @@ th {
     border: 1px solid #ddd; 
     height: 15px; 
     font-size: 15px;
+    padding: 5px;
 } 
 
 .glyphicon{
     color: #333;
+}
+
+table.table tr td:first-child {
+    background: #060;
+    text-align: center;
 }

@@ -580,6 +580,10 @@ form fieldset .set_assunto label{
     cursor: pointer;
 }
 
+.conceitos .panel-heading{
+    font-weight: bold;
+}
+
 .conceitos:hover{
     box-shadow: 0 1px 2px #b83039;
 }
@@ -595,7 +599,14 @@ fieldset legend{
 }
 
 
-#sortable1, #sortable2 {
+#plantas1, 
+#plantas2, 
+#periodos1, 
+#periodos2,  
+#acordos1, 
+#acordos2, 
+#sortable1, 
+#sortable2 {
     border: 1px solid #ccc;
     border-radius: 4px;
     width: 100%;
@@ -608,12 +619,21 @@ fieldset legend{
     float: left;
   }
 
-   #sortable2{
+   #sortable2,
+   #plantas2,
+   #periodos2,
+   #acordos2{
     display: block;
   }
 
-
-  #sortable1 li, #sortable2 li .name{
+  #plantas1 li,
+  #plantas2 li,
+  #periodos1 li,
+  #periodos2 li,
+  #acordos1 li,
+  #acordos2 li,
+  #sortable1 li, 
+  #sortable2 li .name{
     /*
     padding: 5px;
     font-size: 1.2em;
@@ -636,6 +656,12 @@ fieldset legend{
     
   }
 
+  #plantas1 li,
+  #plantas2 li,
+  #periodos1 li,
+  #periodos2 li,
+  #acordos1 li,
+  #acordos2 li,
   #sortable1 li{
     float: left;
     margin: 5px 5px 5px 0;
@@ -646,7 +672,8 @@ fieldset legend{
   #sortable2 li{
     display: block;
   }
-  #sortable1 li:hover, #sortable2 li:hover{
+  #sortable1 li:hover, 
+  #sortable2 li:hover{
     cursor: pointer;
   }
 
@@ -771,4 +798,8 @@ fieldset legend{
 
 .checkbox a{
     float: right;
+}
+
+.form a{
+    color: #23527c;
 }

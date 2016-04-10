@@ -102,7 +102,7 @@ class Pdfgerar extends CI_Controller{
     public function gerar_pdf($dados){
 
         // As PDF creation takes a bit of memory, we're saving the created file in /downloads/reports/
-        $filename = "teste " . date('Y_m_d_H_i_s');
+        $filename = "COE-Flexibilidade-" . date('Y_m_d_H_i_s');
         $pdfFilePath = FCPATH."/downloads/reports/$filename.pdf";
 
         
@@ -118,7 +118,7 @@ class Pdfgerar extends CI_Controller{
             date_default_timezone_set('America/Sao_Paulo');//define o timezone
             setlocale(LC_ALL, NULL);
             setlocale(LC_ALL, 'pt_BR');  
-            $pdf->SetFooter( base_url(). 'COE-Flexibilidade' .'|{PAGENO}|'. date("jS \of F Y h:i:s")); // Add a footer for good measure <img class="emoji" draggable="false" alt="" src="https://s.w.org/images/core/emoji/72x72/1f609.png">
+            $pdf->SetFooter('COE - Flexibilidade' .'|{PAGENO}|'. date("jS \of F Y h:i:s")); // Add a footer for good measure <img class="emoji" draggable="false" alt="" src="https://s.w.org/images/core/emoji/72x72/1f609.png">
             $pdf->WriteHTML($css, 1); // write the HTML into the PDF
             $pdf->WriteHTML($html); // write the HTML into the PDF
             $pdf->Output($pdfFilePath, 'F'); // save to file because we can

@@ -9,11 +9,13 @@ foreach ($interpretacao as $linha):
     if( strlen($linha->dsc_file)>0){
             $file = '<a target="_blank" href="'.base_url().'uploads/'. $linha->dsc_file .'" >Arquivo na Íntegra</a>';
     }else{
-        $file ="-";
+        $file ="<center>-</center>";
     }
 
+    $tratado = "<center>$linha->dsc_tratado</center>";
+    
     $this->table->add_row(
-    $linha->dsc_tratado, 
+    $tratado, 
     $linha->dsc_interpretacao, 
     $file 
     );
@@ -37,3 +39,18 @@ echo '</div>';
 ?>
 
 
+<script>
+// $(function(){
+    $(".table tbody tr").children().eq(0).addClass("center");
+
+     $('.table tbody tr').find('td').each(function () {
+        var test = $(this).text();
+
+        if (test == "-") {
+            $(this).css("text-align: center;");;
+        };
+    })
+
+// });
+
+</script>

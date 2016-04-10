@@ -4,6 +4,7 @@
 
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width">
+        <script type="text/javascript" src=<?php echo base_url("js/jquery-2.1.0.js" )?>></script>
         <link rel="stylesheet" type="text/css" href= <?php echo base_url("css/template_pdf.css" )?> />
     </head>
 

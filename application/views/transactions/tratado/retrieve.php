@@ -4,7 +4,7 @@ if($this->session->flashdata('excluirok')):
     echo '<p>'.$this->session->flashdata('excluirok').'</p>';
 endif;
 
-$this->table->set_heading('ID Planta', 'Nome', 'Editar');
+$this->table->set_heading('ID', 'Nome', 'Editar');
 
 
 foreach ($status as $linha):

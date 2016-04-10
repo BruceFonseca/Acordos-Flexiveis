@@ -27,6 +27,7 @@ class Ocorrencia extends CI_Controller{
         $flash_data = NULL;
 
         if(isset($_POST['data'])) {
+            
             $data = json_decode($_POST['data']);
             // pd($data->dados_acordo->id_assunto);
 
@@ -34,7 +35,6 @@ class Ocorrencia extends CI_Controller{
             $id_planta  = isset($data->dados_acordo->id_planta)      ? $data->dados_acordo->id_planta     : ''; 
             $id_periodo = isset($data->dados_acordo->id_periodo)     ? $data->dados_acordo->id_periodo    : '';
             $dsc_file   = isset($data->dados_acordo->dsc_file)       ? $data->dados_acordo->dsc_file      : '';
-            // $dsc_file = $data->dados_acordo->dsc_file;
 
             $dados = array(
                 'id_assunto' => $id_assunto,
@@ -73,10 +73,39 @@ class Ocorrencia extends CI_Controller{
             'tela'=> 'retrieve',
             'pasta'=> 'ocorrencia',// é a pasta que está dentro de "telas". existe uma pasta para cada tabela a ser cadastrada
             'status'=> $this->ocorrencia_model->get_all()->result(),
+            'dados_planta'=> $this->planta_model->get_all()->result_array(),
+            'dados_periodo'=> $this->periodo_model->get_all()->result_array(),
              );
         
         $this->load->view('conteudo', $dados);
     }
+
+    public function retrieve_condition() {
+
+        $id_planta= $this->input->post('id_planta');
+        $id_periodo= $this->input->post('id_periodo');
+        $dsc_assunto= $this->input->post('dsc_assunto');
+
+        $where = Array();
+
+        //seta as condições para query de acordo com o recebido de POST
+        if($id_planta != 0){$where[]   = " o.id_planta =".$id_planta;}
+        if($id_periodo != 0){$where[]      = " o.id_periodo = ".$id_periodo;}
+        if($dsc_assunto != " "){$where[] = " a.dsc_assunto LIKE '"."%".trim($dsc_assunto)."%'";}
+
+        $condicao = " WHERE " . implode( ' AND ',$where );
+
+        $dados = array(
+            'tela'=> 'retrieve_condition',
+            'pasta'=> 'ocorrencia',// é a pasta que está dentro de "telas". existe uma pasta para cada tabela a ser cadastrada
+            'status'=> $this->ocorrencia_model->get_all_with_condition($condicao)->result(),
+            'dados_planta'=> $this->planta_model->get_all()->result_array(),
+            'dados_periodo'=> $this->periodo_model->get_all()->result_array(),
+             );
+        
+        $this->load->view('conteudo', $dados);
+    }
+
 
     public function retrieve_by_planta() {
 
@@ -213,6 +242,11 @@ class Ocorrencia extends CI_Controller{
         $this->load->view('conteudo', $dados);
     }
     
+    public function delete(){
+        $id = $this->uri->segment(3);
+
+        $this->ocorrencia_model->do_delete($id);
+    }
 
     public function  update(){   
 
@@ -244,7 +278,7 @@ class Ocorrencia extends CI_Controller{
                 $this->ocorrencia_model->do_update($dados, $id);
                 $this->oc_ac_as_model->do_delete($id);
                 $this->oc_ac_as_model->do_insert($data, $id);
-                $flash_data = $this->ocorrencia_model->msg_validacao('cadastrado_sucesso');
+                $flash_data = $this->ocorrencia_model->msg_validacao('atualizado_sucesso');
             // }
         }
 

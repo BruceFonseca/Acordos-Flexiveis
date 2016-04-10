@@ -182,6 +182,8 @@ list-style: none !important;
 .form .apontamento-componente  label{
     /*width: 80px;*/
 }
+
+ 
 .form form input, .form form select, 
 .retrieve-ordem-producao form input, 
 .retrieve-ordem-producao .filtros select,
@@ -212,6 +214,56 @@ list-style: none !important;
     font-size: 14px;
     font-weight: normal;
     line-height: 20px;
+}
+
+.botoes_td{
+    max-width: 40;
+}
+
+.botoes_td button{
+    padding: 2px;
+}
+.botoes_td button span{
+    font-size: 22;
+}
+
+
+.filtar{
+    max-width: 800px;
+}
+.filtar .set_form input, .filtar .set_form select{
+    text-align: left;
+    padding-left: 10px;
+    margin-left: 20px;
+    margin-top: 10px;
+    display: inline-block;
+    margin-bottom: 0;
+    vertical-align: middle;
+    width: 220px;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    height: 30px;
+    line-height: 30px;
+    border-radius: 4px;
+    color: #555;
+    display: inline-block;
+    font-size: 14px;
+    line-height: 26px;
+    margin-bottom: 10px;
+    padding: 4px 6px;
+    vertical-align: middle;
+    font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+    font-size: 14px;
+    font-weight: normal;
+    line-height: 20px;
+}
+.filtar .set_form button{
+    padding-left: 10px;
+    margin-left: 20px;
+    margin-top: 10px;
+    display: inline-block;
+    margin-bottom: 0;
+    vertical-align: middle;
 }
 
 .retrieve-ordem-producao form input, 
@@ -578,6 +630,7 @@ form fieldset .set_assunto label{
     float: left;
     margin-left: 20px;
     cursor: pointer;
+    padding-bottom: 5px;
 }
 
 .conceitos .panel-heading{
@@ -801,5 +854,5 @@ fieldset legend{
 }
 
 .form a{
-    color: #23527c;
+    color: #333;
 }

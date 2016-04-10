@@ -19,7 +19,7 @@ class Ocorrencia_model extends CI_Model{
                         SET 
                         id_planta = ' .  $dados['id_planta'] . ", " .
                         'id_assunto = ' .  $dados['id_assunto'] . ", " .
-                        'id_assunto = ' .  $dados['id_assunto'] . ", " .
+                        'id_periodo = ' .  $dados['id_periodo'] . ", " .
                         'dsc_file = "' . $dados['dsc_file'] .' "'  .
                     ' WHERE id_ocorrencia = ' . $condicao;
                     // pd($sql);
@@ -47,6 +47,32 @@ class Ocorrencia_model extends CI_Model{
                 ORDER BY p.dsc_planta, a.dsc_assunto, pe.dsc_periodo
             ';     
          
+        return $this->db->query($query);
+    }
+    public function get_all_with_condition($condicao = NULL){
+
+          $query = '
+                SELECT 
+                o.id_ocorrencia as id_ocorrencia,
+                o.id_assunto as id_assunto,
+                a.dsc_assunto as dsc_assunto,
+                o.id_planta as id_planta,
+                p.dsc_planta as dsc_planta,
+                o.id_periodo as id_periodo,
+                pe.dsc_periodo as dsc_periodo,
+                o.dsc_resumo as dsc_resumo,
+                o.dsc_file as dsc_file
+                FROM ocorrencia o
+                INNER JOIN assunto a ON o.id_assunto = a.id_assunto
+                INNER JOIN planta p ON o.id_planta = p.id_planta
+                INNER JOIN periodo pe ON o.id_periodo = pe.id_periodo ';   
+
+        $order = ' ORDER BY p.dsc_planta, a.dsc_assunto, pe.dsc_periodo ';
+
+        if($condicao != NULL){
+            $query = $query . $condicao  . $order;
+        }
+
         return $this->db->query($query);
     }
     
@@ -340,12 +366,27 @@ class Ocorrencia_model extends CI_Model{
                         <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
                         <span class="sr-only">Error:</span>
                         Interpretação cadastrada com sucesso!!!</div>';
+        }elseif ($msg == 'atualizado_sucesso') {
+            $return = '<div class="alert alert-success" role="alert">
+                        <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+                        <span class="sr-only">Error:</span>
+                        Interpretação atualizada com sucesso!!!</div>';
         }
 
         return $return;
     }
 
+    public function do_delete($id){
 
+        //apaga dados de oc_cs_ocorrencias
+        $this->db->delete('oc_ac_as', array('id_ocorrencia' => $id)); 
+
+        //apaga dados de ocorrencia
+        $this->db->delete('ocorrencia', array('id_ocorrencia' => $id)); 
+
+        $this->session->set_flashdata('cadastrook','Cadastro efetuado com sucesso');
+        redirect('ocorrencia/retrieve');
+    }
    
     
 

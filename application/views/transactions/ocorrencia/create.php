@@ -62,7 +62,7 @@ echo '</div>';
 
 echo "<a href='#' class='atach-file'> Anexar arquivo " .'<span class="glyphicon glyphicon-paperclip" aria-hidden="true">'."</span></a>";
 
-echo form_input(array('name'=>'dsc_file file', 'class'=>'dsc_file'),  '');
+echo form_input(array('name'=>'dsc_file', 'class'=>'dsc_file'),  '');
 
 echo '
  	<div class="set_assunto">

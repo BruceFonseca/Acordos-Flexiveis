@@ -82,9 +82,9 @@ class Ocorrencia extends CI_Controller{
 
     public function retrieve_condition() {
 
-        $id_planta= $this->input->post('id_planta');
-        $id_periodo= $this->input->post('id_periodo');
-        $dsc_assunto= $this->input->post('dsc_assunto');
+        $id_planta= trim($this->input->post('id_planta'));
+        $id_periodo= trim($this->input->post('id_periodo'));
+        $dsc_assunto= trim($this->input->post('dsc_assunto'));
 
         $where = Array();
 
@@ -99,6 +99,9 @@ class Ocorrencia extends CI_Controller{
             'tela'=> 'retrieve_condition',
             'pasta'=> 'ocorrencia',// é a pasta que está dentro de "telas". existe uma pasta para cada tabela a ser cadastrada
             'status'=> $this->ocorrencia_model->get_all_with_condition($condicao)->result(),
+            'std_planta'=>$id_planta,
+            'std_periodo'=>$id_periodo,
+            'std_assunto'=>$dsc_assunto,
             'dados_planta'=> $this->planta_model->get_all()->result_array(),
             'dados_periodo'=> $this->periodo_model->get_all()->result_array(),
              );

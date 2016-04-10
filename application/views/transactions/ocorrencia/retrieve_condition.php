@@ -1,19 +1,16 @@
 <?php
 
-for($i=0; $i < count($dados_planta); $i++){ 
-    $id = $dados_planta[$i]['id_planta'];
-    $plantas[$id] = $dados_planta[$i]['dsc_planta'];
+foreach ($dados_periodo as $key => $value) {
+    $periodos[$value['id_periodo']] = $value['dsc_periodo'];
 }
 
-for($i=0; $i < count($dados_periodo); $i++){ 
-    $id = $dados_periodo[$i]['id_periodo'];
-    $periodos[$id] = $dados_periodo[$i]['dsc_periodo'];
+foreach ($dados_planta as $key => $value) {
+    $plantas[$value['id_planta']] = $value['dsc_planta'];
 }
-
 
 // insere dentro do array o item "", na primeira posição do array
-array_unshift($plantas, '');
-array_unshift($periodos, '');
+$plantas[0]= '';
+$periodos[0]='';
 
 $this->table->set_heading('#ID', 'Planta', 'Assunto',  'Período', 'Ações');
 
@@ -47,16 +44,16 @@ echo '<div class="filtar">';
 echo '<div class="set_form">';
     echo '<div class="set_com">';
         echo form_label('Planta')."<br>";
-        echo form_dropdown('id_planta',  $plantas);
+        echo form_dropdown('id_planta',  $plantas, $std_planta);
     echo '</div>';
     echo '<div class="set_com">';
         echo form_label('Acordo')."<br>";
-        echo form_input('dsc_assunto');
+        echo form_input('dsc_assunto', $std_assunto);
     echo '</div>';
 
     echo '<div class="set_com">';
         echo form_label('Período')."<br>";
-        echo form_dropdown('id_periodo',  $periodos);
+        echo form_dropdown('id_periodo',  $periodos, $std_periodo);
     echo '</div>';
     echo '<div class="set_com">';
     echo form_label(' ')."<br>";

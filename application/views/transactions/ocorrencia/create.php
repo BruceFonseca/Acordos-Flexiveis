@@ -31,7 +31,7 @@ if($dados_periodo){
 	$periodos = NULL;
 }
 
-
+// pd($plantas);
 
 echo '<form method="post" action="" class="ajax_form_ocorrencia">';
 

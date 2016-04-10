@@ -12,10 +12,10 @@ class pdf {
     {
         include_once APPPATH.'/third_party/mpdf60/mpdf.php';
          
-        if ($params == NULL)
-        {
-            $param = '"en-GB-x","A4","","",10,10,10,10,6,3';         
-        }
+        // if ($params == NULL)
+        // {
+        //     $param = '"utf-8","A4-L","","",0,10,10,10,6,3';         
+        // }
          
         return new mPDF($param);
     }

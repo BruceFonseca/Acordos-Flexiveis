@@ -77,7 +77,7 @@ $errorlevel=error_reporting($errorlevel & ~E_NOTICE);
 //error_reporting(E_ALL);
 
 if(function_exists("date_default_timezone_set")) {
-	if (ini_get("date.timezone")=="") { date_default_timezone_set("Europe/London"); }
+	if (ini_get("date.timezone")=="") { date_default_timezone_set("America/Sao_Paulo"); }
 }
 if (!function_exists("mb_strlen")) { die("Error - mPDF requires mb_string functions. Ensure that PHP is compiled with php_mbstring.dll enabled."); }
 
@@ -810,7 +810,7 @@ var $innerblocktags;
 // **********************************
 // **********************************
 
-function mPDF($mode='',$format='A4',$default_font_size=0,$default_font='',$mgl=15,$mgr=15,$mgt=16,$mgb=16,$mgh=9,$mgf=9, $orientation='P') {
+function mPDF($mode='',$format='A4-L',$default_font_size=0,$default_font='',$mgl=10,$mgr=10,$mgt=5,$mgb=10,$mgh=9,$mgf=9, $orientation='P') {
 
 /*-- BACKGROUNDS --*/
 		if (!class_exists('grad', false)) { include(_MPDF_PATH.'classes/grad.php'); }

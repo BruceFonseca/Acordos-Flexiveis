@@ -217,7 +217,7 @@ list-style: none !important;
 }
 
 .botoes_td{
-    max-width: 40;
+    max-width: 100px;
 }
 
 .botoes_td button{
@@ -585,12 +585,15 @@ preto               102 102 102   #666666*/
     display: inline;
 }
 
-.set_form .set_com label, .set_form .set_com select{
+.set_form .set_com label, .set_form .set_com select, .set_form .set_com input{
     text-align: left;
      margin-left: 20px;
      margin-bottom: 0;
      margin-top: 0;
     bottom: 0;
+}
+.set_form .set_com button{
+    margin-top: 20px;
 }
 
 .set_assunto{

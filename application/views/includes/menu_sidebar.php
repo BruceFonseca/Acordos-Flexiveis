@@ -12,23 +12,9 @@ foreach ($menu_planta->result() as $menu): ?>
 	    <a href="#" class="link-plantas" <?php echo 'ctr = "ocorrencia/retrieve_by_planta/'. $menu->id_planta. '"' ?>><?php echo ucwords($menu->dsc_planta) ?></a>
 	</li>
 <?php endforeach; ?>
-
-
-<!-- cria o menu dinamico do usuário de acordo com a role -->
-<?php foreach ($menu_list->result() as $menu): ?>
-<li class="menu-admin">
-    <a href="#"><?php echo ucwords($menu->menu) ?><span class="caret"></span></a>
-    <ul class="dropdown-menu-admin">
-        <?php foreach ($submenu_list->result() as $submenu): ?>
-            <?php if($menu->id_menu==$submenu->id_menu):?>
-                <li>
-                    <a href="#"  ctr= '<?php echo $submenu->controller ?>'><?php echo ucwords($submenu->submenu) ?></a>
-                </li>
-            <?php endif;?>
-        <?php endforeach; ?>
-    </ul>
-</li>
-<?php endforeach; ?>
+	<li class="list-plantas">
+		<a ctr="ocorrencia/comparacao" href="#">Comparações</a>
+	</li>
 
 </ul>
 

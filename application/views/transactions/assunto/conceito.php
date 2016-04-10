@@ -6,8 +6,11 @@ if($this->session->flashdata('excluirok')):
 endif;
 
 echo '<form method="post" action="" class="ajax_form">';
-
-echo form_fieldset('...');
+    echo'    <div class="header-conceito">
+            <img id="logo-login" src="'. base_url("img/sistema/logotipo/logo.png") . '" alt=""/>
+            <h1>COE - Flexibilidade</h1>
+        </div>';
+echo form_fieldset();
 
 echo  validation_errors('<div class="alert alert-danger" role="alert">
   <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>

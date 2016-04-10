@@ -859,3 +859,21 @@ fieldset legend{
 .form a{
     color: #333;
 }
+
+.header-conceito{
+    display: table;
+    padding-top: 10px;
+    margin: 0 auto;
+}
+.header-conceito img{
+    width: 80px;
+    margin-bottom: 30px;
+}
+.header-conceito h1{
+    margin: 0;
+    margin-left: 20px;
+}
+.header-conceito img, .header-conceito h1{
+    display: inline;
+    line-height: 40px;
+}

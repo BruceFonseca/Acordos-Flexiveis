@@ -99,7 +99,7 @@ echo '</ul>';
 
 	</div>';
 
-echo form_button(array('name'=>'cadastrar', 'class'=>'submit', 'id'=>'submit','content'=>'Salvar', 'type'=>'submit'))."<br>";
+echo form_button(array('name'=>'cadastrar', 'class'=>'submit', 'content'=>'Salvar', 'type'=>'submit'))."<br>";
 
 echo form_fieldset_close();
 echo form_close();
@@ -112,6 +112,12 @@ echo form_close();
 	
 	$(".submit").click(function(event){
 		// event.preventDefault();
+        var id_planta  = $(this).closest('.conteudo').find('select[name="id_planta"]').val();
+    	var id_periodo = $(this).closest('.conteudo').find('select[name="id_periodo"]').val();
+    	var id_assunto = $(this).closest('.conteudo').find('select[name="id_assunto"]').val();
+    	var dsc_file   = $(this).closest('.conteudo').find("input[name='dsc_file']").val();
+    	var thisTab    = $(this).closest('.conteudo').attr('numtab'); //numero da tab atual
+		
 		var id = $('.set_form input[name="id_ocorrencia"]').val();
 		var dadosAssuntos = {};
 		
@@ -124,11 +130,6 @@ echo form_close();
                 interpretacao  : self.find('textarea.dsc_interpretacao').val()
             };            
         });
-
-		var id_assunto = $("select[name='id_assunto']").val();
-		var id_planta  = $("select[name='id_planta']").val();
-		var id_periodo = $("select[name='id_periodo']").val();
-		var dsc_file   = $("input[name='dsc_file']").val();
 
 		dadosAssuntos['dados_acordo'] = {            
             id_assunto  : id_assunto,
@@ -149,10 +150,9 @@ echo form_close();
 				data: 'data=' + dados,
 				success: function( data )
 				{
-					$('div[numtab="'+ numtab +'"] div').remove();
-					$('div[numtab="'+ numtab +'"]').append(data);
+					$('div[numtab="'+ thisTab +'"] div').remove();
+					$('div[numtab="'+ thisTab +'"]').append(data);
 					$('body,html').animate({scrollTop:0},600);
-					update_menu_sidebar();
 				}
 			});
 
@@ -163,7 +163,7 @@ echo form_close();
 	$('.glyphicon.glyphicon-paperclip').on('click',function(){
 
 		var id = $(this).closest("li").attr("id");
-
+		
 		var controller = 'ocorrencia/carregar/'+ id;
 
 	     $.ajax({

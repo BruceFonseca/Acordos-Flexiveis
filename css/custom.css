@@ -661,8 +661,8 @@ fieldset legend{
 #periodos2,  
 #acordos1, 
 #acordos2, 
-#sortable1, 
-#sortable2 {
+.sortable1, 
+.sortable2 {
     border: 1px solid #ccc;
     border-radius: 4px;
     width: 100%;
@@ -675,7 +675,7 @@ fieldset legend{
     float: left;
   }
 
-   #sortable2,
+   .sortable2,
    #plantas2,
    #periodos2,
    #acordos2{
@@ -688,8 +688,8 @@ fieldset legend{
   #periodos2 li,
   #acordos1 li,
   #acordos2 li,
-  #sortable1 li, 
-  #sortable2 li .name{
+  .sortable1 li, 
+  .sortable2 li .name{
     /*
     padding: 5px;
     font-size: 1.2em;
@@ -718,33 +718,33 @@ fieldset legend{
   #periodos2 li,
   #acordos1 li,
   #acordos2 li,
-  #sortable1 li{
+  .sortable1 li{
     float: left;
     margin: 5px 5px 5px 0;
     padding: 0.2em 0.6em 0.3em;
     /*display: inline;*/
   }
 
-  #sortable2 li{
+ .sortable2 li{
     display: block;
   }
-  #sortable1 li:hover, 
-  #sortable2 li:hover{
+  .sortable1 li:hover, 
+  .sortable2 li:hover{
     cursor: pointer;
   }
 
-#sortable1 li .id, 
-#sortable1 li .dsc_interpretacao, 
-#sortable1 li input, 
-#sortable1 li .glyphicon-paperclip, 
-#sortable1 li .file{
+.sortable1 li .id, 
+.sortable1 li .dsc_interpretacao, 
+.sortable1 li input, 
+.sortable1 li .glyphicon-paperclip, 
+.sortable1 li .file{
     display: none;
 }
 
-#sortable1 li span.dsc_interpretacao, 
-#sortable2 li span.dsc_interpretacao, 
-#sortable1 li .id, 
-#sortable2 li .id{
+.sortable1 li span.dsc_interpretacao, 
+.sortable2 li span.dsc_interpretacao, 
+.sortable1 li .id, 
+.sortable2 li .id{
     display: none;
 }
 

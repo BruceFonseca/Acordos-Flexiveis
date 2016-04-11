@@ -57,7 +57,7 @@ echo '
  	<div class="set_assunto">
 	<label>Assuntos Disponíveis </label> <a href="#"> Adicionar assuntos <span class="glyphicon glyphicon-plus" aria-hidden="true"></span></a>
 	<br>
-	<ul id="sortable1" class="connectedSortable list-group">';
+	<ul class="sortable1 connectedSortable list-group">';
 
   		for($i=0; $i < count($assuntos_disp); $i++){ 
 		    $id = $assuntos_disp[$i]['id_tratado'];
@@ -76,7 +76,7 @@ echo '</ul>';
  
  
  	echo '<label>Assuntos Utilizados</label>
-	<ul id="sortable2" class="connectedSortable list-group">';
+	<ul class="sortable2 connectedSortable list-group">';
 	  
 	  for($i=0; $i < count($assuntos_util); $i++){ 
 		    $id = $assuntos_util[$i]['id_tratado'];
@@ -117,11 +117,11 @@ echo form_close();
     	var id_assunto = $(this).closest('.conteudo').find('select[name="id_assunto"]').val();
     	var dsc_file   = $(this).closest('.conteudo').find("input[name='dsc_file']").val();
     	var thisTab    = $(this).closest('.conteudo').attr('numtab'); //numero da tab atual
-		
+
 		var id = $('.set_form input[name="id_ocorrencia"]').val();
 		var dadosAssuntos = {};
 		
-		$("#sortable2 li").each(function(){
+		$('div[numtab="'+ thisTab +'"] div .sortable2 li').each(function(){
             var self = $(this);
             	dadosAssuntos[self.attr('id')] = {            
                 id : self.find('.id').text(),
@@ -163,7 +163,7 @@ echo form_close();
 	$('.glyphicon.glyphicon-paperclip').on('click',function(){
 
 		var id = $(this).closest("li").attr("id");
-		
+
 		var controller = 'ocorrencia/carregar/'+ id;
 
 	     $.ajax({
@@ -217,7 +217,7 @@ echo form_close();
 	});
 
 	$(function() {
-	    $( "#sortable1, #sortable2" ).sortable(
+	    $( ".sortable1, .sortable2" ).sortable(
 	    {
 	      	connectWith: ".connectedSortable",
 	      	start: function(event, ui) {

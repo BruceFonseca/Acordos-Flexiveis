@@ -88,10 +88,12 @@ $(function(){
 
 		// alert('entriou' + controller + desc + numTran);
 		var numTran = numTab();
-		
+
 		if (controller.substring(0, 18) == 'ocorrencia/update/') {
-			fecha_aba_mesmo_ctr_update(controller)
-		};
+			fecha_aba_ocorrencia_update(controller);
+		}else if(controller.substring(0, 15) == 'assunto/update/'){
+			fecha_aba_assunto_update(controller);
+		}
 
 		$('.nav.nav-tabs li').removeClass('active');
 		var $addAba = '<li class="active"><a href="#" numtab="'+ numTran +'" id=" '+ desc  +'" crt="'+ controller +'">'+ desc  +'&nbsp<span>x</span>&nbsp</a></li>';
@@ -101,31 +103,47 @@ $(function(){
 		exibeConteudo(numTran); //exibe conteudo apenas da aba selecionada
 	}
 
-	function fecha_aba_mesmo_ctr_update(controller){
+	function fecha_aba_ocorrencia_update(controller){
 		var sub_ctr = controller.substring(0, 18);
-		// alert(sub_ctr);
 
 		$( "li a" ).each(function( index ) {
 		
 		if($(this).attr('crt')){
 			var sub_att = $(this).attr('crt').substring(0, 18);
-			// alert($(this).attr('crt'));
 			
 			if( sub_att == sub_ctr){
 				var numtab = $(this).attr('numtab');
-				// alert(numtab);
 				$('a[numtab="'+ numtab +'"]').parent().remove();//remove a aba do numtab selecionado
 				$('div[numtab="'+ numtab +'"]').remove(); //remove a div que contem o numtab selecionado
 
 			}
-
-		// if (sub_ctr == sub_att) {
 
 		};
 		  
 		});
 
 	}
+
+	function fecha_aba_assunto_update(controller){
+		var sub_ctr = controller.substring(0, 15);
+
+		$( "li a" ).each(function( index ) {
+		
+		if($(this).attr('crt')){
+			var sub_att = $(this).attr('crt').substring(0, 15);
+			if( sub_att == sub_ctr){
+				var numtab = $(this).attr('numtab');
+				$('a[numtab="'+ numtab +'"]').parent().remove();//remove a aba do numtab selecionado
+				$('div[numtab="'+ numtab +'"]').remove(); //remove a div que contem o numtab selecionado
+
+			}
+
+		};
+		  
+		});
+
+	}
+
 
 
 	// ativa a aba de acordo com o numTran

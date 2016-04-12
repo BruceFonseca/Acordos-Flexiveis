@@ -25,7 +25,7 @@
 		echo '</div>';
 
 		echo form_label('Conceito do Acordo')."<br>";
-		echo form_textarea(array('name'=>'dsc_conceito', 'class'=>'form-control', 'id'=>"txtEditor"),  set_value('dsc_conceito',$query->dsc_conceito))."<br>";
+		echo form_textarea(array('name'=>'dsc_conceito', 'class'=>'form-control txtEditor', 'id'=>""),  set_value('dsc_conceito',$query->dsc_conceito))."<br>";
 
 		echo "<span><a href='#' class='atach-file'>Anexar arquivo </a> </span><span class='glyphicon glyphicon-trash' aria-hidden='true'></span>";
 
@@ -89,19 +89,10 @@
 	    });
 
 	$(document).ready( function() {
-		$("#txtEditor").Editor();   
+		$(".txtEditor").Editor();   
 
 		var txt = decodeURIComponent($('.form-control').val()); 
 		$('.Editor-editor').append(txt);
-
-	// 	$('.Editor-editor').keyup( function(){
-
-	// 		var txt = $('.Editor-editor').html();
-	// 		$('textarea.form-control').text('');
-	// 		$('.form-control').append(txt);
-
-	// 	// alert($(this).text());
-	// });
 
 		$('.Editor-editor').keyup( function(){
 			moveToTextArea();

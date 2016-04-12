@@ -21,7 +21,7 @@ endforeach;
 echo '<div class="buttons-controle">';
 echo 
         '
-        <a class="btn-print" target="_blank" href= "'. base_url().'pdfgerar/pdf_ocorrencia/'. $interpretacao[0]->id_ocorrencia . '">
+        <a class="btn-print" data-toggle="tooltip" data-placement="top" data-original-title="Imprimir" target="_blank" href= "'. base_url().'pdfgerar/pdf_ocorrencia/'. $interpretacao[0]->id_ocorrencia . '">
             <button type="button" class="btn btn-default" id="">
                 <span class="glyphicon glyphicon-print" aria-hidden="true"></span>
             </button>
@@ -30,7 +30,7 @@ echo
     
     echo 
         '
-        <a class="btn-download" target="_blank" href= "'. base_url().'pdfgerar/pdf_ocorrencia/'. $interpretacao[0]->id_ocorrencia . '">
+        <a class="btn-download" data-toggle="tooltip" data-placement="top" data-original-title="Salvar em PDF" target="_blank" href= "'. base_url().'pdfgerar/pdf_ocorrencia/'. $interpretacao[0]->id_ocorrencia . '">
             <button type="button" class="btn btn-default" id="">
                 <span class="glyphicon glyphicon-floppy-save" aria-hidden="true"></span>
             </button>
@@ -55,6 +55,9 @@ echo '</div>';
 ?>
 
 <script>
+$(function () {
+        $('[data-toggle="tooltip"]').tooltip();
+});
 
     $('.btn-print').on('click', function(){
         var controller = $('.btn-print').attr('ctr');

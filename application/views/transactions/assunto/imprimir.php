@@ -6,7 +6,7 @@
     if ($status->dsc_file) {
         echo 
         '
-        <a target="_blank" href= "'. base_url().'uploads/'. $status->dsc_file . '">
+        <a target="_blank"  data-toggle="tooltip" data-placement="top" data-original-title="Ver anexo"  href= "'. base_url().'uploads/'. $status->dsc_file . '">
         
             <button type="button" class="btn btn-default" id="">
                 <span class="glyphicon glyphicon-paperclip" aria-hidden="true"></span>
@@ -20,7 +20,7 @@
     
     echo 
         '
-        <a class="btn-print" target="_blank" href= "'. base_url().'pdfgerar/pdf_conceito/'. $status->id_assunto . '">
+        <a class="btn-print"  data-toggle="tooltip" data-placement="top" data-original-title="Imprimir"  target="_blank" href= "'. base_url().'pdfgerar/pdf_conceito/'. $status->id_assunto . '">
             <button type="button" class="btn btn-default" id="">
                 <span class="glyphicon glyphicon-print" aria-hidden="true"></span>
             </button>
@@ -29,7 +29,7 @@
     
     echo 
         '
-        <a class="btn-download" target="_blank" href= "'. base_url().'pdfgerar/pdf_conceito/'. $status->id_assunto . '">
+        <a class="btn-download" data-toggle="tooltip" data-placement="top" data-original-title="Salvar em PDF"  target="_blank" href= "'. base_url().'pdfgerar/pdf_conceito/'. $status->id_assunto . '">
             <button type="button" class="btn btn-default" id="">
                 <span class="glyphicon glyphicon-floppy-save" aria-hidden="true"></span>
             </button>
@@ -37,7 +37,7 @@
         ';  
     echo 
         '
-        <a href= "#" class="retrieve_by_acordo" ctr="ocorrencia/retrieve_by_acordo/'. $status->id_assunto .'">
+        <a href= "#" data-toggle="tooltip" data-placement="top" data-original-title="Plantas com este acordo"  class="retrieve_by_acordo" ctr="ocorrencia/retrieve_by_acordo/'. $status->id_assunto .'">
             <button type="button" class="btn btn-default" id="">
                 <span class="glyphicon glyphicon-file" aria-hidden="true"></span>
             </button>
@@ -82,6 +82,9 @@ echo form_close();
 
 <!-- o script jquery abaixo é carregado no formulário no momento que o formulário é criado -->
 <script>                    
+$(function () {
+        $('[data-toggle="tooltip"]').tooltip();
+    });
 
 
      $('.retrieve_by_acordo').on('click',function(){

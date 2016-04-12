@@ -3,7 +3,7 @@
 echo '<div class="buttons-controle">';
 echo 
         '
-        <a class="btn-print" target="_blank" href= "'. base_url().'pdfgerar/pdf_acordos_planta/'. $interpretacao[0]->id_planta . '">
+        <a class="btn-print" data-toggle="tooltip" data-placement="top" data-original-title="Imprimir" target="_blank" href= "'. base_url().'pdfgerar/pdf_acordos_planta/'. $interpretacao[0]->id_planta . '">
             <button type="button" class="btn btn-default" id="">
                 <span class="glyphicon glyphicon-print" aria-hidden="true"></span>
             </button>
@@ -12,7 +12,7 @@ echo
     
     echo 
         '
-        <a class="btn-download" target="_blank" href= "'. base_url().'pdfgerar/pdf_acordos_planta/'. $interpretacao[0]->id_planta . '">
+        <a class="btn-download" data-toggle="tooltip" data-placement="top" data-original-title="Salvar em PDF" target="_blank" href= "'. base_url().'pdfgerar/pdf_acordos_planta/'. $interpretacao[0]->id_planta . '">
             <button type="button" class="btn btn-default" id="">
                 <span class="glyphicon glyphicon-floppy-save" aria-hidden="true"></span>
             </button>
@@ -65,6 +65,12 @@ echo '</div>';
 
 <!-- o script jquery abaixo é carregado no formulário no momento que o formulário é criado -->
 <script>
+$(function () {
+        $('[data-toggle="tooltip"]').tooltip();
+    });
+
+ 
+
 $('.retrieve-table tr td a span').click(function(){
 
 	//encontra o id do usuário que será atualizado

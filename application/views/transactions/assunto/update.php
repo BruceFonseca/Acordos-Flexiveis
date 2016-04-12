@@ -3,7 +3,7 @@
 
 	<?php
 
-		echo '<form method="post" action="" class="ajax_form">';
+		echo '<form method="post" action="" class="ajax_form_update">';
 
 		echo form_fieldset('Atualizar Assunto');
 			
@@ -25,7 +25,7 @@
 		echo '</div>';
 
 		echo form_label('Conceito do Acordo')."<br>";
-		echo form_textarea(array('name'=>'dsc_conceito', 'class'=>'form-control txtEditor', 'id'=>""),  set_value('dsc_conceito',$query->dsc_conceito))."<br>";
+		echo form_textarea(array('name'=>'dsc_conceito', 'class'=>'form-control-update txtEditor', 'id'=>""),  set_value('dsc_conceito',$query->dsc_conceito))."<br>";
 
 		echo "<span><a href='#' class='atach-file'>Anexar arquivo </a> </span><span class='glyphicon glyphicon-trash' aria-hidden='true'></span>";
 
@@ -46,11 +46,10 @@
 	$(".submit").click(function(){
 
 		var id_assunto = $(this).closest('fieldset').find('input.id-assunto').val();
+		var thisTab    = $(this).closest('.conteudo').attr('numtab'); //numero da tab atual
 
-
-		$('.ajax_form').submit(function(){
+		$('.ajax_form_update').submit(function(){
 				
-			// var dados = $( this ).serialize();
 			var dados = $( this ).serialize();
 
 			$.ajax({
@@ -59,8 +58,8 @@
 				data: dados,
 				success: function( data )
 				{
-					$('div[numtab="'+ numTran +'"] div').remove();
-					$('div[numtab="'+ numTran +'"]').append(data);
+					$('div[numtab="'+ thisTab +'"] div').remove();
+					$('div[numtab="'+ thisTab +'"]').append(data);
 					$('body,html').animate({scrollTop:0},600);
 					update_container_conceito();
 				}
@@ -91,8 +90,11 @@
 	$(document).ready( function() {
 		$(".txtEditor").Editor();   
 
-		var txt = decodeURIComponent($('.form-control').val()); 
-		$('.Editor-editor').append(txt);
+		var txt = decodeURIComponent($('.form-control-update').val());
+		var thisTab = $(".txtEditor").closest('.conteudo').attr('numtab'); //numero da tab atual
+		// alert(thisTab);
+		$('div[numtab="'+ thisTab +'"] .Editor-editor').append(txt);
+		// $('.Editor-editor').append(txt);
 
 		$('.Editor-editor').keyup( function(){
 			moveToTextArea();
@@ -111,8 +113,8 @@
 
 	function moveToTextArea(){
 		var txt = encodeURIComponent($('.Editor-editor').html());
-		$('textarea.form-control').text('');
-		$('.form-control').append(txt);
+		$('textarea.form-control-update').text('');
+		$('.form-control-update').append(txt);
 	}
         
 </script>

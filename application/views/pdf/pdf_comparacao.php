@@ -16,6 +16,9 @@ foreach ($acordos as $indice => $valor){
   }
 }
 
+// ordena oarray
+asort($plan_per);
+
 //CRIA OS ARRYS COM CADA TRATADO... EX: FÉRIAS...
 foreach ($acordos as $indice => $valor) {
 

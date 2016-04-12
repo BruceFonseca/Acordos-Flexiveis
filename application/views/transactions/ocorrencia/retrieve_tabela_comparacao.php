@@ -15,6 +15,9 @@ foreach ($acordos as $indice => $valor){
 	}
 }
 
+// ordena oarray
+asort($plan_per);
+
 //CRIA OS ARRYS COM CADA TRATADO... EX: FÉRIAS...
 foreach ($acordos as $indice => $valor) {
 
@@ -69,7 +72,7 @@ $new_list = $this->table->make_columns($linha);
 echo '<div class="buttons-controle">';
 echo 
         '
-        <a class="btn-print" target="_blank" href= "'. base_url().'pdfgerar/pdf_comparacao/'. $plantas. '/'.$periodos.'/'.$tratados. '">
+        <a class="btn-print"  data-toggle="tooltip" data-placement="top" data-original-title="Imprimir"  target="_blank" href= "'. base_url().'pdfgerar/pdf_comparacao/'. $plantas. '/'.$periodos.'/'.$tratados. '">
             <button type="button" class="btn btn-default" id="">
                 <span class="glyphicon glyphicon-print" aria-hidden="true"></span>
             </button>
@@ -78,7 +81,7 @@ echo
     
     echo 
         '
-        <a class="btn-download" target="_blank" href= "'. base_url().'pdfgerar/pdf_comparacao/'. $plantas. '/'.$periodos.'/'.$tratados. '">
+        <a class="btn-download" data-toggle="tooltip" data-placement="top" data-original-title="Salvar em PDF"  target="_blank" href= "'. base_url().'pdfgerar/pdf_comparacao/'. $plantas. '/'.$periodos.'/'.$tratados. '">
             <button type="button" class="btn btn-default" id="">
                 <span class="glyphicon glyphicon-floppy-save" aria-hidden="true"></span>
             </button>
@@ -87,49 +90,14 @@ echo
 echo '</div>';
 echo '<div class="retrieve-table">';
 
-
-// $dados = array(
-//               'plantas'  => "'" . $plantas . "'",
-//               'periodos' => "'" .$periodos . "'",
-//               'tratados'   => "'" .$tratados . "'"
-//             );
-// echo form_hidden($dados);
-
     echo '<h2> Comparação entre Plantas, Períodos e Acordos</h2>';	
 		echo $this->table->generate($new_list);
 	echo '</div>';
 ?>
 	
 <script>
+$(function () {
+        $('[data-toggle="tooltip"]').tooltip();
+    });
 
-// var dados = {};
-// dados['dados'] = {            
-//         id_planta   : $('[name="plantas"]').val(),
-//         id_periodo  : $('[name="periodos"]').val(),
-//         id_acordo   : $('[name="tratados"]').val()
-//     };
-
-//     alert($('[name="plantas"]').val());
-
-// $('.btn-print').on('click', function(){
-//         var controller = $('.btn-print').attr('ctr');
-//          printPdf(controller);
-//     });
-
-//     $('.btn-download').on('click', function(){
-//         var controller = $('.btn-print').attr('ctr');
-//         printPdf(controller);
-//     });
-
-//       function printPdf(url) {
-          
-//           $.ajax({
-//               url: url,
-//               success: function(data) {
-//                   var blob=new Blob([data]);
-//                   var link=data;
-//                   link.click();
-//               }
-//           });
-//       }
 </script>

@@ -6,7 +6,7 @@ class Usuario_model extends CI_Model{
         
         if ($dados != NULL):
             $this->db->insert('users',$dados);
-            $this->session->set_flashdata('cadastrook','Cadastro efetuado com sucesso');
+            $this->session->set_flashdata('cadastrook','Cadastro efetuado com sucesso. <br>Um e-mail contendo informações de acesso foi enviado para o usuário.');
             redirect('usuario/create');
         endif;
             
@@ -75,7 +75,7 @@ class Usuario_model extends CI_Model{
         $this->db->query($query);
     }
 
-    public function send_email($email, $senha){
+    public function send_email($email, $senha, $tpass = NULL, $username = NULL, $name = NULL){
 
         $this->load->library('email');
 
@@ -89,13 +89,20 @@ class Usuario_model extends CI_Model{
             $config['mailtype'] = 'html';
 
             $this->email->initialize($config);
-
-            $this->email->from('contato@bflabs.com.br', 'Lembrar Senha | COE - Flexibilidade');
-            // $this->email->to('antonio.aires.jr@gmail.com'); 
+            
+            if ($tpass == 'new_user') {
+                $this->email->from('contato@bflabs.com.br', 'Novo Usuário | COE - Flexibilidade');
+                $this->email->message("Parabéns $name, 
+                                        <br><br>seu usuário COE - Flexibilidade foi criado com sucesso!!!. 
+                                        <br> Seu ID de acesso é: $username <br> Sua nova senha é: $senha <br> <br>
+                                        Favor alterá-la por questões de segurança<br><br>
+                                        <a href='http://bflabs.com.br/cnhind/'' title=>Clique aqui para acessar COE - Flexibilidade</a>");
+            }else{
+                $this->email->from('contato@bflabs.com.br', 'Lembrar Senha | COE - Flexibilidade');
+                $this->email->message("Sua nova senha é: $senha <br> Favor alterá-la por questões de segurança");
+            }
             $this->email->to($email); 
-            // $this->email->cc('lennon.bruce@gmail.com');
             $this->email->subject('Nova mensagem enviada do site');
-            $this->email->message("Sua nova senha é: $senha <br> Favor alterá-la por questões de segurança");
             $this->email->send();
     }
 }

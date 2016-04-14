@@ -19,15 +19,26 @@ class Usuario extends CI_Controller{
     
    
     public function  create(){   
+
+
         
         // validação dos dados recebidos do formulário
         $this->form_validation->set_rules('username','User ID','trim|required|max_lenght[45]|strtoupper|is_unique[users.username]');
         $this->form_validation->set_message('is_unique', 'Este %s já está cadastrado.');//é uma menssagem definida pelo programador onde %s é o nome do campo
+
+        $this->form_validation->set_rules('email','E-mail','trim|required|max_lenght[45]|strtoupper|is_unique[users.email]');
+        $this->form_validation->set_message('is_unique', 'Este %s já está cadastrado.');//é uma menssagem definida pelo programador onde %s é o nome do campo
+        
         $this->form_validation->set_rules('dsc_name','Nome','trim|required|max_lenght[100]|strtoupper');
         $this->form_validation->set_rules('dsc_matricula','Matrícula','trim|required|max_lenght[45]|strtoupper');
 
         // se existe uma validação, envia os dados para o model inserir
         if ($this->form_validation->run()==TRUE){
+
+            $username = $this->input->post('username');
+            $name     = $this->input->post('dsc_name');
+            $email    = $this->input->post('email');
+
             $validacao = TRUE;
             $dados = elements(array(
                                     'username',
@@ -39,6 +50,7 @@ class Usuario extends CI_Controller{
                                     'id_user_roles',
                                     'ativo',
                                     'email' ), $this->input->post());
+            $this->usuario_model->send_email($email, '123', 'new_user', $username, $name);
             $this->usuario_model->do_insert($dados);
         }
         $dados = array(
